@@ -1,0 +1,42 @@
+# Local development — Consulting + LocalBoost databases
+
+services:
+  postgres-consulting:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: consulting
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: change-me
+    ports:
+      - "5433:5432"
+    volumes:
+      - fixna-consulting-postgres:/var/lib/postgresql/data
+
+  postgres-localboost:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: fixna
+      POSTGRES_USER: fixna
+      POSTGRES_PASSWORD: change-me
+    ports:
+      - "5432:5432"
+    volumes:
+      - fixna-localboost-postgres:/var/lib/postgresql/data
+
+  redis:
+    image: redis:8-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - fixna-redis:/data
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+volumes:
+  fixna-consulting-postgres:
+  fixna-localboost-postgres:
+  fixna-redis:

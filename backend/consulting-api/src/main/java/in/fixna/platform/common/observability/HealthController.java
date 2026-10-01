@@ -1,0 +1,32 @@
+package in.fixna.platform.common.observability;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import in.fixna.platform.common.observability.dto.PlatformHealthResponse;
+
+import io.swagger.v3.oas.annotations.Operation;
+
+@RestController
+@RequestMapping("/api/v1/health")
+public class HealthController {
+
+    private final PlatformHealthService platformHealthService;
+
+    public HealthController(PlatformHealthService platformHealthService) {
+        this.platformHealthService = platformHealthService;
+    }
+
+    @Operation(summary = "Aggregated health — overall status, components, version, deployedAt")
+    @GetMapping
+    public ResponseEntity<PlatformHealthResponse> health() {
+        PlatformHealthResponse body = platformHealthService.snapshot();
+        HttpStatus status = platformHealthService.isHealthy()
+                ? HttpStatus.OK
+                : HttpStatus.SERVICE_UNAVAILABLE;
+        return ResponseEntity.status(status).body(body);
+    }
+}

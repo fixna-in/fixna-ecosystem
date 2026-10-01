@@ -1,0 +1,18 @@
+# Shared development/demo environment. Every credential still comes from
+# environment variables or the deployment's secret manager; nothing secret
+# is committed. HSTS is enabled because dev deploy serves HTTPS on TLS hosts.
+fixna:
+  security:
+    # JWT secret intentionally inherits the dev placeholder here: override via
+    # FIXNA_JWT_SECRET; see application-prod.yml for the prod requirement.
+    hsts-enabled: ${FIXNA_HSTS_ENABLED:true}
+management:
+  otlp:
+    tracing:
+      endpoint: ${OTEL_EXPORTER_OTLP_TRACES_ENDPOINT:http://localhost:4318/v1/traces}
+      export:
+        enabled: ${OTEL_EXPORTER_OTLP_ENABLED:true}
+logging:
+  level:
+    root: INFO
+    in.fixna.platform: INFO

@@ -1,0 +1,15 @@
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\autoconfigure\FixnaPlatformCommonAutoConfiguration.java
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\config\CorsConfig.java
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\config\CorsProperties.java
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\config\PasswordConfig.java
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\logging\LoggingConstants.java
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\logging\LoggingContext.java
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\logging\SensitiveDataMasker.java
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\tenant\TenantScopeProvider.java
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\web\ApiAccessDeniedHandler.java
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\web\ApiAuthenticationEntryPoint.java
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\web\ApiError.java
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\web\FixnaException.java
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\web\GlobalExceptionHandler.java
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\web\RequestIdFilter.java
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\web\SecurityHeadersFilter.java

@@ -1,0 +1,33 @@
+fixna:
+  security:
+    jwt:
+      secret: ${FIXNA_JWT_SECRET:}
+      access-ttl: ${FIXNA_JWT_ACCESS_TTL:PT15M}
+      refresh-ttl: ${FIXNA_JWT_REFRESH_TTL:P7D}
+    hsts-enabled: true
+
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
+
+logging:
+  level:
+    root: WARN
+    in.fixna.platform: INFO
+
+server:
+  error:
+    include-message: never
+    include-binding-errors: never
+    include-stacktrace: never

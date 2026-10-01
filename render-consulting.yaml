@@ -1,0 +1,49 @@
+# Consulting API deployment from fixna-ecosystem monorepo.
+# Frontend: deploy frontend/consulting-web separately (e.g. Vercel → consulting.fixna.in)
+
+services:
+  - type: web
+    name: fixna-consulting-api
+    runtime: docker
+    plan: starter
+    region: oregon
+    dockerfilePath: ./backend/consulting-api/Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/v1/health/ready
+    buildFilter:
+      paths:
+        - backend/consulting-api/**
+        - backend/libs/fixna-platform-common/**
+        - pom.xml
+        - render-consulting.yaml
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: FIXNA_APP_ENV
+        value: prod
+      - key: FIXNA_JWT_SECRET
+        sync: false
+      - key: FIXNA_CORS_ALLOWED_ORIGINS
+        sync: false
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: fixna-consulting-db
+          property: connectionString
+      - key: POSTGRES_USER
+        fromDatabase:
+          name: fixna-consulting-db
+          property: user
+      - key: POSTGRES_PASSWORD
+        fromDatabase:
+          name: fixna-consulting-db
+          property: password
+      - key: FIXNA_HSTS_ENABLED
+        value: true
+      - key: JAVA_TOOL_OPTIONS
+        value: -XX:+UseContainerSupport -Xms256m -Xmx384m
+
+databases:
+  - name: fixna-consulting-db
+    databaseName: consulting
+    plan: basic-256mb
+    region: oregon

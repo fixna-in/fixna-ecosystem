@@ -1,0 +1,16 @@
+in\fixna\platform\common\config\CorsProperties.class
+in\fixna\platform\common\web\FixnaException.class
+in\fixna\platform\common\web\ApiAuthenticationEntryPoint.class
+in\fixna\platform\common\web\SecurityHeadersFilter.class
+in\fixna\platform\common\autoconfigure\FixnaPlatformCommonAutoConfiguration.class
+in\fixna\platform\common\web\ApiError.class
+in\fixna\platform\common\tenant\TenantScopeProvider.class
+in\fixna\platform\common\logging\LoggingContext$NoOpTenantScope.class
+in\fixna\platform\common\web\GlobalExceptionHandler.class
+in\fixna\platform\common\web\RequestIdFilter.class
+in\fixna\platform\common\web\ApiAccessDeniedHandler.class
+in\fixna\platform\common\logging\LoggingConstants.class
+in\fixna\platform\common\logging\LoggingContext.class
+in\fixna\platform\common\logging\SensitiveDataMasker.class
+in\fixna\platform\common\config\PasswordConfig.class
+in\fixna\platform\common\config\CorsConfig.class

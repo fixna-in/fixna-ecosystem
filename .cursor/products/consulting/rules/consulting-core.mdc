@@ -1,0 +1,29 @@
+# Consulting agent rules
+
+Product-specific guidance for `backend/consulting-api` and `frontend/consulting-web`.
+
+## Scope
+
+Consulting domain only: clients, projects, proposals, meetings, invoices, portal, public website, AI assistance.
+
+Do not modify LocalBoost campaign/advertising code unless explicitly asked.
+
+## Architecture
+
+Controller → Application Service → Domain → Repository
+
+## RBAC
+
+Permission-based (`Permission` enum + `RolePermissions`). Portal uses `clientId` JWT claim.
+
+## Database
+
+- Migrations: `backend/consulting-api/src/main/resources/db/migration/`
+- Port: **8081**, database: **consulting**
+- See `docs/implementation/` for phase history
+
+## References
+
+- [AGENTS.md](../../AGENTS.md)
+- [docs/deployment/consulting.md](../../docs/deployment/consulting.md)
+- [docs/scaffolding.md](../../docs/scaffolding.md)

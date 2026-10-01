@@ -1,0 +1,3 @@
+in\fixna\platform\common\web\GlobalExceptionHandlerTest.class
+in\fixna\platform\common\config\CorsConfigTest.class
+in\fixna\platform\common\web\SecurityHeadersFilterTest.class

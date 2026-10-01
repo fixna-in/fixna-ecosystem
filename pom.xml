@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.5.6</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>in.fixna</groupId>
+    <artifactId>fixna-ecosystem</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>fixna-ecosystem</name>
+    <description>Fixna multi-product monorepo</description>
+
+    <modules>
+        <module>backend/libs/fixna-platform-common</module>
+        <module>backend/consulting-api</module>
+        <module>backend/localboost-api</module>
+    </modules>
+
+    <properties>
+        <java.version>21</java.version>
+        <flyway.version>11.20.0</flyway.version>
+        <fixna-platform-common.version>1.0.0</fixna-platform-common.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>in.fixna</groupId>
+                <artifactId>fixna-platform-common</artifactId>
+                <version>${fixna-platform-common.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

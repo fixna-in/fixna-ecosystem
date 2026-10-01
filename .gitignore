@@ -1,0 +1,31 @@
+# Java
+backend/*/target/
+*.class
+
+# Node
+node_modules/
+frontend/*/.next/
+frontend/*/node_modules/
+*.tsbuildinfo
+
+# Environment
+.env
+.env.*
+!.env.example
+backend/*/.env
+backend/*/.env.*
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# File storage (local dev)
+backend/consulting-api/storage/

@@ -1,0 +1,32 @@
+# Staging / shared demo (app.fixna.in + api.fixna.in). Set SPRING_PROFILES_ACTIVE=staging on Render.
+# No automatic test-data seed — load tools/sql/neon-demo-seed.sql in Neon manually.
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.redis.RedisReactiveAutoConfiguration
+
+fixna:
+  app-env: demo
+  security:
+    jwt:
+      secret: ${FIXNA_JWT_SECRET:}
+    hsts-enabled: ${FIXNA_HSTS_ENABLED:true}
+  ai:
+    provider: ${FIXNA_AI_PROVIDER:mock}
+  platform:
+    default-mode: ${FIXNA_PLATFORM_MODE:mock}
+  test-data:
+    enabled: false
+
+management:
+  otlp:
+    tracing:
+      export:
+        enabled: ${OTEL_EXPORTER_OTLP_ENABLED:false}
+
+logging:
+  level:
+    root: INFO
+    in.fixna.platform: INFO

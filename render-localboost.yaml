@@ -1,0 +1,56 @@
+# LocalBoost API deployment from fixna-ecosystem monorepo.
+# Frontend: deploy frontend/localboost-web separately (Vercel → app.fixna.in)
+
+services:
+  - type: web
+    name: fixna-localboost-api
+    runtime: docker
+    plan: starter
+    region: singapore
+    dockerfilePath: ./backend/localboost-api/Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/v1/health/readiness
+    buildFilter:
+      paths:
+        - backend/localboost-api/**
+        - backend/libs/fixna-platform-common/**
+        - pom.xml
+        - render-localboost.yaml
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: FIXNA_APP_ENV
+        value: prod
+      - key: FIXNA_AI_PROVIDER
+        value: mock
+      - key: FIXNA_PLATFORM_MODE
+        value: mock
+      - key: FIXNA_BILLING_DEFAULT_PLAN
+        value: STARTER
+      - key: OTEL_EXPORTER_OTLP_ENABLED
+        value: false
+      - key: FIXNA_HSTS_ENABLED
+        value: true
+      - key: JAVA_TOOL_OPTIONS
+        value: -XX:+UseContainerSupport -Xms256m -Xmx384m
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: fixna-localboost-db
+          property: connectionString
+      - key: POSTGRES_USER
+        fromDatabase:
+          name: fixna-localboost-db
+          property: user
+      - key: POSTGRES_PASSWORD
+        fromDatabase:
+          name: fixna-localboost-db
+          property: password
+      - key: FIXNA_JWT_SECRET
+        sync: false
+      - key: FIXNA_CORS_ALLOWED_ORIGINS
+        sync: false
+
+databases:
+  - name: fixna-localboost-db
+    plan: basic-256mb
+    region: singapore
