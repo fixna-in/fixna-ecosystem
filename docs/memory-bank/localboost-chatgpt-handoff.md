@@ -77,19 +77,49 @@ See root `CHANGELOG.md`.
 
 ## 4b. Brand mark (unified)
 
+The ecosystem uses one shared Fixna brand package so Consulting and LocalBoost cannot drift visually.
+
 | Location | Implementation |
 |----------|----------------|
-| Favicon | `frontend/src/app/icon.svg` |
-| Apple touch icon | `frontend/src/app/apple-icon.svg` |
-| Header / sidebar | `BrandMarkIcon` → `components/ui.tsx` |
-| Login/register hero | `BrandMarkIcon` → `components/auth-layout.tsx` |
-| **Source of truth** | `frontend/src/brand/brand-mark-graphic.tsx` |
+| Shared brand component | `packages/fixna-brand/src/index.tsx` |
+| Consulting app wrapper | `frontend/consulting-web/src/brand/brand-mark-icon.tsx` |
+| LocalBoost app wrapper | `frontend/localboost-web/src/brand/brand-mark-icon.tsx` |
+| Browser favicon | `frontend/{product}-web/src/app/icon.svg` |
+| Apple touch icon | `frontend/{product}-web/src/app/apple-icon.svg` |
+| Product header/sidebar | `BrandMarkIcon` in each web app |
 
 Design: white **f** + lime **•** (`#c7ed94`) on dark green `#163e32` rounded square.
 
+The shared SVG artwork is the canonical source; the two static favicon files are synchronized with it.
+
 ---
 
-## 5. Spring profiles
+## 5. Recent product work
+
+### Shared Fixna branding
+
+- Added a reusable `@fixna/brand` workspace package.
+- Replaced duplicated product-local brand components with wrappers around the shared component.
+- Applied the shared mark to Consulting and LocalBoost navigation, authentication, and browser metadata.
+- Added and synchronized favicon and Apple icon assets.
+- Updated the Consulting manifest metadata and verified its production build.
+
+### Release alignment
+
+- Both products now use version **1.0.0**.
+- LocalBoost and Consulting documentation, package metadata, and release records are aligned for the ecosystem release.
+- Historical LocalBoost 1.0.1 and 0.1.0 entries remain in the changelog and release history for traceability.
+
+### Current implementation status
+
+- LocalBoost API and frontend are production-ready for the shared demo.
+- Consulting MVP is production-buildable and branded with Fixna identity.
+- The shared brand package is the preferred source for future branding changes.
+- Production cutover from the standalone LocalBoost repository remains the main deployment task.
+
+---
+
+## 6. Spring profiles
 
 | Profile | Use |
 |---------|-----|
@@ -424,12 +454,21 @@ Returns `status`, `version`, `deployedAt`, `environment`, `service`, `components
 - [x] Vercel frontend live at app.fixna.in
 - [x] DNS CNAME active (api + app)
 - [x] Demo user + campaign data via Neon SQL
-- [x] Unified brand mark (favicon + header + auth hero)
+- [x] Shared Fixna brand package and synchronized favicon/Apple icons
+- [x] Consulting and LocalBoost use matching Fixna visual branding
 - [x] `RequestIdFilter` Optional&lt;Tracer&gt; + explicit micrometer-tracing dep
 - [x] **Version 1.0.0** — ecosystem release aligned with Consulting
 - [x] GitHub org **fixna-in**; Render + Vercel connected and deploying
 - [x] Aggregated health at `/api/v1/health`
+- [x] Shared brand package resolves through npm workspaces
+- [x] Consulting and LocalBoost TypeScript checks report no diagnostics
 - [ ] End-to-end smoke: login → dashboard metrics → campaigns on production URLs
+
+### Build verification
+
+- Consulting: production build completed with Next.js 16.3.6; TypeScript passed and static pages were generated.
+- LocalBoost: production build was started with Next.js 16.3.6 and the shared brand package resolved from the workspace; the final build output was interrupted by the terminal environment.
+- Build environment warning: PowerShell execution-policy blocks npm.ps1, so npm.cmd was used for verification.
 
 ---
 

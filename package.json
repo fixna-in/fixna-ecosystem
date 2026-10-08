@@ -9,6 +9,7 @@
     "bootstrap:maven": "mvn -f pom.xml install -N -B && mvn -f backend/libs/fixna-platform-common/pom.xml clean install -DskipTests -B",
     "build:localboost": "npm --prefix frontend/localboost-web run build",
     "build:consulting": "npm --prefix frontend/consulting-web run build",
+    "build:fixna": "npm --prefix frontend/fixna-web run build",
     "build:all": "npm run build:localboost && npm run build:consulting",
     "test:platform-common": "npm run bootstrap:maven && mvn -f backend/libs/fixna-platform-common/pom.xml test",
     "test:consulting-api": "npm run bootstrap:maven && mvn -f backend/consulting-api/pom.xml test",
