@@ -1,8 +1,8 @@
 # Fixna LocalBoost — Project State Handoff (no secrets)
 
 **Purpose:** Paste into ChatGPT or another assistant for full project context.  
-**Last updated:** 2026-09-28  
-**Version:** 1.0.1  
+**Last updated:** 2026-10-08  
+**Version:** 1.0.0  
 **Domain:** fixna.in  
 **Product:** Fixna LocalBoost (local business marketing orchestration SaaS)
 
@@ -40,7 +40,7 @@ Meta Ads, or WhatsApp. The shared demo uses **mock** AI and **mock** platform ad
 
 | Version | Date | Summary |
 |---------|------|---------|
-| **1.0.1** | 2026-09-28 | Health API, Next.js 16, CI/deploy fixes, `fixna-in` org, demo live |
+| **1.0.0** | 2026-10-08 | Ecosystem product release — LocalBoost and Consulting aligned on the same major version |
 | **1.0.0** | 2026-09-26 | First major release — full MVP + shared demo |
 
 See root `CHANGELOG.md`.
@@ -426,7 +426,7 @@ Returns `status`, `version`, `deployedAt`, `environment`, `service`, `components
 - [x] Demo user + campaign data via Neon SQL
 - [x] Unified brand mark (favicon + header + auth hero)
 - [x] `RequestIdFilter` Optional&lt;Tracer&gt; + explicit micrometer-tracing dep
-- [x] **Version 1.0.1** — health API, Next.js 16, deploy/org fixes
+- [x] **Version 1.0.0** — ecosystem release aligned with Consulting
 - [x] GitHub org **fixna-in**; Render + Vercel connected and deploying
 - [x] Aggregated health at `/api/v1/health`
 - [ ] End-to-end smoke: login → dashboard metrics → campaigns on production URLs

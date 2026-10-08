@@ -1,7 +1,7 @@
 # Deployment State — Shared Demo
 
-**Last updated:** 2026-09-28  
-**Release:** 1.0.1
+**Last updated:** 2026-10-08  
+**Release:** 1.0.0
 
 ## Status
 

@@ -44,7 +44,7 @@ Health probes:
 - **Framework:** Next.js (see `vercel.json`)
 - Env:
   ```
-  NEXT_PUBLIC_API_BASE_URL=https://api.fixna.in/api
+  NEXT_PUBLIC_API_BASE_URL=https://localboost-api.fixna.in/api
   NEXT_PUBLIC_APP_ENV=prod
   ```
 

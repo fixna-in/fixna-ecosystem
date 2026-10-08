@@ -1,6 +1,6 @@
 # Fixna Backlog
 
-**Current release:** 1.0.1 (2026-09-28) — shared demo live at fixna.in (GitHub org fixna-in)
+**Current release:** 1.0.0 (2026-10-08) — ecosystem release aligned with Consulting
 
 ## Foundation
 - [x] Bootstrap repository

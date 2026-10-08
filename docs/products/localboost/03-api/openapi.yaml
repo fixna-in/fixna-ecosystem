@@ -1,1 +1,1 @@
-openapi: 3.0.3\ninfo:\n  title: Fixna LocalBoost API\n  version: 0.1.0\npaths: {}\n
+openapi: 3.0.3\ninfo:\n  title: Fixna LocalBoost API\n  version: 1.0.0\npaths: {}\n

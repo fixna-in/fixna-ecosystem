@@ -26,7 +26,7 @@ docker build -f backend/consulting-api/Dockerfile -t fixna-consulting-api .
 docker run -p 8081:8081 \
   -e SPRING_PROFILES_ACTIVE=prod \
   -e FIXNA_JWT_SECRET=... \
-  -e FIXNA_CORS_ALLOWED_ORIGINS=https://consulting.fixna.in \
+  -e FIXNA_CORS_ALLOWED_ORIGINS=https://fixna-ecosystem-consulting.vercel.app,https://consulting.fixna.in \
   -e SPRING_DATASOURCE_URL=... \
   -e POSTGRES_USER=... \
   -e POSTGRES_PASSWORD=... \

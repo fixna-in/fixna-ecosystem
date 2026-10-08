@@ -1,14 +1,22 @@
 # Active Context
 
-**Last updated:** 2026-09-28  
-**Current focus:** Monorepo stable — both products build and test; LocalBoost production cutover pending.
+**Last updated:** 2026-10-08  
+**Current focus:** Polished Fixna product branding and ecosystem documentation; LocalBoost production cutover remains pending.
 
 ## Current state
 
 | Product | Status | Tests | Notes |
 |---------|--------|-------|-------|
-| **Consulting** | ✅ MVP v1.0.0 | 136 API tests | Rebuilt Phases 1–10 after accidental deletion; deploy via `render-consulting.yaml` |
+| **Consulting** | ✅ MVP v1.0.0 with refreshed Fixna branding | 136 API tests | Rebuilt Phases 1–10 after accidental deletion; branded workspace and public website; deploy via `render-consulting.yaml` |
 | **LocalBoost** | ✅ Ecosystem-ready | 236 (229 + 7 platform-common) | Migrated from standalone repo; production cutover pending |
+
+## Recent Consulting experience updates
+
+- Added a shared Fixna `f•` brand mark and SVG assets for the Consulting product
+- Applied the mark to the public header, authenticated sidebar, homepage, public-site header, and browser/mobile icons
+- Introduced a consistent green Fixna design system covering typography, surfaces, cards, buttons, forms, focus states, and responsive layouts
+- Added `icon.svg`, `apple-icon.svg`, and `manifest.ts` metadata for professional favicon presentation
+- Verified the Consulting web production build; no source diagnostics were reported
 
 ## Monorepo layout
 

@@ -1,17 +1,15 @@
 # Current Task
 
-Task: Post-1.0.1 maintenance
+Task: Ecosystem release alignment
 Phase: production / demo
-Status: COMPLETE (1.0.1 — 2026-09-28)
+Status: COMPLETE (1.0.0 — 2026-10-08)
 
-## Release 1.0.1 (2026-09-28)
+## Release 1.0.0 (2026-10-08)
 
-- [x] Aggregated `/api/v1/health` (components, version, deployedAt)
-- [x] Fix Render startup (`FlywayHealthIndicator` bean conflict removed)
-- [x] Next.js 16.3.6; CI dependency-review on PRs only
-- [x] GitHub org **fixna-in** — Render + Vercel reconnected and deploying
-- [x] Local launcher `mvn clean compile`; Flyway 11.20 for PostgreSQL 18
-- [x] Changelog + memorybank updated
+- [x] Align LocalBoost and Consulting on the same major product version
+- [x] Update release metadata, changelog, and memory-bank context
+- [x] Preserve prior LocalBoost maintenance history as release context
+- [x] Keep product databases, API contracts, and deployment layouts separate
 
 ## Live URLs
 

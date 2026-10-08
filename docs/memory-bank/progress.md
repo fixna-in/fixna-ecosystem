@@ -1,5 +1,18 @@
 # Progress Log
 
+## 2026-10-08 — Consulting Fixna branding refresh
+
+**Delivered:**
+- Reusable Fixna brand mark at `frontend/consulting-web/src/brand/brand-mark-icon.tsx`
+- Browser and Apple favicon assets: `src/app/icon.svg` and `src/app/apple-icon.svg`
+- Web app manifest at `src/app/manifest.ts`
+- Professional Fixna visual system across the Consulting app shell, home page, public website, forms, cards, navigation, and responsive layouts
+- Branded public and authenticated navigation with consistent Fixna wordmarks and calls to action
+
+**Files:** `frontend/consulting-web/src/app/layout.tsx`, `components/app-shell.tsx`, `globals.css`, public assets, and brand component
+
+**Verified:** Consulting web production build completed successfully; VS Code diagnostics reported no errors
+
 ## 2026-09-28 — Architecture validation corrections
 
 **Delivered:**

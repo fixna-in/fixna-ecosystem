@@ -1,13 +1,16 @@
 # Changelog
 
-## Unreleased
+## 1.0.0 — 2026-10-08
 
-_No changes yet._
+**Ecosystem release** — Fixna LocalBoost and Consulting are aligned on the same
+major product version and share the monorepo release baseline.
 
-## 1.0.1 — 2026-09-28
+### Product release
 
-**Post-release maintenance** — shared demo fully operational on [fixna.in](https://fixna.in)
-under GitHub org [fixna-in](https://github.com/fixna-in).
+- LocalBoost backend and web packages are versioned **1.0.0**
+- Shared demo remains live on [fixna.in](https://fixna.in) under GitHub org
+  [fixna-in](https://github.com/fixna-in)
+- Monorepo build and deployment configuration remain independent per product
 
 ### Health & observability
 
@@ -36,7 +39,7 @@ under GitHub org [fixna-in](https://github.com/fixna-in).
 - GitHub repository under **fixna-in**; Render API and Vercel frontend reconnected.
 - Live: https://app.fixna.in · https://api.fixna.in/api/v1/health
 
-## 1.0.0 — 2026-09-26
+## Initial 1.0.0 — 2026-09-26
 
 **First major release** of Fixna LocalBoost: production-oriented multi-tenant MVP
 with shared demo live at [app.fixna.in](https://app.fixna.in) and API at

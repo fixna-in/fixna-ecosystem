@@ -1,6 +1,6 @@
 # Project Context — Fixna LocalBoost
 
-**Version:** 1.0.1 (2026-09-28)
+**Version:** 1.0.0 (2026-10-08)
 
 ## Product
 

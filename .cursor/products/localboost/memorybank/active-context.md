@@ -1,11 +1,11 @@
 # Active Context — Fixna LocalBoost
 
-**Last updated:** 2026-09-28  
-**Release:** **1.0.1** — shared demo fully operational
+**Last updated:** 2026-10-08  
+**Release:** **1.0.0** — Fixna ecosystem product release
 
 ## Current focus
 
-**v1.0.1 shipped.** Demo on **fixna.in** is live end-to-end: Neon + Render API +
+**v1.0.0 shipped.** Demo on **fixna.in** is live end-to-end: Neon + Render API +
 Vercel frontend, DNS, health API, GitHub org **fixna-in**, CI green.
 
 | App | URL |
@@ -24,7 +24,7 @@ Vercel frontend, DNS, health API, GitHub org **fixna-in**, CI green.
 | API | Render (`fixna-localboost-api`) | `staging` profile, Docker |
 | Frontend | Vercel (`frontend/`) | Next.js **16.3.6** |
 
-## Recent fixes (1.0.1)
+## Release highlights (1.0.0)
 
 - Enhanced `/api/v1/health` (components + version + `deployedAt`)
 - Removed `FlywayHealthIndicator` bean conflict (Render startup)

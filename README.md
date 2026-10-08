@@ -80,10 +80,60 @@ Layer pattern for each product: `backend/{product}-api` + `frontend/{product}-we
 
 | Product | Web (UI) | API base | Health |
 |---------|----------|----------|--------|
-| **LocalBoost** | https://app.fixna.in | https://api.fixna.in/api | https://api.fixna.in/api/v1/health |
+| **LocalBoost** | https://localboost.fixna.in | https://api.localbost.fixna.in/api | https://api.localbost.fixna.in/api/v1/health |
 | **Consulting** | https://consulting.fixna.in _(planned)_ | https://api.consulting.fixna.in/api _(planned)_ | `/api/v1/health/ready` |
 
 LocalBoost production currently runs from the standalone `fixna-localboost` repo; ecosystem copy is ready for cutover.
+
+### Custom domain and CNAME configuration
+
+Configure the following DNS records in the domain provider:
+
+| Service | Hostname | Target | DNS record |
+|---------|----------|--------|------------|
+| LocalBoost web | `localboost.fixna.in` | Vercel or frontend deployment hostname | `CNAME` |
+| LocalBoost API | `api.localbost.fixna.in` | Render web service hostname | `CNAME` |
+| Consulting web | `consulting.fixna.in` | Vercel or frontend deployment hostname | `CNAME` |
+| Consulting API | `api.consulting.fixna.in` | Render web service hostname | `CNAME` |
+
+The target for each `CNAME` is the hostname provided by the deployment platform, for example `fixna-localboost-api.onrender.com` or `fixna-consulting-api.onrender.com`. Do not use an IP address as the target.
+
+Render setup:
+
+1. Open the Render web service and select **Settings → Custom Domains**.
+2. Add the API hostname, for example `api.localbost.fixna.in`.
+3. Copy the value shown by Render for the domain verification record.
+4. Add the returned verification record in the DNS provider.
+5. Repeat for the additional API or web hostname.
+6. Wait for DNS propagation and confirm that the domain shows HTTPS in Render.
+
+Vercel setup:
+
+1. Open the project and select **Settings → Domains**.
+2. Add the web hostname, for example `localboost.fixna.in` or `consulting.fixna.in`.
+3. Add the DNS records supplied by Vercel.
+4. Wait for DNS verification before switching traffic to the new domain.
+
+After the DNS records are verified, update the deployed application and frontend environment variables to use the final custom domains instead of the platform-provided hostnames.
+
+### Health API
+
+| Endpoint | Service | Response | Status |
+|----------|---------|----------|--------|
+| `/api/v1/health` | LocalBoost and Consulting | Aggregated component health, application version, and deployment timestamp | `200` when healthy; otherwise `503` |
+| `/api/v1/health/readiness` | LocalBoost | Deployment readiness | `200` when ready; otherwise `503` |
+| `/api/v1/health/ready` | Consulting | Deployment readiness | `200` when ready; otherwise `503` |
+| `/actuator/health` | LocalBoost and Consulting | Spring Boot actuator health with component details when enabled | `200` or `503` |
+
+Example:
+
+```bash
+curl -i http://localhost:8080/api/v1/health/readiness
+curl -i http://localhost:8081/api/v1/health/ready
+curl -i http://localhost:8080/actuator/health
+```
+
+The readiness endpoints return a JSON body such as `{"status":"READY","service":"fixna-localboost-backend","timestamp":"..."}`. Use the aggregated health endpoint for operational status and the readiness endpoint for load balancer or deployment checks.
 
 ### Local development
 
@@ -177,7 +227,7 @@ Create product-specific files before running the apps. Never commit real secrets
 | `POSTGRES_USER` | `fixna` | Render PostgreSQL user |
 | `POSTGRES_PASSWORD` | `change-me` | Render PostgreSQL password |
 | `FIXNA_JWT_SECRET` | Long random secret | Render secret, never committed |
-| `FIXNA_CORS_ALLOWED_ORIGINS` | `http://localhost:3000,http://127.0.0.1:3000` | `https://app.fixna.in` |
+| `FIXNA_CORS_ALLOWED_ORIGINS` | `http://localhost:3000,http://127.0.0.1:3000` | `https://localboost.fixna.in` |
 | `FIXNA_APP_ENV` | `local` | `prod` |
 | `FIXNA_AI_PROVIDER` | `mock` | `mock` |
 | `FIXNA_PLATFORM_MODE` | `mock` | `mock` |
@@ -202,7 +252,7 @@ Create product-specific files before running the apps. Never commit real secrets
 | `POSTGRES_USER` | `postgres` | Render PostgreSQL user |
 | `POSTGRES_PASSWORD` | `change-me` | Render PostgreSQL password |
 | `FIXNA_JWT_SECRET` | Long random secret | Render secret, never committed |
-| `FIXNA_CORS_ALLOWED_ORIGINS` | `http://localhost:3001,http://127.0.0.1:3001` | `https://consulting.fixna.in` |
+| `FIXNA_CORS_ALLOWED_ORIGINS` | `http://localhost:3001,http://127.0.0.1:3001` | `https://fixna-ecosystem-consulting.vercel.app,https://consulting.fixna.in` |
 | `FIXNA_APP_ENV` | `local` | `prod` |
 | `FIXNA_HSTS_ENABLED` | `false` | `true` |
 | `FIXNA_FILE_STORAGE_PATH` | `./data/files` | Persistent storage path provided by the deployment |
@@ -219,7 +269,7 @@ Create product-specific files before running the apps. Never commit real secrets
 
 | Variable | Local value | Production value |
 |----------|-------------|------------------|
-| `NEXT_PUBLIC_API_BASE_URL` | `http://localhost:8080/api` | `https://api.fixna.in/api` |
+| `NEXT_PUBLIC_API_BASE_URL` | `http://localhost:8080/api` | `https://localboost-api.fixna.in/api` |
 | `NEXT_PUBLIC_APP_ENV` | `local` | `prod` |
 
 #### Consulting web (`frontend/consulting-web`)

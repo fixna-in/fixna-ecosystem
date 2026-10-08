@@ -6,6 +6,15 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Changed — Consulting Fixna branding refresh
+
+- Added a reusable Fixna `f•` brand mark and shared SVG icon assets for the Consulting product
+- Updated the Consulting app shell with a polished Fixna wordmark, responsive navigation, workspace labels, and branded actions
+- Reworked the home page, public website, forms, cards, and interaction states to use a unified green Fixna visual system
+- Added favicon, Apple icon, and web manifest metadata for browser and mobile presentation
+- Updated the Consulting public site and product headers to maintain consistent branding across authenticated and public pages
+- Verified the Consulting web production build and editor diagnostics after the visual refresh
+
 ### Changed — Architecture validation corrections
 
 - **LocalBoost Docker:** monorepo build includes `fixna-platform-common`; `render-localboost.yaml` uses `dockerContext: .`
