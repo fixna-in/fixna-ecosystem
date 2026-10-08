@@ -163,7 +163,79 @@ Use Compose only if you also need the containerized Redis or Mailhog services:
 docker compose up -d
 ```
 
-### 2. Bootstrap Maven (once per clone, or after platform-common changes)
+### 2. Environment variables
+
+Create product-specific files before running the apps. Never commit real secrets or production credentials.
+
+#### LocalBoost API (`backend/localboost-api`)
+
+| Variable | Local value | Production value |
+|----------|-------------|------------------|
+| `SPRING_PROFILES_ACTIVE` | `local` | `prod` |
+| `SERVER_PORT` | `8080` | Render `PORT` |
+| `SPRING_DATASOURCE_URL` | `jdbc:postgresql://localhost:5432/fixna` | Render PostgreSQL connection string |
+| `POSTGRES_USER` | `fixna` | Render PostgreSQL user |
+| `POSTGRES_PASSWORD` | `change-me` | Render PostgreSQL password |
+| `FIXNA_JWT_SECRET` | Long random secret | Render secret, never committed |
+| `FIXNA_CORS_ALLOWED_ORIGINS` | `http://localhost:3000,http://127.0.0.1:3000` | `https://app.fixna.in` |
+| `FIXNA_APP_ENV` | `local` | `prod` |
+| `FIXNA_AI_PROVIDER` | `mock` | `mock` |
+| `FIXNA_PLATFORM_MODE` | `mock` | `mock` |
+| `FIXNA_BILLING_DEFAULT_PLAN` | `FREE` | `STARTER` |
+| `REDIS_URL` | `redis://localhost:6379` | Redis service URL or omitted when unavailable |
+| `FIXNA_HSTS_ENABLED` | `false` | `true` |
+| `OTEL_EXPORTER_OTLP_ENABLED` | `false` | `false` |
+| `FIXNA_JWT_ACCESS_TTL` | `PT15M` | `PT15M` |
+| `FIXNA_JWT_REFRESH_TTL` | `P7D` | `P7D` |
+| `FIXNA_RATE_LIMIT_PER_IP_PER_MINUTE` | `20` | `20` |
+| `DB_POOL_MAX` | `10` | `10` |
+| `DB_POOL_MIN` | `2` | `2` |
+| `DB_CONN_TIMEOUT_MS` | `5000` | `5000` |
+
+#### Consulting API (`backend/consulting-api`)
+
+| Variable | Local value | Production value |
+|----------|-------------|------------------|
+| `SPRING_PROFILES_ACTIVE` | `local` | `prod` |
+| `SERVER_PORT` | `8081` | Render `PORT` |
+| `SPRING_DATASOURCE_URL` | `jdbc:postgresql://localhost:5433/consulting` | Render PostgreSQL connection string |
+| `POSTGRES_USER` | `postgres` | Render PostgreSQL user |
+| `POSTGRES_PASSWORD` | `change-me` | Render PostgreSQL password |
+| `FIXNA_JWT_SECRET` | Long random secret | Render secret, never committed |
+| `FIXNA_CORS_ALLOWED_ORIGINS` | `http://localhost:3001,http://127.0.0.1:3001` | `https://consulting.fixna.in` |
+| `FIXNA_APP_ENV` | `local` | `prod` |
+| `FIXNA_HSTS_ENABLED` | `false` | `true` |
+| `FIXNA_FILE_STORAGE_PATH` | `./data/files` | Persistent storage path provided by the deployment |
+| `FIXNA_JWT_ACCESS_TTL` | `PT15M` | `PT15M` |
+| `FIXNA_JWT_REFRESH_TTL` | `P7D` | `P7D` |
+| `DB_POOL_MAX` | `10` | `10` |
+| `DB_POOL_MIN` | `2` | `2` |
+| `DB_CONN_TIMEOUT_MS` | `5000` | `5000` |
+| `FIXNA_TEST_DATA_ENABLED` | `false` | `false` |
+| `FIXNA_TEST_USER_PASSWORD` | Empty | Empty |
+| `FIXNA_DEPLOYED_AT` | Empty | Optional ISO-8601 deployment timestamp |
+
+#### LocalBoost web (`frontend/localboost-web`)
+
+| Variable | Local value | Production value |
+|----------|-------------|------------------|
+| `NEXT_PUBLIC_API_BASE_URL` | `http://localhost:8080/api` | `https://api.fixna.in/api` |
+| `NEXT_PUBLIC_APP_ENV` | `local` | `prod` |
+
+#### Consulting web (`frontend/consulting-web`)
+
+| Variable | Local value | Production value |
+|----------|-------------|------------------|
+| `NEXT_PUBLIC_API_BASE_URL` | `http://localhost:8081/api` | `https://api.consulting.fixna.in/api` |
+| `NEXT_PUBLIC_APP_ENV` | `local` | `prod` |
+
+> The current Consulting API client adds `/v1` automatically. For other clients, the API URL may be configured with `/api/v1` instead.
+
+#### Environment templates
+
+A complete root template is available at [`\.env.example`](.env.example). For LocalBoost web, use [`frontend/localboost-web/.env.example`](frontend/localboost-web/.env.example).
+
+### 3. Bootstrap Maven (once per clone, or after platform-common changes)
 
 Product APIs depend on `fixna-platform-common:1.0.0`. Install it before building a single product:
 
@@ -172,13 +244,13 @@ npm run bootstrap:maven
 # or: scripts/bootstrap-maven.sh  (scripts/bootstrap-maven.cmd on Windows)
 ```
 
-### 3. Install frontend dependencies (once)
+### 4. Install frontend dependencies (once)
 
 ```bash
 npm install
 ```
 
-### 4. Run APIs
+### 5. Run APIs
 
 ```bash
 # LocalBoost — port 8080, DB localhost:5432/fixna
@@ -188,7 +260,7 @@ mvn -f backend/localboost-api/pom.xml spring-boot:run
 SPRING_PROFILES_ACTIVE="local" POSTGRES_USER="postgres" POSTGRES_PASSWORD="admin" mvn -f backend/consulting-api/pom.xml spring-boot:run
 ```
 
-### 5. Run web apps
+### 6. Run web apps
 
 Copy env files before first run:
 
