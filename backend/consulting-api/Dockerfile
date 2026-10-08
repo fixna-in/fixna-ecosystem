@@ -6,7 +6,9 @@ COPY backend/libs/fixna-platform-common/pom.xml backend/libs/fixna-platform-comm
 COPY backend/libs/fixna-platform-common/src backend/libs/fixna-platform-common/src
 COPY backend/consulting-api/pom.xml backend/consulting-api/pom.xml
 COPY backend/consulting-api/src backend/consulting-api/src
-RUN mvn -f pom.xml -pl backend/consulting-api -am -DskipTests package
+RUN mvn -N -f pom.xml install \
+    && mvn -f backend/libs/fixna-platform-common/pom.xml -DskipTests install \
+    && mvn -f backend/consulting-api/pom.xml -DskipTests package
 
 FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
