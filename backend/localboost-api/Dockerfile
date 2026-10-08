@@ -6,7 +6,7 @@ COPY backend/libs/fixna-platform-common/pom.xml backend/libs/fixna-platform-comm
 COPY backend/libs/fixna-platform-common/src backend/libs/fixna-platform-common/src
 COPY backend/localboost-api/pom.xml backend/localboost-api/pom.xml
 COPY backend/localboost-api/src backend/localboost-api/src
-RUN mvn -f pom.xml -pl backend/localboost-api -am -DskipTests package
+RUN mvn -f backend/localboost-api/pom.xml -pl :fixna-localboost-api -am -DskipTests package
 
 FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
