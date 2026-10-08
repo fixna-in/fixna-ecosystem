@@ -41,6 +41,10 @@ services:
         fromDatabase:
           name: fixna-localboost-db
           property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: fixna-localboost-db
+          property: password
       - key: POSTGRES_PASSWORD
         fromDatabase:
           name: fixna-localboost-db

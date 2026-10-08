@@ -8,7 +8,7 @@ spring:
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/fixna}
     username: ${POSTGRES_USER:fixna}
-    password: ${POSTGRES_PASSWORD:change-me}
+    password: ${SPRING_DATASOURCE_PASSWORD:${POSTGRES_PASSWORD:change-me}}
     hikari:
       maximum-pool-size: ${DB_POOL_MAX:10}
       minimum-idle: ${DB_POOL_MIN:2}
