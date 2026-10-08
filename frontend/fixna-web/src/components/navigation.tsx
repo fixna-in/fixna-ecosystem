@@ -23,7 +23,7 @@ export function Header() {
           {navigation.map((item) => (
             <Link key={item.href} href={item.href}>{item.label}</Link>
           ))}
-          <Link className="button button-primary nav-cta" href="/contact">Contact Us</Link>
+          <Link className="button button-primary nav-cta" href="/contact">Contact</Link>
         </nav>
 
         <button

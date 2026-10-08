@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { footerNavigation } from "@/content/navigation";
 import { FixnaBrandMark } from "@/components/brand-mark";
+import { productLinks } from "@/lib/product-links";
 
 export function Footer() {
   return (
@@ -12,46 +12,46 @@ export function Footer() {
             <span className="brand-wordmark"><span>Fixna</span></span>
           </Link>
           <p className="footer-description">
-            Technology and product engineering for practical software that solves real business problems.
+            Technology • Product Engineering • AI
           </p>
-        </div>
-
-        <div>
-          <h2>Explore</h2>
-          <nav aria-label="Footer navigation">
-            <ul className="footer-nav">
-              {footerNavigation.map((item) => (
-                <li key={item.href}><Link href={item.href}>{item.label}</Link></li>
-              ))}
-            </ul>
-          </nav>
         </div>
 
         <div>
           <h2>Products</h2>
           <ul className="footer-nav">
-            <li><a href="https://app.fixna.in" target="_blank" rel="noreferrer">LocalBoost</a></li>
-            <li><a href="https://consulting.fixna.in" target="_blank" rel="noreferrer">Consulting</a></li>
-            <li><Link href="/products">Hospitality <span aria-label="Coming soon">— Coming Soon</span></Link></li>
+            <li><a href={productLinks.localboost} target="_blank" rel="noreferrer">LocalBoost</a></li>
+            <li><a href={productLinks.consulting} target="_blank" rel="noreferrer">Consulting</a></li>
+            <li><span>Hospitality <em>— Coming Soon</em></span></li>
           </ul>
         </div>
 
         <div>
-          <h2>Technology</h2>
+          <h2>Capabilities</h2>
           <ul className="footer-nav">
-            <li><span>Java</span></li>
-            <li><span>Cloud</span></li>
-            <li><span>Kafka</span></li>
-            <li><span>AI</span></li>
-            <li><span>Observability</span></li>
+            <li><Link href="/what-we-do">Product Engineering</Link></li>
+            <li><Link href="/what-we-do">Cloud &amp; Modernization</Link></li>
+            <li><Link href="/what-we-do">Event-Driven Architecture</Link></li>
+            <li><Link href="/what-we-do">AI &amp; GenAI</Link></li>
+            <li><Link href="/what-we-do">Integration &amp; Automation</Link></li>
+            <li><Link href="/what-we-do">Technology Consulting</Link></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2>Company</h2>
+          <ul className="footer-nav">
+            <li><Link href="/about">About</Link></li>
+            <li><Link href="/industries">Industries</Link></li>
+            <li><Link href="/contact">Contact</Link></li>
           </ul>
         </div>
       </div>
 
       <div className="container footer-bottom">
-        <p>© {new Date().getFullYear()} Fixna.</p>
+        <p>© {new Date().getFullYear()} Fixna</p>
         <div className="footer-links">
-          <a href="https://github.com/fixna-in" target="_blank" rel="noreferrer" aria-label="Fixna GitHub">GitHub</a>
+          <Link href="/privacy-policy">Privacy Policy</Link>
+          <Link href="/terms">Terms</Link>
         </div>
       </div>
     </footer>

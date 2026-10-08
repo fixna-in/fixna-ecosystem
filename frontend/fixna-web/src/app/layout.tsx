@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageShell } from "@/components/page-shell";
 import { siteUrl } from "@/lib/site-url";
+import "./design-system.css";
 import "./globals.css";
 
 export const metadata: Metadata = {

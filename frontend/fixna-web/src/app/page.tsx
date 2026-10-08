@@ -1,17 +1,17 @@
 import Link from "next/link";
 import { capabilities } from "@/content/capabilities";
-import { company } from "@/content/company";
 import { products } from "@/content/products";
 import { technologyGroups } from "@/content/technology";
 import { consultingExpertise } from "@/content/consulting";
 import { productLinks } from "@/lib/product-links";
 
-const process = [
-  { number: "01", title: "Understand", description: "Understand the business problem and the constraints that matter." },
-  { number: "02", title: "Architect", description: "Design the right technical solution without unnecessary complexity." },
-  { number: "03", title: "Build", description: "Deliver production-quality software incrementally." },
-  { number: "04", title: "Validate", description: "Test, observe, and measure the result in real use." },
-  { number: "05", title: "Improve", description: "Refine the system based on evidence and feedback." },
+const approach = [
+  ["01", "Understand", "Define the business problem, users, requirements, and constraints."],
+  ["02", "Assess", "Identify the architecture, delivery, and operational risks that matter."],
+  ["03", "Design", "Choose a practical approach without unnecessary complexity."],
+  ["04", "Build", "Deliver production software in clear, testable stages."],
+  ["05", "Modernize", "Evolve existing systems without disrupting what already works."],
+  ["06", "Optimize", "Use evidence to improve reliability, performance, and business value."],
 ];
 
 export default function HomePage() {
@@ -20,23 +20,23 @@ export default function HomePage() {
       <section className="hero" aria-labelledby="hero-title">
         <div className="container hero-grid">
           <div className="hero-copy">
-            <p className="eyebrow">Fixna / technology + product engineering</p>
-            <h1 id="hero-title">We build software that solves real business problems.</h1>
-            <p>From cloud-native platforms and event-driven systems to AI-powered products and business automation.</p>
+            <p className="eyebrow">Technology • Product Engineering • AI</p>
+            <h1 id="hero-title">Build software that solves real business problems.</h1>
+            <p>We design and build practical digital products, modernize legacy systems, and apply AI where it creates meaningful business value.</p>
             <div className="hero-actions">
-              <Link className="button button-primary" href="/contact">Work With Us</Link>
-              <Link className="button button-secondary" href="/products">Explore Our Products</Link>
+              <Link className="button button-primary" href="/what-we-do">Explore What We Do</Link>
+              <Link className="button button-secondary" href="/products">View Our Products</Link>
             </div>
-            <p className="hero-trust">Product engineering · Cloud architecture · AI and automation</p>
+            <p className="hero-trust">Java • Spring Boot • Confluent Kafka • AWS • Azure • AI/GenAI</p>
           </div>
 
           <div className="hero-visual" aria-label="Fixna system architecture overview">
             <div className="architecture-card">
               <div className="architecture-flow">
-                <div className="flow-node"><span className="icon">01</span><div><strong>Strategy</strong><span>Business problem</span></div></div>
-                <div className="flow-node"><span className="icon">02</span><div><strong>Architecture</strong><span>Reliable technical design</span></div></div>
-                <div className="flow-node"><span className="icon">03</span><div><strong>Delivery</strong><span>Production software</span></div></div>
-                <div className="flow-node"><span className="icon">04</span><div><strong>Measure</strong><span>Observability and improvement</span></div></div>
+                <div className="flow-node"><span className="icon">01</span><div><strong>Business</strong><span>Define the real need</span></div></div>
+                <div className="flow-node"><span className="icon">02</span><div><strong>Architecture</strong><span>Build the right foundation</span></div></div>
+                <div className="flow-node"><span className="icon">03</span><div><strong>Product</strong><span>Deliver working software</span></div></div>
+                <div className="flow-node"><span className="icon">04</span><div><strong>Operate</strong><span>Measure and improve</span></div></div>
               </div>
             </div>
           </div>
@@ -45,44 +45,48 @@ export default function HomePage() {
 
       <section className="section" aria-labelledby="capabilities-title">
         <div className="container">
-          <div className="section-intro">
-            <div className="section-heading">
-              <p className="eyebrow">What we do</p>
-              <h2 id="capabilities-title">Practical engineering for the problems businesses actually face.</h2>
-            </div>
+          <div className="section-heading">
+            <p className="eyebrow">What Fixna does</p>
+            <h2 id="capabilities-title">Technology built around real business needs.</h2>
+            <p>Fixna is a technology and product engineering company helping businesses turn complex requirements into dependable software.</p>
           </div>
-          <div className="grid card-grid-3">
-            {capabilities.map((capability, index) => (
-              <article className="card" key={capability.title}>
-                <span className="card-index">0{index + 1}</span>
-                <h3>{capability.title}</h3>
-                <p>{capability.description}</p>
-                <p><strong>Problem:</strong> {capability.problem}</p>
-                <p><strong>Outcome:</strong> {capability.outcome}</p>
+          <div className="capability-grid">
+            {capabilities.slice(0, 6).map((capability, index) => (
+              <article className="capability-card" key={capability.title}>
+                <span className="capability-index">{String(index + 1).padStart(2, "0")}</span>
+                <div>
+                  <h3>{capability.title}</h3>
+                  <p>{capability.description}</p>
+                </div>
+                <div className="capability-card__meta">
+                  <strong>Outcome</strong>
+                  <span>{capability.outcome}</span>
+                </div>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section" aria-labelledby="products-title">
+      <section className="section section--compact" aria-labelledby="products-title">
         <div className="container">
           <div className="section-heading">
-            <p className="eyebrow">Our products</p>
-            <h2 id="products-title">Distinct products, built around clear business needs.</h2>
+            <p className="eyebrow">Products</p>
+            <h2 id="products-title">Built by Fixna.</h2>
+            <p>Products designed around real business workflows.</p>
           </div>
           <div className="grid card-grid-3">
             {products.map((product) => (
               <article className="card product-card" key={product.id}>
-                <span className={`status ${product.status === "LIVE" ? "live" : product.status === "COMING SOON" ? "coming-soon" : ""}`}>{product.status}</span>
+                <span className={`status ${product.status === "LIVE" ? "live" : "coming-soon"}`}>{product.status}</span>
                 <h3>{product.name}</h3>
                 <p>{product.description}</p>
-                <p>{product.category}</p>
+                <p><strong>{product.category}</strong></p>
                 <div className="card-list">
                   {product.capabilities.map((capability) => <span key={capability}>{capability}</span>)}
                 </div>
                 {product.url ? (
-                  <a className="button button-primary" href={product.url} target="_blank" rel="noreferrer">Explore {product.name.split(" ").slice(1).join(" ")}</a>
+                  <a className="button button-primary" href={product.url} target="_blank" rel="noreferrer">Explore {product.name === "Fixna LocalBoost" ? "LocalBoost" : product.name}</a>
                 ) : (
                   <span className="button button-secondary" aria-disabled="true">Coming Soon</span>
                 )}
@@ -92,37 +96,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section" aria-labelledby="technology-title">
+      <section className="section page-section--muted" aria-labelledby="technology-title">
         <div className="container">
           <div className="section-heading">
-            <p className="eyebrow">Our technology</p>
-            <h2 id="technology-title">The tools we use are chosen for the job, not for decoration.</h2>
+            <p className="eyebrow">Engineering foundations</p>
+            <h2 id="technology-title">Built on proven engineering foundations.</h2>
+            <p>We select established tools for maintainability, clarity, and operational confidence.</p>
           </div>
           <div className="grid technology-grid">
             {technologyGroups.map((group) => (
-              <div className="card technology-group" key={group.title}>
+              <article className="card technology-group" key={group.title}>
                 <h3>{group.title}</h3>
                 <ul>
                   {group.items.map((item) => <li key={item}>{item}</li>)}
                 </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section" aria-labelledby="process-title">
-        <div className="container">
-          <div className="section-heading">
-            <p className="eyebrow">How we work</p>
-            <h2 id="process-title">We prefer practical architecture over unnecessary complexity.</h2>
-          </div>
-          <div className="grid process-grid">
-            {process.map((step) => (
-              <article className="card process-card" key={step.number}>
-                <strong>{step.number}</strong>
-                <h3>{step.title}</h3>
-                <p>{step.description}</p>
               </article>
             ))}
           </div>
@@ -132,38 +119,33 @@ export default function HomePage() {
       <section className="section" aria-labelledby="consulting-title">
         <div className="container">
           <div className="section-heading">
-            <p className="eyebrow">Consulting expertise</p>
-            <h2 id="consulting-title">Architecture and engineering guidance that turns complexity into an executable plan.</h2>
+            <p className="eyebrow">Consulting</p>
+            <h2 id="consulting-title">Architecture decisions that hold up in production.</h2>
+            <p>From technical reviews to implementation support, we help teams make better engineering decisions.</p>
           </div>
           <div className="grid card-grid-4">
-            {consultingExpertise.map((item) => (
-              <div className="card" key={item}><h3>{item}</h3></div>
-            ))}
+            {consultingExpertise.map((item) => <article className="card" key={item}><h3>{item}</h3></article>)}
           </div>
           <div className="cta-actions" style={{ marginTop: "1.5rem" }}>
-            <Link className="button button-primary" href="/contact">Discuss Your Architecture</Link>
+            <Link className="button button-primary" href="/contact">Discuss a technology challenge</Link>
             <Link className="button button-secondary" href="/consulting">Explore Consulting</Link>
           </div>
         </div>
       </section>
 
-      <section className="section" aria-labelledby="who-title">
+      <section className="section page-section--muted" aria-labelledby="approach-title">
         <div className="container">
           <div className="section-heading">
-            <p className="eyebrow">Who we work with</p>
-            <h2 id="who-title">Partners with the ambition to build and modernize.</h2>
-            <p>Whether you are building a new product or modernizing an existing platform, we help turn technical complexity into an executable engineering plan.</p>
+            <p className="eyebrow">How we work</p>
+            <h2 id="approach-title">A practical path from problem to production.</h2>
           </div>
-          <div className="grid client-grid">
-            {[
-              { title: "Startups", text: "Product strategy, architecture, and rapid delivery." },
-              { title: "SMBs", text: "Practical systems that support business growth." },
-              { title: "Product Companies", text: "Scalable platforms and maintainable engineering foundations." },
-              { title: "Enterprises", text: "Complex modernization with clear operational boundaries." },
-              { title: "GCCs", text: "Technology delivery and capability development." },
-              { title: "Digital Businesses", text: "Automation, integration, and AI-enabled workflows." },
-            ].map((item) => (
-              <article className="card client-card" key={item.title}><h3>{item.title}</h3><p>{item.text}</p></article>
+          <div className="grid process-grid">
+            {approach.map(([number, title, description]) => (
+              <article className="card process-card" key={number}>
+                <strong>{number}</strong>
+                <h3>{title}</h3>
+                <p>{description}</p>
+              </article>
             ))}
           </div>
         </div>
@@ -172,55 +154,51 @@ export default function HomePage() {
       <section className="section" aria-labelledby="industries-title">
         <div className="container">
           <div className="section-heading">
-            <p className="eyebrow">Industries & solutions</p>
-            <h2 id="industries-title">Flexible software for the industries and workflows that need it.</h2>
+            <p className="eyebrow">Industries</p>
+            <h2 id="industries-title">Software shaped by the realities of each business.</h2>
           </div>
-          <div className="grid industry-grid">
+          <div className="industry-grid">
             {[
-              "Local Business",
-              "Hospitality",
-              "Professional Services",
-              "Healthcare",
-              "Education",
-              "Enterprise Technology",
-            ].map((industry) => <div className="card" key={industry}><h3>{industry}</h3></div>)}
+              ["Local Business", "Clear workflows and measurable marketing performance."],
+              ["Hospitality", "Coordinated operations, service, and guest experiences."],
+              ["Professional Services", "Reliable delivery systems and transparent client operations."],
+              ["Enterprise Technology", "Modernization support for complex platforms and teams."],
+            ].map(([title, text]) => (
+              <article className="industry-card" key={title}>
+                <span className="industry-card__index">{title}</span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
           </div>
+          <p style={{ marginTop: "1.25rem" }}><Link href="/industries">More vertical products are being developed within the Fixna ecosystem.</Link></p>
         </div>
       </section>
 
-      <section className="section" aria-labelledby="why-title">
-        <div className="container">
-          <div className="section-heading">
-            <p className="eyebrow">Why Fixna</p>
-            <h2 id="why-title">An engineering-first approach that stays useful as the business changes.</h2>
+      <section className="section page-section--muted" aria-labelledby="statement-title">
+        <div className="container two-column">
+          <div>
+            <p className="eyebrow">Our philosophy</p>
+            <h2 id="statement-title">Technology should solve a business problem, not create another one.</h2>
           </div>
-          <div className="grid why-grid">
-            {[
-              ["Engineering-first", "Architecture before unnecessary technology."],
-              ["Product mindset", "We think beyond individual features."],
-              ["Cloud-native", "Built for modern deployment and operations."],
-              ["AI-ready", "AI is applied where it creates measurable value."],
-              ["Observable", "Systems should be measurable and diagnosable."],
-              ["Scalable by design", "Start simple, evolve when the business requires it."],
-            ].map(([title, text]) => (
-              <article className="card" key={title}><h3>{title}</h3><p>{text}</p></article>
-            ))}
+          <div className="content-list">
+            <div className="card"><strong>Practical over fashionable</strong><p>Use the right technology for the problem and operational reality.</p></div>
+            <div className="card"><strong>Architecture before unnecessary complexity</strong><p>Make decisions that support delivery and change.</p></div>
+            <div className="card"><strong>AI with purpose</strong><p>Apply AI where it creates measurable value and understands the surrounding process.</p></div>
+            <div className="card"><strong>Build for reality</strong><p>Design systems that people can operate, maintain, and improve.</p></div>
           </div>
         </div>
       </section>
 
       <section className="cta-band" aria-labelledby="cta-title">
-        <div className="container">
-          <div className="cta-card">
-            <div>
-              <p className="eyebrow" style={{ color: "#c7ed94" }}>Start a conversation</p>
-              <h2 id="cta-title">Have a business or technology problem to solve?</h2>
-              <p>Tell us what you're building, modernizing or automating.</p>
-            </div>
-            <div className="cta-actions">
-              <Link className="button button-primary" href="/contact">Start a Conversation</Link>
-              <Link className="button button-ghost" href="/consulting">Explore Consulting</Link>
-            </div>
+        <div className="container cta-band__inner">
+          <div>
+            <p className="eyebrow">Start a conversation</p>
+            <h2 id="cta-title">Have a business or technology problem to solve?</h2>
+          </div>
+          <div className="cta-actions">
+            <Link className="button button-primary" href="/contact">Start a conversation</Link>
+            <Link className="button button-ghost" href="/consulting">Explore consulting</Link>
           </div>
         </div>
       </section>
