@@ -1,28 +1,16 @@
-import { BrandMarkGraphic } from "./brand-mark-graphic";
+import { BrandMark } from "@fixna/brand";
 
-type BrandMarkIconProps = {
+export type BrandMarkIconProps = {
   className?: string;
   width?: number;
   height?: number;
 };
 
-/** Header/sidebar logo mark — same artwork as app/icon.svg. */
+/** Header/sidebar logo mark — shared ecosystem artwork. */
 export function BrandMarkIcon({
   className,
   width = 42,
   height = 44,
 }: BrandMarkIconProps) {
-  return (
-    <svg
-      className={className}
-      width={width}
-      height={height}
-      viewBox="0 0 42 44"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <BrandMarkGraphic />
-    </svg>
-  );
+  return <BrandMark className={className} width={width} height={height} />;
 }

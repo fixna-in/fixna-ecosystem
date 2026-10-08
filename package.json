@@ -2,7 +2,8 @@
   "name": "fixna-ecosystem",
   "private": true,
   "workspaces": [
-    "frontend/*"
+    "frontend/*",
+    "packages/*"
   ],
   "scripts": {
     "bootstrap:maven": "mvn -f pom.xml install -N -B && mvn -f backend/libs/fixna-platform-common/pom.xml clean install -DskipTests -B",

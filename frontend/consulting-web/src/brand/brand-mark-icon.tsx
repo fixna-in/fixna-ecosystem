@@ -1,24 +1,12 @@
-type BrandMarkIconProps = {
+import { BrandMark } from "@fixna/brand";
+
+export type BrandMarkIconProps = {
   className?: string;
   width?: number;
   height?: number;
 };
 
-/** Shared Fixna brand mark for the Consulting product. */
+/** Shared Fixna brand mark for all products. */
 export function BrandMarkIcon({ className, width = 42, height = 44 }: BrandMarkIconProps) {
-  return (
-    <svg
-      className={className}
-      width={width}
-      height={height}
-      viewBox="0 0 42 44"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <rect width="42" height="44" rx="12" fill="#163e32" />
-      <path d="M15 11.5h11.5c1.66 0 3 1.34 3 3v2.4c0 1.66-1.34 3-3 3H20.3v8.8c0 1.66-1.34 3-3 3H12.5c-1.66 0-3-1.34-3-3v-2.4c0-1.66 1.34-3 3-3h4.8V14.5c0-1.66 1.34-3 3-3Z" fill="#fff" />
-      <circle cx="29.5" cy="31.5" r="4.25" fill="#c7ed94" />
-    </svg>
-  );
+  return <BrandMark className={className} width={width} height={height} />;
 }
