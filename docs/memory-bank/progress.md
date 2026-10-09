@@ -1,5 +1,19 @@
 # Progress Log
 
+## 2026-10-09 — Cross-product styling consistency (LocalBoost ↔ Consulting)
+
+**Delivered:**
+- One shared Fixna design system across both web apps: identical `:root` tokens, base typography/gradient/focus ring, brand wordmark, public header/footer, sidebar nav, button variants, form/input styling with focus rings, boxed alerts, and table styles
+- Removed the LocalBoost `product.css` `:root` palette override that silently replaced the canonical palette app-wide (`--primary: #17634e` → `#163e32` etc.)
+- Tokenized off-palette colors in LocalBoost (`product.css`, `workspace.css`, `responsive.css`): blue `#eaf0fa` tables/pre, bluish status-badge neutral and auth-card shadows, hardcoded greens
+- Aligned component metrics: buttons (46px / radius 10 / weight 700 / lift hover), inputs (46px / radius 9 / `#fbfdfb` + focus ring), form cards (radius 16 + `--shadow`), h1/h2 type scale, body font 1rem, sidebar 250px
+- Markup parity: LocalBoost `Brand` → shared `brand-wordmark` structure (38×40 mark), header CTA → `header-cta`, sidebar sign-out → solid button; Consulting sidebar sign-in → `button button-secondary`; Consulting gained skip links + `#main-content` targets
+- Consulting bug fix: `select { font: inherit }` (8+ forms) and checkbox/radio accent color
+
+**Files:** `frontend/consulting-web/src/app/globals.css`, `frontend/localboost-web/src/app/{globals,product,workspace,responsive}.css`, `frontend/{consulting,localboost}-web/src/components/app-shell.tsx`, `frontend/localboost-web/src/components/ui.tsx`
+
+**Verified:** production builds pass for consulting-web and localboost-web (Next.js 16.3.6, TypeScript clean)
+
 ## 2026-10-08 — Consulting Fixna branding refresh
 
 **Delivered:**

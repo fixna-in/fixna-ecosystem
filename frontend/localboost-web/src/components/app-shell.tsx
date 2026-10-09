@@ -28,7 +28,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   if (publicPage) return <>
     <a className="skip-link" href="#main-content">Skip to content</a>
-    <header className="public-header"><Brand /><nav aria-label="Primary"><Link href="/dashboard">Workspace</Link><Link href="/login">Sign in</Link><Link className="button button-small" href="/register">Get started <span aria-hidden="true">↗</span></Link></nav></header>
+    <header className="public-header"><Brand /><nav aria-label="Primary"><Link href="/dashboard">Workspace</Link><Link href="/login">Sign in</Link><Link className="header-cta" href="/register">Get started <span aria-hidden="true">↗</span></Link></nav></header>
     <main id="main-content" tabIndex={-1} className="public-content">{children}</main>
     <footer className="public-footer"><span>© {new Date().getFullYear()} Fixna · LocalBoost</span><span>Built for local ambition.</span></footer>
   </>;
@@ -45,7 +45,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       })}</nav>
       <div className="sidebar-note"><span className="eyebrow">YOU’RE IN CONTROL</span><p>AI recommends.<br />You make the decisions.</p><small>Review and approve every campaign before launch.</small></div>
       <div className="sidebar-account"><span className="workspace-avatar" aria-hidden="true">F</span><div><strong>{session ? "Your account" : "Welcome to Fixna"}</strong><small>{session ? session.role.toLowerCase().replaceAll("_", " ") : initialized ? "Sign in to get started" : "Restoring session…"}</small></div></div>
-      {session ? <button className="button-quiet" disabled={busy} onClick={async () => {
+      {session ? <button disabled={busy} onClick={async () => {
         setBusy(true); setError(null);
         try { await logout(); await queryClient.cancelQueries(); queryClient.clear(); router.push("/login"); }
         catch (err) { setError(toApiError(err).message); }

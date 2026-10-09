@@ -30,6 +30,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   if (publicPage) {
     return (
       <>
+        <a className="skip-link" href="#main-content">Skip to content</a>
         <header className="public-header">
           <Link className="brand" href="/" aria-label="Fixna Consulting home">
             <BrandMarkIcon width={38} height={40} />
@@ -41,7 +42,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             <Link href="/register" className="header-cta">Create account</Link>
           </nav>
         </header>
-        <main className="public-content">{children}</main>
+        <main id="main-content" tabIndex={-1} className="public-content">{children}</main>
         <footer className="public-footer">
           <span>© {new Date().getFullYear()} Fixna Consulting</span>
           <span>Built for ambitious advisory teams</span>
@@ -52,6 +53,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="shell">
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <aside className="sidebar">
         <Link className="brand" href="/" aria-label="Fixna Consulting home">
           <BrandMarkIcon width={38} height={40} />
@@ -89,13 +91,13 @@ export function AppShell({ children }: { children: ReactNode }) {
               {busy ? "Signing out…" : "Sign out"}
             </button>
           ) : (
-            <Link href="/login" className="sidebar-login">Sign in</Link>
+            <Link href="/login" className="sidebar-login button button-secondary">Sign in</Link>
           )}
           {!session && initialized ? <p className="muted">Sign in to manage clients.</p> : null}
           {error ? <p className="sidebar-error" role="alert">{error}</p> : null}
         </div>
       </aside>
-      <main className="main">{children}</main>
+      <main id="main-content" tabIndex={-1} className="main">{children}</main>
     </div>
   );
 }

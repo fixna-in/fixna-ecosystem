@@ -1,7 +1,7 @@
 # Active Context
 
-**Last updated:** 2026-10-08  
-**Current focus:** Polished Fixna product branding and ecosystem documentation; LocalBoost production cutover remains pending.
+**Last updated:** 2026-10-09  
+**Current focus:** Shared Fixna design system across LocalBoost & Consulting web; LocalBoost production cutover remains pending.
 
 ## Current state
 
@@ -9,6 +9,13 @@
 |---------|--------|-------|-------|
 | **Consulting** | ✅ MVP v1.0.0 with refreshed Fixna branding | 136 API tests | Rebuilt Phases 1–10 after accidental deletion; branded workspace and public website; deploy via `render-consulting.yaml` |
 | **LocalBoost** | ✅ Ecosystem-ready | 236 (229 + 7 platform-common) | Migrated from standalone repo; production cutover pending |
+
+## Recent updates — cross-product styling consistency (2026-10-09)
+
+- LocalBoost and Consulting now share one design system: same tokens (green `#163e32` palette), typography scale, focus ring, brand wordmark, public header/footer, sidebar nav, buttons, forms, alerts, and tables
+- LocalBoost `product.css` no longer overrides `:root`; all component CSS is token-driven (no stray blue/off-palette colors)
+- Shared markup conventions: `brand-wordmark`, `header-cta`, `button button-secondary` sidebar sign-in, skip links with `#main-content` targets (both apps)
+- Product-specific compositions kept: LocalBoost auth story/landing/dashboard panels; Consulting home hero/public site
 
 ## Recent Consulting experience updates
 

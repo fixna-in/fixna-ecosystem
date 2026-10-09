@@ -6,6 +6,17 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Changed — Cross-product styling consistency (LocalBoost ↔ Consulting)
+
+- Unified both web apps on a single Fixna design system: identical design tokens, base typography, focus ring, brand wordmark, public header/footer, sidebar navigation, buttons, forms, alerts, and table styles
+- Removed the LocalBoost `product.css` `:root` palette override (`--primary: #17634e` etc.); both apps now use the canonical green palette (`--primary: #163e32`)
+- Aligned LocalBoost with Consulting on h1/h2 type scale, base font size (1rem), body gradient background, focus offset, and sidebar/shell width (250px)
+- Replaced off-palette colors in LocalBoost (blue `#eaf0fa` tables/pre, bluish status-badge neutral and auth-card shadows, hardcoded greens) with design tokens
+- Matched shared component metrics across apps: buttons (46px, radius 10, weight 700, lift hover, `.button`/`.button-small`/`.button-secondary` variants), inputs (46px, radius 9, `#fbfdfb`, focus ring), boxed `[role="alert"]` banners, form cards (radius 16 + `--shadow`)
+- Markup parity: LocalBoost `Brand` now uses the shared `brand-wordmark` structure and `header-cta` CTA class; sidebar sign-in/sign-out actions aligned; Consulting gained skip links and `#main-content` targets
+- **Consulting fix:** `select` elements now inherit `font` (used in 8+ forms); checkbox/radio accent color added
+- LocalBoost product-specific compositions (auth story, landing, dashboard panels) retained but expressed with the shared tokens
+
 ### Changed — Consulting Fixna branding refresh
 
 - Added a reusable Fixna `f•` brand mark and shared SVG icon assets for the Consulting product

@@ -5,8 +5,8 @@ import { BrandMarkIcon } from "@/brand/brand-mark-icon";
 export function Brand() {
   return (
     <Link className="brand" href="/" aria-label="Fixna LocalBoost home">
-      <BrandMarkIcon className="brand-mark" />
-      <span>fixna<span className="brand-product">LocalBoost</span></span>
+      <BrandMarkIcon width={38} height={40} />
+      <span className="brand-wordmark">fixna<span>LocalBoost</span></span>
     </Link>
   );
 }
