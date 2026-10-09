@@ -1,7 +1,7 @@
 
 .sidebar { overflow-y: auto; }
 .workspace-body { min-width: 0; display: flex; flex-direction: column; }
-.workspace-topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: var(--surface); border-bottom: 1px solid var(--border); min-height: 78px; padding: 1rem 2.5rem; font-size: 0.78rem; }
+.workspace-topbar { position: sticky; top: 0; z-index: 15; display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: rgb(255 255 255 / 90%); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); min-height: 78px; padding: 1rem 2.5rem; font-size: 0.78rem; }
 .breadcrumb-divider { color: var(--muted); margin: 0 0.8rem; }
 .page-content { width: 100%; max-width: 1440px; padding: 2.5rem; flex: 1; }
 .workspace-footer { padding: 1.3rem 2.5rem; color: var(--muted); display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--border); font-size: 0.65rem; }

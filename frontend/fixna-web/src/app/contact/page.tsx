@@ -1,3 +1,5 @@
+import { productLinks } from "@/lib/product-links";
+
 export const metadata = {
   title: "Contact",
   description: "Start a conversation with Fixna about your product, technology, cloud, automation, or consulting requirement.",
@@ -21,7 +23,7 @@ export default function ContactPage() {
             <h2>We would like to understand your requirement.</h2>
             <p>Share the context, constraints, and desired outcome. You can also use the same information to request architecture, product engineering, or consulting support.</p>
             <p><strong>Email:</strong> <a href="mailto:hello@fixna.in">hello@fixna.in</a></p>
-            <p><strong>Product links:</strong> <a href="https://app.fixna.in" target="_blank" rel="noreferrer">LocalBoost</a> · <a href="https://consulting.fixna.in" target="_blank" rel="noreferrer">Consulting</a></p>
+            <p><strong>Product links:</strong> <a href={productLinks.localboost} target="_blank" rel="noreferrer">LocalBoost</a> · <a href={productLinks.consulting} target="_blank" rel="noreferrer">Consulting</a></p>
           </div>
 
           <div className="contact-card">

@@ -1,5 +1,17 @@
 # Progress Log
 
+## 2026-10-09 — fixna.web links, dark-hero fix, LocalBoost sticky topbar
+
+**Delivered:**
+- LocalBoost outbound links → `https://localboost.fixna.in/`: `content/products.ts` (homepage + `/products` Explore CTAs) and `contact/page.tsx` (now imports `productLinks` instead of hardcoding)
+- Root-caused the "blank" `/products` page: `h1, h2, h3 { color: var(--ink) }` beat `.page-hero`/`.hero` color inheritance → headlines invisible dark-on-dark; added `.hero h1, .hero h2, .page-hero h1, .page-hero h2 { color: var(--surface) }` (fixes homepage + all page-hero pages too)
+- `.page-kicker { margin-bottom: 0.9rem }` — kicker was flush against the h1
+- LocalBoost `.workspace-topbar` now sticky with translucent blurred shade (`rgb(255 255 255 / 90%)` + `blur(16px)`), matching Consulting's fixed shaded header; public header stickiness already shipped in commit `1bf448d`
+
+**Files:** `frontend/fixna-web/src/content/products.ts`, `frontend/fixna-web/src/app/contact/page.tsx`, `frontend/fixna-web/src/app/design-system.css`, `frontend/localboost-web/src/app/workspace.css`
+
+**Verified:** production builds pass for fixna-web and localboost-web
+
 ## 2026-10-09 — Cross-product styling consistency (LocalBoost ↔ Consulting)
 
 **Delivered:**

@@ -134,6 +134,8 @@ h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); }
 h2 { font-size: clamp(2rem, 4vw, 3.1rem); }
 h3 { font-size: 1.18rem; }
 p { margin: 0; color: var(--muted); }
+/* Dark heroes: the base heading color (var(--ink)) would be dark-on-dark — force light text. */
+.hero h1, .hero h2, .page-hero h1, .page-hero h2 { color: var(--surface); }
 
 .hero {
   position: relative;
@@ -279,7 +281,7 @@ p { margin: 0; color: var(--muted); }
 .page-hero__inner { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, 0.45fr); align-items: end; gap: 2rem; }
 .page-hero .container { position: relative; z-index: 1; }
 .page-hero p { color: rgb(255 255 255 / 72%); font-size: 1.08rem; }
-.page-kicker { color: var(--lime); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+.page-kicker { margin-bottom: 0.9rem; color: var(--lime); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
 .page-hero h1 + p { margin-top: 1.2rem; max-width: 630px; }
 .hero-stat-card { display: grid; padding: 1.5rem; border: 1px solid rgb(255 255 255 / 12%); border-radius: 1.2rem; background: rgb(255 255 255 / 5%); box-shadow: 0 24px 60px rgb(0 0 0 / 18%); }
 .hero-stat-card span { margin-bottom: 0.4rem; color: var(--lime); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; }

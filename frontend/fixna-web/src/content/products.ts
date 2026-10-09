@@ -16,7 +16,7 @@ export const products: Product[] = [
     name: "Fixna LocalBoost",
     description: "AI-assisted marketing orchestration for local businesses.",
     status: "LIVE",
-    url: "https://app.fixna.in",
+    url: "https://localboost.fixna.in/",
     category: "Marketing intelligence",
     capabilities: ["Campaign orchestration", "AI recommendations", "Local targeting", "Performance tracking"],
   },

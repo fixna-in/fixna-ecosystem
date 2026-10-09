@@ -6,6 +6,13 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Fixed — fixna.web links, dark-hero headlines, LocalBoost header
+
+- LocalBoost hyperlinks from fixna.web now use `https://localboost.fixna.in/` — product cards (`content/products.ts`) and the contact page (now via `productLinks`, the single source of truth)
+- **Invisible dark-hero headlines fixed:** base `h1, h2, h3 { color: var(--ink) }` (dark green) overrode hero inheritance, rendering headlines dark-on-dark on `.hero` / `.page-hero` backgrounds — homepage, `/products`, and every page-hero page showed an empty hero; headings now render in `--surface`
+- `.page-kicker` now has breathing room above the headline (was 0px gap)
+- **LocalBoost:** authenticated `.workspace-topbar` is now sticky (`top: 0`) with the same translucent blurred shade as the public header — matches Consulting's fixed, shaded header behavior while scrolling
+
 ### Changed — Cross-product styling consistency (LocalBoost ↔ Consulting)
 
 - Unified both web apps on a single Fixna design system: identical design tokens, base typography, focus ring, brand wordmark, public header/footer, sidebar navigation, buttons, forms, alerts, and table styles
