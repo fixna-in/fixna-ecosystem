@@ -1,4 +1,5 @@
 import { productLinks } from "@/lib/product-links";
+import { ContactForm } from "./contact-form";
 
 export const metadata = {
   title: "Contact",
@@ -27,30 +28,7 @@ export default function ContactPage() {
           </div>
 
           <div className="contact-card">
-            <form className="contact-form" action="mailto:hello@fixna.in" method="post" encType="text/plain">
-              <div className="field">
-                <label htmlFor="name">Name</label>
-                <input id="name" name="Name" type="text" autoComplete="name" required />
-              </div>
-              <div className="field">
-                <label htmlFor="company">Company</label>
-                <input id="company" name="Company" type="text" autoComplete="organization" />
-              </div>
-              <div className="field">
-                <label htmlFor="email">Email</label>
-                <input id="email" name="Email" type="email" autoComplete="email" required />
-              </div>
-              <div className="field">
-                <label htmlFor="phone">Phone (optional)</label>
-                <input id="phone" name="Phone" type="tel" autoComplete="tel" />
-              </div>
-              <div className="field">
-                <label htmlFor="requirement">Requirement</label>
-                <textarea id="requirement" name="Requirement" required placeholder="Tell us what you are building, modernizing, or automating." />
-              </div>
-              <button className="button button-primary" type="submit">Send Requirement</button>
-              <p className="form-note">This form opens your email client. No backend or database is required.</p>
-            </form>
+            <ContactForm />
           </div>
         </div>
       </section>

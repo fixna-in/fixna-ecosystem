@@ -16,12 +16,14 @@ export default function PrivacyPolicyPage() {
 
       <section className="page-section">
         <div className="container narrow prose">
-          <p>Fixna may collect information you provide through this website, including your name, company, email address, project description, and any optional timeline or budget information.</p>
-          <p>We use this information only to respond to your enquiry and understand the requirements you provide. We do not sell personal information.</p>
+          <p>Fixna may collect information you provide through this website, including your name, company, email address, phone number, and project description submitted through the contact form.</p>
+          <p>Contact-form submissions are stored in a private Google Sheets spreadsheet accessible only to Fixna. We use this information only to respond to your enquiry and understand the requirements you provide. We do not sell personal information.</p>
           <h2>Contact information</h2>
           <p>If you have questions about this policy, contact <a href="mailto:hello@fixna.in">hello@fixna.in</a>.</p>
           <h2>Website analytics</h2>
-          <p>Fixna may use standard analytics and platform logs to understand website performance and improve the experience. The specific tools used may vary by deployment.</p>
+          <p>This website does not currently load third-party analytics scripts. Like any web host, our hosting provider (Vercel) processes standard request logs — such as IP address, user agent, and requested path — for operation and abuse prevention.</p>
+          <h2>Product applications</h2>
+          <p>The LocalBoost and Consulting applications are separate products with their own accounts and data. Data you store there is governed by the terms of the product you use, not this website's contact form.</p>
           <h2>Your choices</h2>
           <p>You may contact Fixna to request access, correction, or deletion of information you have provided through the website.</p>
         </div>

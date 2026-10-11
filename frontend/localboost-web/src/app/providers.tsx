@@ -40,8 +40,10 @@ function HealthProbe() {
     },
     retry: false,
   });
-  if (isLoading) return <LoadingState label="Checking API status" />;
-  if (error) return <ErrorState error={error} />;
+  if (isLoading) return <p className="muted" role="status">Checking live status…</p>;
+  // Landing-page context: a status probe failure must never render as a raw
+  // error banner for first-time visitors — degrade to a neutral note.
+  if (error) return <p className="muted" role="status">Live status is unavailable right now.</p>;
   return <p role="status">API: {data?.status ?? "unknown"}</p>;
 }
 

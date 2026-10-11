@@ -4,6 +4,7 @@ import in.fixna.platform.identity.auth.JwtAuthenticationFilter;
 import in.fixna.platform.identity.auth.JwtProperties;
 import in.fixna.platform.common.web.ApiAccessDeniedHandler;
 import in.fixna.platform.common.web.ApiAuthenticationEntryPoint;
+import in.fixna.platform.common.web.RateLimitFilter;
 import in.fixna.platform.common.web.RequestIdFilter;
 import in.fixna.platform.common.web.SecurityHeadersFilter;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -26,6 +27,7 @@ public class SecurityConfig {
             HttpSecurity http,
             RequestIdFilter requestIdFilter,
             SecurityHeadersFilter securityHeadersFilter,
+            RateLimitFilter rateLimitFilter,
             JwtAuthenticationFilter jwtFilter,
             ApiAuthenticationEntryPoint entryPoint,
             ApiAccessDeniedHandler deniedHandler)
@@ -38,6 +40,9 @@ public class SecurityConfig {
                 .addFilterBefore(requestIdFilter, SecurityContextHolderFilter.class)
                 .addFilterBefore(securityHeadersFilter, RequestIdFilter.class)
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                // Brute-force guard for the public auth surface (login/register/
+                // refresh + portal login); mirrors localboost-api parity.
+                .addFilterBefore(rateLimitFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(auth -> auth.requestMatchers(
                                 "/api/v1/auth/register",
                                 "/api/v1/auth/login",

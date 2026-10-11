@@ -313,6 +313,12 @@ p { margin: 0; color: var(--muted); }
 .field textarea { min-height: 140px; resize: vertical; }
 .field input:focus, .field textarea:focus { border-color: var(--ink); outline: none; box-shadow: 0 0 0 3px rgb(22 62 50 / 8%); }
 .form-note { color: var(--muted); font-size: 0.8rem; }
+.field-error { color: #b42318; font-size: 0.8rem; font-weight: 600; }
+/* Honeypot field: visually hidden, unreachable by keyboard/assistive tech. */
+.hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.contact-success { display: grid; gap: 0.75rem; }
+.contact-success h2 { margin: 0; }
+.muted-text { color: var(--muted); font-size: 0.85rem; }
 
 .prose { display: grid; gap: 1.25rem; }
 .prose h2 { font-size: 1.6rem; margin-top: 0.75rem; }

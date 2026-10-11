@@ -25,6 +25,7 @@ export default function ProductsPage() {
                 <span className={`status ${product.status === "LIVE" ? "live" : product.status === "COMING SOON" ? "coming-soon" : ""}`}>{product.status}</span>
                 <h3>{product.name}</h3>
                 <p>{product.description}</p>
+                <p className="muted-text">{product.statusNote}</p>
                 <p>{product.category}</p>
                 <div className="card-list">
                   {product.capabilities.map((capability) => <span key={capability}>{capability}</span>)}

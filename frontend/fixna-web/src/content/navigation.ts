@@ -5,7 +5,7 @@ export type NavItem = {
 
 export const navigation: NavItem[] = [
   { href: "/about", label: "About" },
-  { href: "/capabilities", label: "Capabilities" },
+  { href: "/what-we-do", label: "Capabilities" },
   { href: "/products", label: "Products" },
   { href: "/consulting", label: "Consulting" },
   { href: "/technology", label: "Technology" },
@@ -13,7 +13,7 @@ export const navigation: NavItem[] = [
 
 export const footerNavigation: NavItem[] = [
   { href: "/about", label: "About" },
-  { href: "/capabilities", label: "Capabilities" },
+  { href: "/what-we-do", label: "Capabilities" },
   { href: "/products", label: "Products" },
   { href: "/consulting", label: "Consulting" },
   { href: "/contact", label: "Contact" },

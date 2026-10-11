@@ -61,5 +61,7 @@ fixna:
     cors:
       allowed-origins: ${FIXNA_CORS_ALLOWED_ORIGINS:http://localhost:3000,http://127.0.0.1:3000}
     hsts-enabled: ${FIXNA_HSTS_ENABLED:false}
+    rate-limit:
+      per-ip-per-minute: ${FIXNA_RATE_LIMIT_PER_IP_PER_MINUTE:20}
   file-storage:
     base-path: ${FIXNA_FILE_STORAGE_PATH:./data/files}

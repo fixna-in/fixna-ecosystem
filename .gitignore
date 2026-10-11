@@ -1,6 +1,5 @@
-# Java
-backend/*/target/
 *.class
+target/
 
 # Node
 node_modules/
@@ -29,3 +28,17 @@ Thumbs.db
 
 # File storage (local dev)
 backend/consulting-api/storage/
+
+# Secrets — never commit private keys, tokens, or service-account JSON.
+# (A stray private key file named `git` existed at repo root; it was deleted
+# locally on 2026-10-09. Treat it as exposed — rotate the key on GitHub if it
+# was ever pushed.)
+git
+**/git
+*.pem
+*.key
+*-key.json
+*service-account*.json
+google-credentials*.json
+secrets/
+credentials/

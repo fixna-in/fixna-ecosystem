@@ -110,3 +110,23 @@ jobs:
         env:
           NEXT_PUBLIC_API_BASE_URL: https://api.consulting.fixna.in/api
           NEXT_PUBLIC_APP_ENV: ci
+
+  fixna-web:
+    name: Fixna Web — typecheck, test & production build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Typecheck
+        run: npm --prefix frontend/fixna-web run typecheck
+      - name: Unit tests (contact form handler)
+        run: npm --prefix frontend/fixna-web run test
+      - name: Build fixna web
+        run: npm run build:fixna
+        env:
+          NEXT_PUBLIC_SITE_URL: https://www.fixna.in
