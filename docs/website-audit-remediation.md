@@ -1,6 +1,6 @@
-# Public Website Audit — Remediation Proposal (Phase 2–6)
+# Public Website Audit — Remediation Record (Phase 2–6)
 
-Date: 2026-10-11 · Status: PROPOSAL — awaiting review before app-code edits.
+Date: 2026-10-11 · Status: IMPLEMENTED + VERIFIED LOCALLY (see gates below).
 Baseline: `docs/website-audit-baseline.md`. Scope limited to `frontend/fixna-web`.
 No LocalBoost/Consulting/shared-backend/DB/auth/billing changes. No deploys,
 DNS, env, or migration changes without explicit approval.
@@ -18,7 +18,7 @@ DNS, env, or migration changes without explicit approval.
 | R7 | Low | Sitemap `lastModified: new Date()` on every build (all 10 routes churn weekly regardless of change). | Stable `lastModified` (fixed date or per-page) unless content changed. |
 | R8 | Info | Consulting wording mixes services + Workspace product: `products.ts` consulting = "Technology consulting and client delivery platform…"; `/consulting` page = pure services. No Workspace disclaimer on public site beyond statusNote. | Content proposal below adopted; services vs Workspace clearly labelled. |
 
-## Content change proposal (ambiguous claims — do not implement without approval)
+## Content change proposal — ADOPTED (C1, C2, C5 as proposed; C3/C4 unchanged)
 
 C1 Consulting card (`products.ts` description + statusNote): keep "Available
 for early access. AI drafting features are advisory templates that always
@@ -87,6 +87,18 @@ M1 Contact delivery on deployed host. M2 Vercel `NEXT_PUBLIC_SITE_URL` +
 www↔apex redirect. M3 Keyboard-only + mobile + contrast pass. M4 Inbox
 monitoring. M5 Legal review. R8 wording adopted as proposed (C1) — confirm
 it matches how services are actually sold.
+
+## Completion record
+
+- Temp evidence logs from verification (`status*.log`, `diffstat.log`,
+  `gitlog.log`, `showstat*.log`, `unpushed.log`, `*.log` gate logs) all
+  deleted; confirmed absent via file reads.
+- Session commits on `main`: `4161457 "fixing audit issue-1"` (all Batch A–D
+  edits + audit docs) and `e9ae6ea "audit fix -2"` (canonical test/helper
+  rework). Working tree clean; `origin/main..HEAD` empty at last check —
+  confirm CI `fixna-web` job green on HEAD before closing.
+- All six required deliverables present: baseline doc, remediation record,
+  prioritized issue list (R1–R8), scoped code changes, new tests, this report.
 
 ## Manual verification required (owner)
 
