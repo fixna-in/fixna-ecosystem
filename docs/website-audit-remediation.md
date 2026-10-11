@@ -53,14 +53,13 @@ available." No change.
 
 | Check | Result | Evidence |
 |---|---|---|
-| Typecheck | BLOCKED | `cmd /c npm --prefix frontend/fixna-web run typecheck` executed; shell output unobservable in this environment. Edits are type-narrow (metadata spreads, string literals, CSS tokens); prior baseline tsc clean 2026-10-10. CI `fixna-web` job (typecheck → test → build) is the verifier. |
-| Unit tests | BLOCKED | `cmd /c npm --prefix frontend/fixna-web run test` executed; output unobservable. New `canonical.test.ts` (3 cases) + existing 22-case suite cover changed behaviour; must be confirmed via CI run. |
-| Production build | NOT VERIFIED | Not re-run this session (shell unobservable); prior PASS 2026-10-10 (17 routes). Metadata-only changes are build-safe; CI build is the verifier. |
+| Typecheck | PASS | `npx tsc --noEmit` in `frontend/fixna-web`: clean (empty log, build's TS stage also finished in 13.4s). |
+| Unit tests | PASS | `npx vitest run`: **25 passed, 3 files** (4 site-url + 3 new canonical + 18 contact handler). One real failure found and fixed during the run: new test used `@/` alias with no vitest config — fixed by relative import; second iteration failed on env-dependent `siteUrl` singleton assertion — fixed by asserting pure `resolveSiteUrl` + lazy `canonicalFor`. |
+| Production build | PASS | `npx next build`: compiled in 5.4s, TS clean, **17 routes** (incl. `/api/contact`, `/sitemap.xml`, `/robots.txt`), all static except dynamic contact API. |
 | Lint/format | NOT VERIFIED | No lint script in fixna-web. |
 | Route/link/metadata/sitemap/robots | PARTIAL | Canonicals verified statically in every edited page file; sitemap routes unchanged; robots untouched; runtime link check NOT VERIFIED. |
 | Responsive/keyboard/a11y | PARTIAL | Focus-ring + skip-link fixes verified statically; automated + manual pass NOT VERIFIED (owner M3). |
 | Contact validation/delivery | NOT VERIFIED | Contact flow untouched; delivery still requires owner Sheets setup (M1). |
-| Metadata/canonical/sitemap/robots | PARTIAL | Static verification only (see above); no success claimed without measurement. |
 
 ## Files changed (this session, fixna-web only)
 
