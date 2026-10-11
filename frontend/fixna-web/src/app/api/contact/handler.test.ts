@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  CONTACT_HONEYPOT_FIELD,
   createContactHandler,
   createInMemoryRateLimiter,
   toSheetRow,
@@ -121,9 +122,24 @@ describe("createContactHandler", () => {
   it("pretends success for honeypot submissions without storing", async () => {
     let called = false;
     const handle = createContactHandler(deps({ appendRow: async () => { called = true; } }));
-    const response = await handle(post({ ...VALID_BODY, companyWebsite: "spam.example" }));
+    const response = await handle(post({ ...VALID_BODY, [CONTACT_HONEYPOT_FIELD]: "spam.example" }));
     expect(response.status).toBe(202);
+    const payload = await response.json();
+    // Generic message — traps must not reveal they were detected.
+    expect(payload.message).not.toContain("test@example.com");
     expect(called).toBe(false);
+  });
+
+  it("ignores the legacy companyWebsite autofill value and stores the enquiry", async () => {
+    // Regression: browsers used to autofill the old `companyWebsite` trap
+    // with a stored URL, discarding real enquiries as suspected bots.
+    const rows: string[][] = [];
+    const handle = createContactHandler(deps({ appendRow: async (row) => { rows.push(row); } }));
+    const response = await handle(post({ ...VALID_BODY, companyWebsite: "https://example.com" }));
+    expect(response.status).toBe(202);
+    const payload = await response.json();
+    expect(payload.message).toContain("test@example.com");
+    expect(rows).toHaveLength(1);
   });
 
   it("returns a generic error when storage fails", async () => {
@@ -141,7 +157,7 @@ describe("createContactHandler", () => {
     const response = await handle(post(VALID_BODY));
     expect(response.status).toBe(503);
     const payload = await response.json();
-    expect(payload.message).toContain("hello@fixna.in");
+    expect(payload.message).toContain("fixnainfo@gmail.com");
   });
 
   it("rejects non-POST methods", async () => {

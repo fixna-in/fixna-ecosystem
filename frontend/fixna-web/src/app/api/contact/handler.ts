@@ -19,6 +19,16 @@ export type ValidationResult =
   | { ok: true; value: ContactSubmission }
   | { ok: false; errors: Record<string, string> };
 
+/**
+ * Honeypot trap field name — deliberately obscure so browser autofill and
+ * password managers do not recognise or fill it (the previous
+ * `companyWebsite` name was autofilled as a URL field, discarding real
+ * enquiries as suspected bots). The value is read from FormData at submit
+ * time and never stored. Keep in sync with `contact-form.tsx` via the
+ * exported constant — do not rename one side only.
+ */
+export const CONTACT_HONEYPOT_FIELD = "fx_hp_confirm_9q2";
+
 const LIMITS = {
   name: 120,
   company: 200,
@@ -115,7 +125,7 @@ export function createContactHandler(deps: ContactHandlerDeps) {
       return json(503, {
         ok: false,
         code: "FORM_UNAVAILABLE",
-        message: "The contact form is temporarily unavailable. Please email hello@fixna.in.",
+        message: "The contact form is temporarily unavailable. Please email fixnainfo@gmail.com.",
       });
     }
 
@@ -127,7 +137,7 @@ export function createContactHandler(deps: ContactHandlerDeps) {
       return json(429, {
         ok: false,
         code: "RATE_LIMIT_EXCEEDED",
-        message: "Too many submissions — please retry shortly or email hello@fixna.in.",
+        message: "Too many submissions — please retry shortly or email fixnainfo@gmail.com.",
       });
     }
 
@@ -139,8 +149,12 @@ export function createContactHandler(deps: ContactHandlerDeps) {
     }
 
     // Honeypot: bots fill hidden fields. Pretend success, store nothing.
-    const honeypot = (body as Record<string, unknown>)?.companyWebsite;
+    // The key living on CONTACT_HONEYPOT_FIELD avoids browser autofill
+    // false-positives; legacy `companyWebsite` keys are plain fields now.
+    const honeypot = (body as Record<string, unknown>)?.[CONTACT_HONEYPOT_FIELD];
     if (typeof honeypot === "string" && honeypot.trim() !== "") {
+      // eslint-disable-next-line no-console
+      console.log("contact:honeypot trap");
       return json(202, { ok: true, message: "Thanks — your enquiry has been recorded." });
     }
 
@@ -155,7 +169,7 @@ export function createContactHandler(deps: ContactHandlerDeps) {
       return json(502, {
         ok: false,
         code: "STORAGE_FAILED",
-        message: "We could not record your enquiry right now. Please email hello@fixna.in.",
+        message: "We could not record your enquiry right now. Please email fixnainfo@gmail.com.",
       });
     }
 

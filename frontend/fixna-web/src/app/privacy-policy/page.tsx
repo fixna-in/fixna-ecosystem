@@ -19,7 +19,7 @@ export default function PrivacyPolicyPage() {
           <p>Fixna may collect information you provide through this website, including your name, company, email address, phone number, and project description submitted through the contact form.</p>
           <p>Contact-form submissions are stored in a private Google Sheets spreadsheet accessible only to Fixna. We use this information only to respond to your enquiry and understand the requirements you provide. We do not sell personal information.</p>
           <h2>Contact information</h2>
-          <p>If you have questions about this policy, contact <a href="mailto:hello@fixna.in">hello@fixna.in</a>.</p>
+          <p>If you have questions about this policy, contact <a href="mailto:fixnainfo@gmail.com">fixnainfo@gmail.com</a>.</p>
           <h2>Website analytics</h2>
           <p>This website does not currently load third-party analytics scripts. Like any web host, our hosting provider (Vercel) processes standard request logs — such as IP address, user agent, and requested path — for operation and abuse prevention.</p>
           <h2>Product applications</h2>

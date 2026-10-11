@@ -49,6 +49,11 @@ docs) preserved and extended.
   - `src/lib/site-url.test.ts` — 4 cases (converted from a stray
     node:test `.mjs` file that broke `vitest run`).
   - Result: **21 tests, 2 files, all passing**.
+- Contact email standardized on `fixnainfo@gmail.com` across the
+  contact page, contact-form fallback links/messages, API handler
+  fallback messages, and privacy-policy contact line; zero
+  `hello@fixna.in` references remain (fixna-web test + typecheck
+  re-verified after the swap: 21 pass, tsc clean).
 - SEO/navigation (P1-1, P2-6, P2-7):
   - Nav + footer nav now link to `/what-we-do`; `/capabilities` stays live
     with `canonical=/what-we-do` + `noindex`.

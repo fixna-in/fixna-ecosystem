@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { CONTACT_HONEYPOT_FIELD } from "../api/contact/handler";
+
 type FormState =
   | { kind: "idle" }
   | { kind: "submitting" }
@@ -17,7 +19,6 @@ const FIELDS = [
 
 export function ContactForm() {
   const [state, setState] = useState<FormState>({ kind: "idle" });
-  const [honeypot, setHoneypot] = useState("");
 
   const submitting = state.kind === "submitting";
 
@@ -37,7 +38,9 @@ export function ContactForm() {
           email: data.get("email"),
           phone: data.get("phone"),
           requirement: data.get("requirement"),
-          companyWebsite: honeypot,
+          // Read the trap from FormData (not React state) so password
+          // managers that bypass React events are handled consistently.
+          [CONTACT_HONEYPOT_FIELD]: data.get(CONTACT_HONEYPOT_FIELD),
         }),
       });
       const payload = (await response.json().catch(() => ({}))) as {
@@ -52,13 +55,13 @@ export function ContactForm() {
       }
       setState({
         kind: "error",
-        message: payload.message ?? "Something went wrong. Please try again or email hello@fixna.in.",
+        message: payload.message ?? "Something went wrong. Please try again or email fixnainfo@gmail.com.",
         fieldErrors: payload.errors,
       });
     } catch {
       setState({
         kind: "error",
-        message: "We could not reach the server. Please try again or email hello@fixna.in.",
+        message: "We could not reach the server. Please try again or email fixnainfo@gmail.com.",
       });
     }
   }
@@ -69,7 +72,7 @@ export function ContactForm() {
         <h2>Enquiry recorded</h2>
         <p>{state.message}</p>
         <p className="form-note">
-          Need to add something? Email <a href="mailto:hello@fixna.in">hello@fixna.in</a>.
+          Need to add something? Email <a href="mailto:fixnainfo@gmail.com">fixnainfo@gmail.com</a>.
         </p>
       </div>
     );
@@ -110,17 +113,18 @@ export function ContactForm() {
           </p>
         ) : null}
       </div>
-      {/* Honeypot — hidden from real users; bots fill it and are dropped. */}
+      {/* Honeypot — hidden from real users; bots fill it and are dropped.
+          The obscure name defeats browser autofill / password managers that
+          filled the previous `companyWebsite` trap with a stored URL. */}
       <div className="hp-field" aria-hidden="true">
-        <label htmlFor="companyWebsite">Company website</label>
+        <label htmlFor={CONTACT_HONEYPOT_FIELD}>Leave this field empty</label>
         <input
-          id="companyWebsite"
-          name="companyWebsite"
+          id={CONTACT_HONEYPOT_FIELD}
+          name={CONTACT_HONEYPOT_FIELD}
           type="text"
           tabIndex={-1}
-          autoComplete="off"
-          value={honeypot}
-          onChange={(event) => setHoneypot(event.target.value)}
+          autoComplete="new-password"
+          spellCheck={false}
         />
       </div>
       <button className="button button-primary" type="submit" disabled={submitting}>
@@ -133,7 +137,7 @@ export function ContactForm() {
       ) : null}
       <p className="form-note">
         Your enquiry is recorded securely and we reply by email. Prefer email?{" "}
-        <a href="mailto:hello@fixna.in">hello@fixna.in</a>.
+        <a href="mailto:fixnainfo@gmail.com">fixnainfo@gmail.com</a>.
       </p>
     </form>
   );
