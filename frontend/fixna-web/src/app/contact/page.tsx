@@ -1,9 +1,11 @@
 import { productLinks } from "@/lib/product-links";
+import { canonicalFor } from "@/lib/canonical";
 import { ContactForm } from "./contact-form";
 
 export const metadata = {
   title: "Contact",
   description: "Start a conversation with Fixna about your product, technology, cloud, automation, or consulting requirement.",
+  ...canonicalFor("/contact"),
 };
 
 export default function ContactPage() {

@@ -4,6 +4,13 @@ import { products } from "@/content/products";
 import { technologyGroups } from "@/content/technology";
 import { consultingExpertise } from "@/content/consulting";
 import { productLinks } from "@/lib/product-links";
+import { canonicalFor } from "@/lib/canonical";
+
+export const metadata = {
+  description:
+    "Fixna builds practical software, cloud-native platforms, event-driven systems, AI-enabled products, automation, and technology consulting for real business problems.",
+  ...canonicalFor(""),
+};
 
 const approach = [
   ["01", "Understand", "Define the business problem, users, requirements, and constraints."],

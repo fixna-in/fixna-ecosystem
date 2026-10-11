@@ -27,10 +27,10 @@ export const products: Product[] = [
   {
     id: "consulting",
     name: "Fixna Consulting",
-    description: "Technology consulting and client delivery platform for modern engineering teams.",
+    description: "Technology consulting services — architecture, modernization, and engineering advisory.",
     status: "MVP",
     statusNote:
-      "Available for early access. AI drafting features are advisory templates that always require human review.",
+      "Available for early access. Delivered as professional services with support from the Fixna Consulting Workspace (early-access software). AI drafting features are advisory templates that always require human review.",
     url: "https://consulting.fixna.in/",
     category: "Technology consulting",
     capabilities: ["Architecture", "Cloud", "Kafka", "AI consulting"],

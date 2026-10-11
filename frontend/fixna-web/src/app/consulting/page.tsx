@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { consultingExpertise, engagementModels } from "@/content/consulting";
+import { canonicalFor } from "@/lib/canonical";
 
 export const metadata = {
   title: "Consulting",
   description: "Technology consulting, architecture design, cloud modernization, Kafka, Java, AI, and engineering advisory from Fixna.",
+  ...canonicalFor("/consulting"),
 };
 
 export default function ConsultingPage() {
@@ -22,17 +24,23 @@ export default function ConsultingPage() {
           <div className="section-heading">
             <p className="eyebrow">Consulting overview</p>
             <h2>From architecture reviews to implementation support.</h2>
+            <p>
+              These service entry points map directly to the expertise and
+              engagement models below — each starts with a conversation about
+              your requirement.
+            </p>
           </div>
           <div className="grid card-grid-3">
             {[
-              ["Architecture Consulting", "Define the technical direction and make trade-offs explicit."],
-              ["Kafka & Event-Driven Systems", "Design reliable streaming, integration, and asynchronous workflows."],
-              ["Java & Spring Boot", "Build maintainable backend systems and practical modernization paths."],
-              ["Cloud Architecture", "Design cloud-native platforms that are secure, observable, and scalable."],
-              ["AI / GenAI", "Identify high-value AI use cases and build responsible workflows."],
-              ["Legacy Modernization", "Reduce risk while modernizing critical systems incrementally."],
-            ].map(([title, text]) => (
-              <article className="card" key={title}><h3>{title}</h3><p>{text}</p></article>
+              ["Architecture Review", "Define the technical direction and make trade-offs explicit.", "/contact"],
+              ["Cloud Modernization Assessment", "Design cloud-native platforms that are secure, observable, and scalable.", "/contact"],
+              ["AI Workflow Assessment", "Identify high-value AI use cases and build responsible workflows.", "/contact"],
+            ].map(([title, text, href]) => (
+              <article className="card" key={title}>
+                <h3>{title}</h3>
+                <p>{text}</p>
+                <p><Link className="button button-secondary" href={href}>Start with this service</Link></p>
+              </article>
             ))}
           </div>
         </div>

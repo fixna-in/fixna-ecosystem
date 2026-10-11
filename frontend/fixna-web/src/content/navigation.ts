@@ -9,6 +9,7 @@ export const navigation: NavItem[] = [
   { href: "/products", label: "Products" },
   { href: "/consulting", label: "Consulting" },
   { href: "/technology", label: "Technology" },
+  { href: "/industries", label: "Industries" },
 ];
 
 export const footerNavigation: NavItem[] = [

@@ -1,6 +1,9 @@
+import { canonicalFor } from "@/lib/canonical";
+
 export const metadata = {
   title: "Privacy Policy",
   description: "Fixna privacy policy and information-handling practices.",
+  ...canonicalFor("/privacy-policy"),
 };
 
 export default function PrivacyPolicyPage() {

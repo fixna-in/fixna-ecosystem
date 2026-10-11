@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { SectionHeading } from "@/components/section-heading";
+import { canonicalFor } from "@/lib/canonical";
 
 export const metadata = {
   title: "Industries",
   description: "Fixna builds practical technology for local businesses, hospitality, professional services, and enterprise technology teams.",
+  ...canonicalFor("/industries"),
 };
 
 const industries = [

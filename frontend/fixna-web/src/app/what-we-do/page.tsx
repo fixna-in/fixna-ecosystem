@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { capabilities } from "@/content/capabilities";
 import { SectionHeading } from "@/components/section-heading";
+import { canonicalFor } from "@/lib/canonical";
 
 export const metadata = {
   title: "What We Do",
   description: "Fixna designs and builds practical products, modernizes platforms, and applies AI where it creates measurable business value.",
+  ...canonicalFor("/what-we-do"),
 };
 
 const capabilityIcons = ["01", "02", "03", "04", "05", "06"];

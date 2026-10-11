@@ -1,4 +1,5 @@
 import { company } from "@/content/company";
+import { canonicalFor } from "@/lib/canonical";
 
 const beliefs = [
   ["Clear requirements", "We begin with the business problem and the constraints that matter."],
@@ -9,6 +10,7 @@ const beliefs = [
 export const metadata = {
   title: "About",
   description: "Learn how Fixna combines product engineering, cloud architecture, AI, and consulting to build practical software.",
+  ...canonicalFor("/about"),
 };
 
 export default function AboutPage() {

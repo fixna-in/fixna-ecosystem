@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { products } from "@/content/products";
+import { canonicalFor } from "@/lib/canonical";
 
 export const metadata = {
   title: "Products",
   description: "Explore Fixna LocalBoost, Fixna Consulting, and the upcoming Fixna Hospitality platform.",
+  ...canonicalFor("/products"),
 };
 
 export default function ProductsPage() {

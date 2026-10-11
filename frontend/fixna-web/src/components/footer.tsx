@@ -28,12 +28,12 @@ export function Footer() {
         <div>
           <h2>Capabilities</h2>
           <ul className="footer-nav">
-            <li><Link href="/what-we-do">Product Engineering</Link></li>
-            <li><Link href="/what-we-do">Cloud &amp; Modernization</Link></li>
-            <li><Link href="/what-we-do">Event-Driven Architecture</Link></li>
-            <li><Link href="/what-we-do">AI &amp; GenAI</Link></li>
-            <li><Link href="/what-we-do">Integration &amp; Automation</Link></li>
-            <li><Link href="/what-we-do">Technology Consulting</Link></li>
+            <li><Link href="/what-we-do">What we do</Link></li>
+            <li><Link href="/consulting">Consulting services</Link></li>
+            <li><Link href="/technology">Technology</Link></li>
+            <li><Link href="/industries">Industries</Link></li>
+            <li><Link href="/products">Products</Link></li>
+            <li><Link href="/contact">Start a conversation</Link></li>
           </ul>
         </div>
 

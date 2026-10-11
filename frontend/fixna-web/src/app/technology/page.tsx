@@ -1,8 +1,10 @@
 import { technologyGroups } from "@/content/technology";
+import { canonicalFor } from "@/lib/canonical";
 
 export const metadata = {
   title: "Technology",
   description: "Fixna uses Java, Spring Boot, cloud-native platforms, Kafka, PostgreSQL, Redis, OpenTelemetry, Next.js, React, TypeScript, and AI technologies.",
+  ...canonicalFor("/technology"),
 };
 
 export default function TechnologyPage() {

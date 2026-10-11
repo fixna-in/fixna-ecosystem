@@ -10,6 +10,7 @@
   --line: #dfe8e2;
   --text: #2f473f;
   --muted: #60756e;
+  --white: #ffffff;
   --shadow: 0 20px 55px rgb(22 62 50 / 8%);
   --shadow-soft: 0 10px 26px rgb(22 62 50 / 5%);
   --radius-xl: 28px;
@@ -50,8 +51,11 @@ img { display: block; max-width: 100%; }
 .skip-link:focus { top: 1rem; }
 
 :focus-visible {
-  outline: 3px solid var(--lime);
+  /* Lime alone on white is ~1.4:1 — pair it with a dark inner edge so the
+     focus ring stays visible on every background (R5). */
+  outline: 3px solid var(--ink);
   outline-offset: 3px;
+  box-shadow: 0 0 0 5px var(--lime);
 }
 
 .container { width: min(calc(100% - 2rem), var(--container)); margin-inline: auto; }

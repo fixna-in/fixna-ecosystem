@@ -1,10 +1,11 @@
 import { capabilities } from "@/content/capabilities";
+import { siteUrl } from "@/lib/site-url";
 
 export const metadata = {
   title: "Capabilities",
   description: "Product engineering, solution architecture, modernization, event-driven systems, AI, automation, observability, and technical consulting.",
   // Legacy duplicate of /what-we-do — kept live for old links, canonicalized.
-  alternates: { canonical: "/what-we-do" },
+  alternates: { canonical: `${siteUrl}/what-we-do` },
   robots: { index: false, follow: true },
 };
 

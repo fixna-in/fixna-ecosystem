@@ -1,6 +1,9 @@
+import { canonicalFor } from "@/lib/canonical";
+
 export const metadata = {
   title: "Terms",
   description: "Fixna website terms and conditions.",
+  ...canonicalFor("/terms"),
 };
 
 export default function TermsPage() {

@@ -44,11 +44,21 @@ docs) preserved and extended.
   - `contact/page.tsx`, `design-system.css` updated (`.field-error`,
     `.hp-field`, `.contact-success`, `.muted-text`).
   - `.env.example` extended with contact vars + setup notes.
+  - Contact honeypot false-positive fixed (found in production
+    verification): browsers/password managers were autofilling the
+    `companyWebsite` trap with a stored URL, so real enquiries returned
+    202 but were discarded without reaching Sheets. Trap field renamed to
+    the obscure shared constant `CONTACT_HONEYPOT_FIELD`
+    (`fx_hp_confirm_9q2`), value read from FormData at submit time,
+    `autoComplete="new-password"` + `spellCheck={false}`; server logs
+    `contact:honeypot trap` on traps (no PII) for future diagnosability.
+    Legacy `companyWebsite` values are now ignored as plain fields.
 - NEW Vitest harness (`vitest` devDependency, `npm test` script):
-  - `src/app/api/contact/handler.test.ts` — 17 cases.
+  - `src/app/api/contact/handler.test.ts` — 18 cases (incl. honeypot
+    trap + legacy `companyWebsite` regression).
   - `src/lib/site-url.test.ts` — 4 cases (converted from a stray
     node:test `.mjs` file that broke `vitest run`).
-  - Result: **21 tests, 2 files, all passing**.
+  - Result: **22 tests, 2 files, all passing**.
 - Contact email standardized on `fixnainfo@gmail.com` across the
   contact page, contact-form fallback links/messages, API handler
   fallback messages, and privacy-policy contact line; zero
@@ -93,7 +103,7 @@ docs) preserved and extended.
 | platform-common | 7 pass (baseline) |
 | localboost-api | 229 pass (baseline) |
 | consulting-api | 148 pass (136 baseline + 12 new; 0 failures) |
-| fixna-web vitest | 21 pass (2 files) — executed 2026-10-10 |
+| fixna-web vitest | 22 pass (2 files) — executed 2026-10-11 (honeypot fix verified) |
 | fixna-web typecheck | pass (tsc --noEmit clean) — executed 2026-10-10 |
 | fixna-web production build | pass — 17 routes incl. dynamic /api/contact — executed 2026-10-10 |
 | localboost-web production build | pass — 11 routes — executed 2026-10-10 |

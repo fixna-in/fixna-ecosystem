@@ -26,7 +26,9 @@ export const metadata: Metadata = {
     type: "website",
   },
   twitter: {
-    card: "summary_large_image",
+    // No social preview image exists yet — use the text-only summary card
+    // rather than claiming a large image (R3).
+    card: "summary",
     title: "Fixna — Technology, Product Engineering & AI Solutions",
     description:
       "We build practical software for real business problems through product engineering, cloud architecture, event-driven systems, AI, and automation.",
@@ -41,10 +43,35 @@ export const metadata: Metadata = {
   },
 };
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      name: "Fixna",
+      url: siteUrl,
+      description:
+        "Technology, product engineering and AI solutions company.",
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: "Fixna",
+      publisher: { "@id": `${siteUrl}/#organization` },
+    },
+  ],
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         <PageShell>{children}</PageShell>
       </body>
     </html>
