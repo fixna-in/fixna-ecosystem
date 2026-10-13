@@ -16,5 +16,8 @@
     "package:consulting-api": "npm run bootstrap:maven && mvn -f backend/consulting-api/pom.xml -DskipTests package",
     "package:localboost-api": "npm run bootstrap:maven && mvn -f backend/localboost-api/pom.xml -DskipTests package",
     "package:all-apis": "npm run package:localboost-api && npm run package:consulting-api"
+  },
+  "dependencies": {
+    "playwright": "^1.64.0"
   }
 }
