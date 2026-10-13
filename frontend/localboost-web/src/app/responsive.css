@@ -14,7 +14,7 @@
 .landing-bottom { margin-top: 2rem; color: var(--muted-foreground); font-size: 0.72rem; }
 .cell-description { display: block; color: var(--muted-foreground); margin-top: 0.25rem; font-size: 0.68rem; text-transform: capitalize; }
 .resource-list { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-.resource-list > li { padding: 1.3rem; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 10px 25px rgb(23 53 46 / 4%); overflow-wrap: anywhere; margin: 0; }
+.resource-list > li { padding: 1.3rem; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 10px 25px rgb(17 17 17 / 4%); overflow-wrap: anywhere; margin: 0; }
 .resource-list a { font-size: 1rem; font-weight: 600; text-decoration: none; }
 .resource-list a:hover { text-decoration: underline; }
 .resource-list p { font-size: 0.8rem; color: var(--muted-foreground); }
