@@ -153,8 +153,6 @@ a:hover { text-decoration-thickness: 2px; }
 
 .public-content { max-width: 760px; margin: 0 auto; padding: clamp(2rem, 6vw, 5rem) 1.25rem; }
 .public-content:has(.consulting-home) { max-width: none; margin: 0; padding: 0; }
-
-.consulting-home { --home-ink: var(--surface-hero); }
 .home-intro {
   position: relative;
   overflow: hidden;
@@ -166,7 +164,7 @@ a:hover { text-decoration-thickness: 2px; }
   color: #f7faf6;
   background:
     radial-gradient(circle at 82% 56%, rgba(199, 237, 148, 0.18), transparent 15rem),
-    linear-gradient(135deg, #000000 0%, #111111 52%, #000000 100%);
+    var(--surface-hero);
 }
 .home-intro::before {
   position: absolute;

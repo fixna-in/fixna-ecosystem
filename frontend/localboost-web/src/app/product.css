@@ -1,5 +1,5 @@
-.auth-layout { display: grid; grid-template-columns: 1fr 1fr; min-height: 720px; max-width: 1400px; margin: auto; background: white; }
-.auth-story { position: relative; overflow: hidden; background: radial-gradient(ellipse at 0% 80%, #111111 0%, #000000 55%); color: #fff; margin: 1.5rem; padding: 3rem; border-radius: 20px; display: flex; flex-direction: column; }
+.auth-layout { display: grid; grid-template-columns: 1fr 1fr; min-height: 720px; max-width: 1400px; margin: auto; background: var(--surface); }
+.auth-story { position: relative; overflow: hidden; background: var(--surface-hero); color: #fff; margin: 1.5rem; padding: 3rem; border-radius: 20px; display: flex; flex-direction: column; }
 .story-pill { display: inline-block; align-self: flex-start; font-size: 0.63rem; letter-spacing: 0.14em; font-weight: 650; border: 1px solid #4b5563; border-radius: 30px; padding: 0.55rem 0.9rem; }
 .auth-story h2 { font-size: clamp(2rem, 3.3vw, 3.25rem); line-height: 1.14; margin: 1.8rem 0 1rem; font-weight: 550; letter-spacing: -0.045em; }
 .auth-story em { font-style: normal; color: var(--primary-bright); }

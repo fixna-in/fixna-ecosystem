@@ -55,6 +55,7 @@
   color-scheme: light;
 
   --background: #ffffff;            /* pure white */
+  --surface-hero: #000000;          /* deep black for hero emphasis */
   --foreground: #111827;            /* near-black readable text */
   --surface: #ffffff;               /* cards, panels */
   --surface-elevated: #ffffff;      /* popovers, dropdowns */
@@ -96,11 +97,12 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  --background: #000000;            /* pure black */
+  --background: #0a0a0a;            /* soft charcoal — comfortable, not pure black */
+  --surface-hero: #050505;          /* deeper than bg for hero emphasis */
   --foreground: #e5e7eb;            /* clean light gray text */
-  --surface: #111111;               /* very dark card surface */
-  --surface-elevated: #181818;      /* elevated popovers/dropdowns */
-  --surface-muted: #1c1c1c;
+  --surface: #141414;               /* card surface — subtle separation from bg */
+  --surface-elevated: #1c1c1c;      /* elevated popovers/dropdowns */
+  --surface-muted: #222222;
 
   --primary: #2a7a63;               /* brightened green separates from bg */
   --primary-foreground: #ffffff;
@@ -115,7 +117,7 @@
   --muted-foreground: #9ca3af;      /* neutral gray text */
 
   --border: #262626;
-  --input: #000000;
+  --input: #0a0a0a;
   --ring: #60a5fa;                  /* light blue focus */
   --link: #86efac;
 
@@ -126,12 +128,12 @@
 
   --sidebar-background: #0a0a0a;
   --sidebar-foreground: #e5e7eb;
-  --header-background: rgb(0 0 0 / 90%);
+  --header-background: rgb(10 10 10 / 85%);
   --overlay-background: rgb(0 0 0 / 62%);
 
-  --shadow-sm: 0 6px 16px rgb(0 0 0 / 30%);
-  --shadow-md: 0 12px 30px rgb(0 0 0 / 38%);
-  --shadow-lg: 0 22px 54px rgb(0 0 0 / 46%);
+  --shadow-sm: 0 6px 16px rgb(0 0 0 / 40%);
+  --shadow-md: 0 12px 30px rgb(0 0 0 / 50%);
+  --shadow-lg: 0 22px 54px rgb(0 0 0 / 58%);
 }
 
 /* ---------- 4. System preference (only until an explicit choice exists) -- */
@@ -139,11 +141,12 @@
   :root:not([data-theme]) {
     color-scheme: dark;
 
-    --background: #000000;
+    --background: #0a0a0a;
+    --surface-hero: #050505;
     --foreground: #e5e7eb;
-    --surface: #111111;
-    --surface-elevated: #181818;
-    --surface-muted: #1c1c1c;
+    --surface: #141414;
+    --surface-elevated: #1c1c1c;
+    --surface-muted: #222222;
 
     --primary: #2a7a63;
     --primary-foreground: #ffffff;
@@ -158,7 +161,7 @@
     --muted-foreground: #9ca3af;
 
     --border: #262626;
-    --input: #000000;
+    --input: #0a0a0a;
     --ring: #60a5fa;
     --link: #86efac;
 
@@ -169,12 +172,12 @@
 
     --sidebar-background: #0a0a0a;
     --sidebar-foreground: #e5e7eb;
-    --header-background: rgb(0 0 0 / 90%);
+    --header-background: rgb(10 10 10 / 85%);
     --overlay-background: rgb(0 0 0 / 62%);
 
-    --shadow-sm: 0 6px 16px rgb(0 0 0 / 30%);
-    --shadow-md: 0 12px 30px rgb(0 0 0 / 38%);
-    --shadow-lg: 0 22px 54px rgb(0 0 0 / 46%);
+    --shadow-sm: 0 6px 16px rgb(0 0 0 / 40%);
+    --shadow-md: 0 12px 30px rgb(0 0 0 / 50%);
+    --shadow-lg: 0 22px 54px rgb(0 0 0 / 58%);
   }
 }
 

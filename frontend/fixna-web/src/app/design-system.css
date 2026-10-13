@@ -17,7 +17,6 @@
   --text: var(--foreground);
   --muted: var(--muted-foreground);
   --white: var(--primary-foreground);
-  --surface-hero: #000000;
   --shadow: var(--shadow-lg);
   --shadow-soft: var(--shadow-md);
   --radius-xl: 28px;
