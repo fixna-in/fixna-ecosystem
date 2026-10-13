@@ -60,21 +60,22 @@ import "@fixna/design-system/base.css";       # plain-CSS apps
 
 | Token | Value | Usage |
 |-------|-------|-------|
-| `--background` | `#000000` | Page background (pure black) |
-| `--foreground` | `#e5e7eb` | Primary text (clean light gray) |
-| `--surface` | `#111111` | Cards, panels |
-| `--surface-elevated` | `#181818` | Popovers, dropdowns |
-| `--surface-muted` | `#1c1c1c` | Table headers, subtle fills |
+| `--background` | `#171a18` | Page background (soft charcoal, not pure black) |
+| `--surface-hero` | `#0f1110` | Deeper than bg for hero/CTA emphasis |
+| `--foreground` | `#f3f4f6` | Primary text (clean light gray) |
+| `--surface` | `#1f2421` | Cards, panels (visible separation from bg) |
+| `--surface-elevated` | `#262c28` | Popovers, dropdowns |
+| `--surface-muted` | `#2b312d` | Table headers, subtle fills |
 | `--primary` | `#2a7a63` | Brand green (brightened for dark) |
 | `--primary-foreground` | `#ffffff` | Text on primary |
 | `--primary-hover` | `#349077` | Primary hover |
 | `--accent` | `#c7ed94` | Brand lime (same as light) |
 | `--accent-foreground` | `#000000` | Text on accent (black for contrast) |
-| `--secondary` | `#1a1a1a` | Secondary surfaces |
-| `--muted` | `#141414` | Muted backgrounds |
-| `--muted-foreground` | `#9ca3af` | Secondary text |
-| `--border` | `#262626` | Borders, dividers |
-| `--input` | `#000000` | Form input background |
+| `--secondary` | `#262c28` | Secondary surfaces |
+| `--muted` | `#262c28` | Muted backgrounds |
+| `--muted-foreground` | `#a1a1aa` | Secondary text |
+| `--border` | `#343b36` | Borders, dividers |
+| `--input` | `#1f2421` | Form input background |
 | `--ring` | `#60a5fa` | Focus ring (light blue) |
 | `--link` | `#86efac` | Link color (light green) |
 
@@ -95,9 +96,9 @@ import "@fixna/design-system/base.css";       # plain-CSS apps
 
 | Token | Light | Dark |
 |-------|-------|------|
-| `--shadow-sm` | `0 6px 16px rgb(17 17 17 / 4%)` | `0 6px 16px rgb(0 0 0 / 30%)` |
-| `--shadow-md` | `0 12px 28px rgb(17 17 17 / 6%)` | `0 12px 30px rgb(0 0 0 / 38%)` |
-| `--shadow-lg` | `0 20px 52px rgb(17 17 17 / 8%)` | `0 22px 54px rgb(0 0 0 / 46%)` |
+| `--shadow-sm` | `0 6px 16px rgb(17 17 17 / 4%)` | `0 6px 16px rgb(0 0 0 / 45%)` |
+| `--shadow-md` | `0 12px 28px rgb(17 17 17 / 6%)` | `0 12px 30px rgb(0 0 0 / 55%)` |
+| `--shadow-lg` | `0 20px 52px rgb(17 17 17 / 8%)` | `0 22px 54px rgb(0 0 0 / 60%)` |
 
 ### Backward-compatible aliases
 
@@ -122,7 +123,7 @@ import "@fixna/design-system/base.css";       # plain-CSS apps
 | `--surface-soft` | `--surface-muted` |
 | `--line` | `--border` |
 | `--white` | `--primary-foreground` |
-| `--surface-hero` | `#000000` (pure black) |
+| `--surface-hero` | `#000000` (light) / `#0f1110` (dark) | Theme-aware hero/CTA background |
 
 ---
 

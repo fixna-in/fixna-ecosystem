@@ -107,14 +107,14 @@ a:hover { text-decoration-thickness: 2px; }
 .public-header nav a {
   padding: 0.65rem 0.9rem;
   border-radius: 9px;
-  color: var(--muted-foreground);
+  color: var(--text);
   font-size: 0.9rem;
   font-weight: 650;
   text-decoration: none;
 }
 .public-header nav a:hover { background: var(--surface-soft); color: var(--primary); }
-.public-header nav a.header-cta { background: var(--primary); color: #fff; }
-.public-header nav a.header-cta:hover { background: var(--primary-deep); color: #fff; }
+.public-header nav a.header-cta { background: var(--primary); color: var(--primary-foreground); }
+.public-header nav a.header-cta:hover { background: var(--primary-deep); color: var(--primary-foreground); }
 .public-footer { border-top: 1px solid var(--border); border-bottom: none; color: var(--muted-foreground); font-size: 0.8rem; }
 
 .eyebrow { margin: 0 0 1rem; color: var(--primary); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; }

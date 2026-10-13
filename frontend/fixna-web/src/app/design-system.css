@@ -73,7 +73,7 @@ main { overflow: clip; }
   top: 0;
   z-index: 100;
   border-bottom: 1px solid var(--line);
-  background: rgb(255 255 255 / 95%);
+  background: var(--header-background);
   backdrop-filter: blur(18px);
 }
 .header-inner {
@@ -103,7 +103,7 @@ main { overflow: clip; }
 .main-nav a:hover { background: var(--surface-muted); }
 .nav-cta { margin-left: 0.25rem; }
 .mobile-menu-button { display: none; width: 46px; height: 46px; padding: 0; border: 0; background: transparent; cursor: pointer; }
-.mobile-menu-button span { display: block; width: 23px; height: 2px; margin: 5px auto; background: var(--ink); border-radius: 1px; }
+.mobile-menu-button span { display: block; width: 23px; height: 2px; margin: 5px auto; background: var(--foreground); border-radius: 1px; }
 /* Shared light/dark toggle control. */
 .theme-toggle {
   display: inline-flex;
@@ -117,13 +117,13 @@ main { overflow: clip; }
   border: 1px solid var(--line);
   border-radius: 0.7rem;
   background: var(--surface);
-  color: var(--ink);
+  color: var(--foreground);
   cursor: pointer;
   transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
 }
-.theme-toggle:hover { background: var(--surface-muted); border-color: var(--ink); }
+.theme-toggle:hover { background: var(--surface-muted); border-color: var(--ring); }
 .mobile-nav { display: none; padding: 0.8rem 1rem 1.4rem; border-top: 1px solid var(--line); background: var(--surface); }
-.mobile-nav a { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 0.25rem; border-bottom: 1px solid var(--surface-muted); color: var(--ink); text-decoration: none; }
+.mobile-nav a { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 0.25rem; border-bottom: 1px solid var(--surface-muted); color: var(--text); text-decoration: none; }
 .mobile-products { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); }
 .mobile-products p { margin: 0 0 0.4rem; color: var(--muted); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
 .status { color: var(--muted); font-size: 0.72rem; }
@@ -142,7 +142,7 @@ main { overflow: clip; }
   transition: transform var(--transition), background var(--transition), border-color var(--transition), color var(--transition);
 }
 .button:hover { transform: translateY(-1px); text-decoration: none; }
-.button-primary { background: var(--lime); color: var(--ink); box-shadow: 0 8px 20px rgb(199 237 148 / 28%); }
+.button-primary { background: var(--lime); color: var(--accent-foreground); box-shadow: 0 8px 20px rgb(199 237 148 / 28%); }
 .button-primary:hover { background: var(--lime-soft); }
 .button-secondary { border-color: var(--line); background: var(--surface); }
 .button-secondary:hover { background: var(--surface-soft); }

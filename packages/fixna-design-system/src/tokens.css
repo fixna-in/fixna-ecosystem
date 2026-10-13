@@ -97,12 +97,12 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  --background: #0a0a0a;            /* soft charcoal — comfortable, not pure black */
-  --surface-hero: #050505;          /* deeper than bg for hero emphasis */
-  --foreground: #e5e7eb;            /* clean light gray text */
-  --surface: #141414;               /* card surface — subtle separation from bg */
-  --surface-elevated: #1c1c1c;      /* elevated popovers/dropdowns */
-  --surface-muted: #222222;
+  --background: #171a18;            /* soft charcoal — comfortable, not pure black */
+  --surface-hero: #0f1110;          /* slightly deeper than bg for hero emphasis */
+  --foreground: #f3f4f6;            /* clean light gray text */
+  --surface: #1f2421;               /* card surface — visible separation from bg */
+  --surface-elevated: #262c28;      /* elevated popovers/dropdowns */
+  --surface-muted: #2b312d;
 
   --primary: #2a7a63;               /* brightened green separates from bg */
   --primary-foreground: #ffffff;
@@ -110,14 +110,14 @@
   --accent: #c7ed94;                /* lime still pops on dark */
   --accent-foreground: #000000;
 
-  --secondary: #1a1a1a;
-  --secondary-foreground: #e5e7eb;
+  --secondary: #262c28;
+  --secondary-foreground: #f3f4f6;
 
-  --muted: #141414;
-  --muted-foreground: #9ca3af;      /* neutral gray text */
+  --muted: #262c28;
+  --muted-foreground: #a1a1aa;      /* neutral gray text */
 
-  --border: #262626;
-  --input: #0a0a0a;
+  --border: #343b36;
+  --input: #1f2421;
   --ring: #60a5fa;                  /* light blue focus */
   --link: #86efac;
 
@@ -126,14 +126,14 @@
   --danger: #f2897a;         --danger-soft: #2c1614;
   --info: #6aa9f0;           --info-soft: #101f30;
 
-  --sidebar-background: #0a0a0a;
-  --sidebar-foreground: #e5e7eb;
-  --header-background: rgb(10 10 10 / 85%);
-  --overlay-background: rgb(0 0 0 / 62%);
+  --sidebar-background: #171a18;
+  --sidebar-foreground: #f3f4f6;
+  --header-background: rgb(23 26 24 / 85%);
+  --overlay-background: rgb(15 17 16 / 58%);
 
-  --shadow-sm: 0 6px 16px rgb(0 0 0 / 40%);
-  --shadow-md: 0 12px 30px rgb(0 0 0 / 50%);
-  --shadow-lg: 0 22px 54px rgb(0 0 0 / 58%);
+  --shadow-sm: 0 6px 16px rgb(0 0 0 / 45%);
+  --shadow-md: 0 12px 30px rgb(0 0 0 / 55%);
+  --shadow-lg: 0 22px 54px rgb(0 0 0 / 60%);
 }
 
 /* ---------- 4. System preference (only until an explicit choice exists) -- */
@@ -141,12 +141,12 @@
   :root:not([data-theme]) {
     color-scheme: dark;
 
-    --background: #0a0a0a;
-    --surface-hero: #050505;
-    --foreground: #e5e7eb;
-    --surface: #141414;
-    --surface-elevated: #1c1c1c;
-    --surface-muted: #222222;
+    --background: #171a18;
+    --surface-hero: #0f1110;
+    --foreground: #f3f4f6;
+    --surface: #1f2421;
+    --surface-elevated: #262c28;
+    --surface-muted: #2b312d;
 
     --primary: #2a7a63;
     --primary-foreground: #ffffff;
@@ -154,14 +154,14 @@
     --accent: #c7ed94;
     --accent-foreground: #000000;
 
-    --secondary: #1a1a1a;
-    --secondary-foreground: #e5e7eb;
+    --secondary: #262c28;
+    --secondary-foreground: #f3f4f6;
 
-    --muted: #141414;
-    --muted-foreground: #9ca3af;
+    --muted: #262c28;
+    --muted-foreground: #a1a1aa;
 
-    --border: #262626;
-    --input: #0a0a0a;
+    --border: #343b36;
+    --input: #1f2421;
     --ring: #60a5fa;
     --link: #86efac;
 
@@ -170,14 +170,14 @@
     --danger: #f2897a;         --danger-soft: #2c1614;
     --info: #6aa9f0;           --info-soft: #101f30;
 
-    --sidebar-background: #0a0a0a;
-    --sidebar-foreground: #e5e7eb;
-    --header-background: rgb(10 10 10 / 85%);
-    --overlay-background: rgb(0 0 0 / 62%);
+    --sidebar-background: #171a18;
+    --sidebar-foreground: #f3f4f6;
+    --header-background: rgb(23 26 24 / 85%);
+    --overlay-background: rgb(15 17 16 / 58%);
 
-    --shadow-sm: 0 6px 16px rgb(0 0 0 / 40%);
-    --shadow-md: 0 12px 30px rgb(0 0 0 / 50%);
-    --shadow-lg: 0 22px 54px rgb(0 0 0 / 58%);
+    --shadow-sm: 0 6px 16px rgb(0 0 0 / 45%);
+    --shadow-md: 0 12px 30px rgb(0 0 0 / 55%);
+    --shadow-lg: 0 22px 54px rgb(0 0 0 / 60%);
   }
 }
 
