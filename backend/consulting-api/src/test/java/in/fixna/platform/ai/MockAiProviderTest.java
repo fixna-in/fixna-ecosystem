@@ -1,12 +1,15 @@
 package in.fixna.platform.ai;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
 import in.fixna.platform.ai.dto.ClientSummarySuggestion;
+import in.fixna.platform.ai.dto.InvoiceLineIdeasSuggestion;
 import in.fixna.platform.ai.dto.MeetingAgendaSuggestion;
 import in.fixna.platform.ai.dto.ProposalSuggestion;
+import in.fixna.platform.ai.dto.WebsiteAuditFixSuggestion;
 import in.fixna.platform.ai.dto.WebsiteCopySuggestion;
 import in.fixna.platform.consulting.client.Client;
 import in.fixna.platform.consulting.profile.ConsultingProfile;
@@ -96,6 +99,40 @@ class MockAiProviderTest {
 
         assertThat(suggestion.tagline()).contains("Your consulting practice");
         assertThat(suggestion.bio()).contains("helps organizations");
+    }
+
+    @Test
+    void suggestWebsiteAuditFixesIsDeterministicAndCappedAtSix() {
+        List<String> findings = List.of("title: Add a title", "viewport: Add viewport");
+
+        WebsiteAuditFixSuggestion first = provider.suggestWebsiteAuditFixes("https://example.com/", findings);
+        WebsiteAuditFixSuggestion second = provider.suggestWebsiteAuditFixes("https://example.com/", findings);
+
+        assertThat(first.url()).isEqualTo("https://example.com/");
+        assertThat(first.priorities()).hasSize(5);
+        assertThat(first.priorities().get(0)).isEqualTo("Address finding: title: Add a title");
+        assertThat(first).isEqualTo(second);
+
+        List<String> many = List.of("a", "b", "c", "d", "e", "f", "g");
+        assertThat(provider.suggestWebsiteAuditFixes("https://example.com/", many).priorities()).hasSize(6);
+        assertThat(provider.suggestWebsiteAuditFixes("https://example.com/", List.of()).priorities()).hasSize(3);
+    }
+
+    @Test
+    void suggestInvoiceLineIdeasIsDeterministicAndExcludesExisting() {
+        InvoiceLineIdeasSuggestion first = provider.suggestInvoiceLineIdeas("Website redesign", List.of());
+        InvoiceLineIdeasSuggestion second = provider.suggestInvoiceLineIdeas("Website redesign", List.of());
+
+        assertThat(first.ideas()).hasSize(3);
+        assertThat(first.ideas().get(0)).contains("Website redesign");
+        assertThat(first).isEqualTo(second);
+
+        InvoiceLineIdeasSuggestion withExisting = provider.suggestInvoiceLineIdeas("Website redesign", first.ideas());
+        assertThat(withExisting.ideas()).hasSize(1);
+        assertThat(withExisting.ideas().get(0)).isEqualTo("Advisory retainer follow-up support");
+
+        InvoiceLineIdeasSuggestion blankTitle = provider.suggestInvoiceLineIdeas("  ", List.of());
+        assertThat(blankTitle.ideas().get(0)).contains("this engagement");
     }
 
     private static Client client(String name, String industry, String notes) {

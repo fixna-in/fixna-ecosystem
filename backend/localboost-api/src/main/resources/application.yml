@@ -90,4 +90,12 @@ fixna:
     default-mode: ${FIXNA_PLATFORM_MODE:mock}
   billing:
     default-plan: ${FIXNA_BILLING_DEFAULT_PLAN:FREE}
+  razorpay:
+    key-id: ${RAZORPAY_KEY_ID:}
+    key-secret: ${RAZORPAY_KEY_SECRET:}
+    webhook-secret: ${RAZORPAY_WEBHOOK_SECRET:}
+    plan:
+      free: ${RAZORPAY_PLAN_FREE:}
+      starter: ${RAZORPAY_PLAN_STARTER:}
+      growth: ${RAZORPAY_PLAN_GROWTH:}
 

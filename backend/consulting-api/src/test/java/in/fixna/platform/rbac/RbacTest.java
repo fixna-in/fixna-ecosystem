@@ -37,4 +37,26 @@ class RbacTest {
         assertThat(RolePermissions.has(Role.INTERNAL_TEAM, Permission.TASK_MANAGE)).isTrue();
         assertThat(RolePermissions.has(Role.INTERNAL_TEAM, Permission.CLIENT_MANAGE)).isFalse();
     }
+
+    @Test
+    void websiteAuditPermissionsScopedToConsultantRoles() {
+        assertThat(RolePermissions.has(Role.CONSULTANT, Permission.WEBSITE_AUDIT_VIEW)).isTrue();
+        assertThat(RolePermissions.has(Role.CONSULTANT, Permission.WEBSITE_AUDIT_MANAGE)).isTrue();
+        assertThat(RolePermissions.has(Role.CONSULTANT_ADMIN, Permission.WEBSITE_AUDIT_VIEW)).isTrue();
+        assertThat(RolePermissions.has(Role.CONSULTANT_ADMIN, Permission.WEBSITE_AUDIT_MANAGE)).isTrue();
+        assertThat(RolePermissions.has(Role.PLATFORM_ADMIN, Permission.WEBSITE_AUDIT_MANAGE)).isTrue();
+        assertThat(RolePermissions.has(Role.INTERNAL_TEAM, Permission.WEBSITE_AUDIT_VIEW)).isFalse();
+        assertThat(RolePermissions.has(Role.CLIENT_ADMIN, Permission.WEBSITE_AUDIT_VIEW)).isFalse();
+        assertThat(RolePermissions.has(Role.CLIENT_USER, Permission.WEBSITE_AUDIT_MANAGE)).isFalse();
+    }
+
+    @Test
+    void invoiceAssistPermissionScopedToConsultantRoles() {
+        assertThat(RolePermissions.has(Role.CONSULTANT, Permission.INVOICE_ASSIST_USE)).isTrue();
+        assertThat(RolePermissions.has(Role.CONSULTANT_ADMIN, Permission.INVOICE_ASSIST_USE)).isTrue();
+        assertThat(RolePermissions.has(Role.PLATFORM_ADMIN, Permission.INVOICE_ASSIST_USE)).isTrue();
+        assertThat(RolePermissions.has(Role.INTERNAL_TEAM, Permission.INVOICE_ASSIST_USE)).isFalse();
+        assertThat(RolePermissions.has(Role.CLIENT_ADMIN, Permission.INVOICE_ASSIST_USE)).isFalse();
+        assertThat(RolePermissions.has(Role.CLIENT_USER, Permission.INVOICE_ASSIST_USE)).isFalse();
+    }
 }

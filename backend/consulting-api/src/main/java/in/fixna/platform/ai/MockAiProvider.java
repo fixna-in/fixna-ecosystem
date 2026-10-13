@@ -9,6 +9,8 @@ import in.fixna.platform.ai.dto.ClientSummarySuggestion;
 import in.fixna.platform.ai.dto.MeetingAgendaSuggestion;
 import in.fixna.platform.ai.dto.ProposalSuggestion;
 import in.fixna.platform.ai.dto.ProposalSuggestion.ProposalLineItemSuggestion;
+import in.fixna.platform.ai.dto.WebsiteAuditFixSuggestion;
+import in.fixna.platform.ai.dto.InvoiceLineIdeasSuggestion;
 import in.fixna.platform.ai.dto.WebsiteCopySuggestion;
 import in.fixna.platform.consulting.client.Client;
 import in.fixna.platform.consulting.profile.ConsultingProfile;
@@ -75,5 +77,48 @@ public class MockAiProvider implements AiProvider {
                 : displayName
                         + " helps organizations solve complex challenges with practical, results-driven consulting.";
         return new WebsiteCopySuggestion(tagline, bio);
+    }
+
+    @Override
+    public WebsiteAuditFixSuggestion suggestWebsiteAuditFixes(String url, List<String> findings) {
+        List<String> priorities = new java.util.ArrayList<>();
+        for (String finding : findings) {
+            if (priorities.size() >= 6) {
+                break;
+            }
+            priorities.add("Address finding: " + finding);
+        }
+        List<String> generic = List.of(
+                "Publish a sitemap.xml and reference it from robots.txt",
+                "Add a clear call-to-action above the fold",
+                "Review page copy so each key page targets one search intent");
+        for (String item : generic) {
+            if (priorities.size() >= 6) {
+                break;
+            }
+            priorities.add(item);
+        }
+        return new WebsiteAuditFixSuggestion(url, List.copyOf(priorities));
+    }
+
+    @Override
+    public InvoiceLineIdeasSuggestion suggestInvoiceLineIdeas(String invoiceTitle, List<String> existingLines) {
+        String subject = invoiceTitle != null && !invoiceTitle.isBlank() ? invoiceTitle.trim() : "this engagement";
+        List<String> candidates = List.of(
+                "Discovery and scoping workshop — " + subject,
+                "Implementation and delivery milestones — " + subject,
+                "Handover, documentation, and training — " + subject,
+                "Advisory retainer follow-up support");
+        List<String> ideas = new java.util.ArrayList<>();
+        for (String candidate : candidates) {
+            if (existingLines.contains(candidate)) {
+                continue;
+            }
+            ideas.add(candidate);
+            if (ideas.size() == 3) {
+                break;
+            }
+        }
+        return new InvoiceLineIdeasSuggestion(List.copyOf(ideas));
     }
 }

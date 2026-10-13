@@ -44,6 +44,12 @@ fixna-ecosystem/
 |---------|-----|-----|--------------|
 | Consulting | `backend/consulting-api` | `frontend/consulting-web` | API :8081, web :3001 |
 | LocalBoost | `backend/localboost-api` | `frontend/localboost-web` | API :8080, web :3000 |
+| Website Audit | `backend/website-audit-api` | `frontend/website-audit-web` | API :8082, web :3003 |
+| Invoice Assistant | `backend/invoice-assistant-api` | `frontend/invoice-assistant-web` | API :8083, web :3004 |
+
+Each product uses a **separate database and Flyway history** — never merge
+migrations. Local dev DBs come up via `docker compose up -d` (consulting :5433,
+localboost :5432, website-audit :5434, invoice-assistant :5435).
 
 LocalBoost and Consulting use **separate databases and Flyway histories** — never merge migrations.
 
@@ -88,3 +94,14 @@ Bootstrap Maven once per clone: `npm run bootstrap:maven`
 1. Initial git commit to protect monorepo state
 2. LocalBoost production cutover from standalone `fixna-localboost` repo
 3. Post-MVP Consulting integrations (calendar, payments, AI providers)
+## 2026-10-13 � Unified Fixna design system across all five web apps
+
+**Delivered:**
+- Established @fixna/design-system as single source of truth (tokens, themes, runtime, primitives); added brand lime/dark-green palette with light/dark/system + no-flash init.
+- Integrated into all five apps: fixna-web (Next.js, plain CSS), localboost-web, consulting-web (plain CSS), hospitality-web, invoice-assistant-web, website-audit-web (Tailwind v4).
+- Added ThemeToggle to headers/shells; ThemeProvider + theme bootstrap in all layouts; Tailwind bridge with [data-theme="dark"] mapping.
+- All TypeScript checks pass (design-system + 5 apps). Design-system unit tests pass (18/18). Existing frontend unit tests passing.
+
+**Files:** packages/fixna-design-system/*, app layouts/components updated for all five apps.
+
+**Verified:** typecheck clean across all packages/apps; vitest green for design system and existing suites.

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import in.fixna.platform.billing.PlanLimitChecker;
+import in.fixna.platform.localboost.billing.PlanLimitChecker;
 import in.fixna.platform.billing.PlanLimits;
 import in.fixna.platform.common.tenant.TenantContext;
 import in.fixna.platform.common.web.FixnaException;

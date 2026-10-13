@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { PageShell } from "@/components/page-shell";
 import { siteUrl } from "@/lib/site-url";
+import { ThemeProvider } from "@fixna/design-system";
+import { themeInitScript } from "@fixna/design-system/theme";
+import "@fixna/design-system/tokens.css";
 import "./design-system.css";
 import "./globals.css";
 
@@ -66,13 +69,19 @@ const structuredData = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Apply the persisted/system theme before paint to avoid a flash. */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-        <PageShell>{children}</PageShell>
+        <ThemeProvider>
+          <PageShell>{children}</PageShell>
+        </ThemeProvider>
       </body>
     </html>
   );

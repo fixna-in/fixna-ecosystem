@@ -23,6 +23,28 @@ services:
     volumes:
       - fixna-localboost-postgres:/var/lib/postgresql/data
 
+  postgres-website-audit:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: website_audit
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: change-me
+    ports:
+      - "5434:5432"
+    volumes:
+      - fixna-website-audit-postgres:/var/lib/postgresql/data
+
+  postgres-invoice-assistant:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: invoice_assistant
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: change-me
+    ports:
+      - "5435:5432"
+    volumes:
+      - fixna-invoice-assistant-postgres:/var/lib/postgresql/data
+
   redis:
     image: redis:8-alpine
     ports:
@@ -39,4 +61,6 @@ services:
 volumes:
   fixna-consulting-postgres:
   fixna-localboost-postgres:
+  fixna-website-audit-postgres:
+  fixna-invoice-assistant-postgres:
   fixna-redis:

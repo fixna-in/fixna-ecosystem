@@ -23,8 +23,11 @@ public final class RolePermissions {
                     Permission.PROPOSAL_APPROVE,
                     Permission.INVOICE_VIEW,
                     Permission.INVOICE_MANAGE,
+                    Permission.INVOICE_ASSIST_USE,
                     Permission.PAYMENT_VIEW,
                     Permission.WEBSITE_MANAGE,
+                    Permission.WEBSITE_AUDIT_VIEW,
+                    Permission.WEBSITE_AUDIT_MANAGE,
                     Permission.TESTIMONIAL_MANAGE,
                     Permission.AI_USE),
             Role.CONSULTANT, EnumSet.of(
@@ -40,7 +43,10 @@ public final class RolePermissions {
                     Permission.PROPOSAL_MANAGE,
                     Permission.INVOICE_VIEW,
                     Permission.INVOICE_MANAGE,
+                    Permission.INVOICE_ASSIST_USE,
                     Permission.PAYMENT_VIEW,
+                    Permission.WEBSITE_AUDIT_VIEW,
+                    Permission.WEBSITE_AUDIT_MANAGE,
                     Permission.AI_USE),
             Role.INTERNAL_TEAM, EnumSet.of(
                     Permission.CLIENT_VIEW,

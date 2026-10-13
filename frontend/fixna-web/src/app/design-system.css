@@ -1,18 +1,24 @@
+/* Brand palette and light/dark themes come from the shared Fixna Design System
+   (@fixna/design-system/tokens.css, imported in layout.tsx). This stylesheet
+   keeps the marketing site's own token NAMES for continuity, but maps them onto
+   the shared semantic tokens so the site follows the unified light/dark themes.
+   Do not hardcode palette colors here — reference the tokens below. */
 :root {
-  --ink: #163e32;
-  --ink-strong: #0d2c25;
-  --ink-soft: #325c4f;
-  --lime: #c7ed94;
-  --lime-soft: #eef9d9;
-  --surface: #ffffff;
-  --surface-soft: #f5f7f5;
-  --surface-muted: #edf2ee;
-  --line: #dfe8e2;
-  --text: #2f473f;
-  --muted: #60756e;
-  --white: #ffffff;
-  --shadow: 0 20px 55px rgb(22 62 50 / 8%);
-  --shadow-soft: 0 10px 26px rgb(22 62 50 / 5%);
+  /* Name aliases → shared semantic tokens (follow light/dark automatically). */
+  --ink: var(--primary);
+  --ink-strong: var(--primary-hover);
+  --ink-soft: var(--muted-foreground);
+  --lime: var(--accent);
+  --lime-soft: var(--accent);
+  --surface: var(--surface);
+  --surface-soft: var(--surface-muted);
+  --surface-muted: var(--surface-muted);
+  --line: var(--border);
+  --text: var(--foreground);
+  --muted: var(--muted-foreground);
+  --white: var(--primary-foreground);
+  --shadow: var(--shadow-lg);
+  --shadow-soft: var(--shadow-md);
   --radius-xl: 28px;
   --radius-lg: 20px;
   --radius-md: 12px;
@@ -98,6 +104,24 @@ main { overflow: clip; }
 .nav-cta { margin-left: 0.25rem; }
 .mobile-menu-button { display: none; width: 46px; height: 46px; padding: 0; border: 0; background: transparent; cursor: pointer; }
 .mobile-menu-button span { display: block; width: 23px; height: 2px; margin: 5px auto; background: var(--ink); border-radius: 1px; }
+/* Shared light/dark toggle control. */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  flex: 0 0 auto;
+  margin-left: 0.35rem;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 0.7rem;
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+.theme-toggle:hover { background: var(--surface-muted); border-color: var(--ink); }
 .mobile-nav { display: none; padding: 0.8rem 1rem 1.4rem; border-top: 1px solid var(--line); background: var(--surface); }
 .mobile-nav a { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 0.25rem; border-bottom: 1px solid var(--surface-muted); color: var(--ink); text-decoration: none; }
 .mobile-products { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); }

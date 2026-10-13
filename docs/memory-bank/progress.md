@@ -145,3 +145,14 @@
 ## Post-MVP
 
 Consulting MVP v1.0.0 complete. See `activeContext.md` for integration opportunities.
+## 2026-10-13 — Unified Fixna design system across all five web apps
+
+**Delivered:**
+- Established @fixna/design-system as single source of truth (tokens, themes, runtime, primitives); added brand lime/dark-green palette with light/dark/system + no-flash init.
+- Integrated into all five apps: fixna-web (Next.js, plain CSS), localboost-web, consulting-web (plain CSS), hospitality-web, invoice-assistant-web, website-audit-web (Tailwind v4).
+- Added ThemeToggle to headers/shells; ThemeProvider + theme bootstrap in all layouts; Tailwind bridge with [data-theme="dark"] mapping.
+- All TypeScript checks pass (design-system + 5 apps). Design-system unit tests pass (18/18). Existing frontend unit tests passing.
+
+**Files:** packages/fixna-design-system/*, app layouts/components updated for all five apps.
+
+**Verified:** typecheck clean across all packages/apps; vitest green for design system and existing suites.

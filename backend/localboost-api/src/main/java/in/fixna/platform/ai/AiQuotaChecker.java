@@ -6,7 +6,7 @@ import java.util.UUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-import in.fixna.platform.billing.PlanLimitChecker;
+import in.fixna.platform.localboost.billing.PlanLimitChecker;
 import in.fixna.platform.common.web.FixnaException;
 
 /**

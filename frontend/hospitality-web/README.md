@@ -1,9 +1,25 @@
 # hospitality-web
 
-Placeholder for a future Hospitality product.
+Hospitality frontend — Next.js 16 (App Router), React 19, TypeScript.
 
-When implementing, follow the monorepo scaffolding in `docs/scaffolding.md`:
+## Development
 
-- `frontend/hospitality-web/` — separate Next.js deploy unit
-- `@fixna/hospitality-web` package name
-- Deploy independently from `backend/hospitality-api`
+```bash
+npm run dev          # runs on http://localhost:3002
+npm run build        # production build
+npm run lint         # lint
+npm run test         # unit tests
+```
+
+## Environment
+
+Copy `.env.example` to `.env.local` and adjust:
+
+```
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8082/api
+NEXT_PUBLIC_APP_ENV=local
+```
+
+## Deployment
+
+Vercel: root directory `frontend/hospitality-web`, framework preset Next.js.

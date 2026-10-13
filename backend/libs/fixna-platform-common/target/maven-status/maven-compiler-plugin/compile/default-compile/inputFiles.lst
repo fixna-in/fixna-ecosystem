@@ -1,3 +1,11 @@
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\billing\PaymentProvider.java
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\billing\PlanCode.java
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\billing\PlanLimits.java
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\billing\Subscription.java
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\billing\SubscriptionRepository.java
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\billing\SubscriptionService.java
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\billing\WebhookEvent.java
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\billing\WebhookEventRepository.java
 C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\autoconfigure\FixnaPlatformCommonAutoConfiguration.java
 C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\config\CorsConfig.java
 C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\config\CorsProperties.java
@@ -5,6 +13,7 @@ C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\m
 C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\logging\LoggingConstants.java
 C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\logging\LoggingContext.java
 C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\logging\SensitiveDataMasker.java
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\tenant\TenantContext.java
 C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\tenant\TenantScopeProvider.java
 C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\web\ApiAccessDeniedHandler.java
 C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\web\ApiAuthenticationEntryPoint.java
@@ -13,3 +22,4 @@ C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\m
 C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\web\GlobalExceptionHandler.java
 C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\web\RequestIdFilter.java
 C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\common\web\SecurityHeadersFilter.java
+C:\Users\Dell\workspace\fixna-ecosystem\backend\libs\fixna-platform-common\src\main\java\in\fixna\platform\tenant\MembershipRole.java

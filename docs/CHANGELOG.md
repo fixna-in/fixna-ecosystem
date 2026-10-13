@@ -6,6 +6,35 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added — Website Audit async jobs & Invoice document intake (Consulting)
+
+- **Website Audit jobs (ADR-009):** `POST /api/v1/website-audits/jobs` (202) → lease-claimed background worker with startup + periodic crash recovery, attempt  cap (3), and bounded crawl (≤25 pages, depth ≤2, 60 s budget). Endpoints `GET /website-audits/jobs`, `GET /website-audits/jobs/{id}`, `POST /website-audits/jobs/{id}/cancel`, plus per-page rows in `website_audit_pages`
+- **Website Audit HTML report:** `GET /api/v1/website-audits/{id}/report` — self-contained, CSP-locked (`default-src 'none'`), HTML-escaped report; downloadable from the audit detail page
+- **Invoice document intake (ADR-011/012):** private PDF upload (magic-byte validated, ≤10 MB, sha256 dedupe) stored only in tenant-scoped `FileStorage`; native PDF text extraction with OCR-fallback adapter; per-field provenance (page, bbox, snippet, extractor version) and deterministic confidence. Endpoints under `/api/v1/invoices/{id}/documents/...` for upload/list/download/extract/confirm/approve/reject/post/export
+- **Confidence gates + human approval (ADR-012):** exact `BigDecimal` money grammar (scale ≤2, never float); ≥0.90 prefill / 0.70–0.89 review / <0.70 hidden; approval blocked until low-confidence fields are confirmed; only approved extractions post to a DRAFT invoice; AI never posts
+- **Retention purge (IA-09):** scheduled job hard-deletes documents past `purge_after` (default 180 days), leaving an id-only tombstone
+- **First scheduler in consulting-api:** `@EnableScheduling` with a dedicated single-thread worker; `fixna.website-audit.poll-ms` and `fixna.invoice.retention-cron` configuration
+- **FileStorage:** added `delete(tenantId, storageKey)` to the interface + `LocalFileStorage`
+- **Frontend:** async audit submit with polling, progress, and cancel on `/website-audits`; `InvoiceDocumentIntake` component (upload, async extract with job polling, review with confidence badges, approve/reject/post, CSV/JSON export) embedded in the invoice detail panel; `invoice-documents-api.ts` client (job schema, poll, search, signed-URL, export)
+- **Migrations (Consulting only):** `V12__website_audit_jobs.sql`, `V13__invoice_documents.sql`, `V14__invoice_document_jobs.sql`, `V15__tenant_quotas.sql`; CI migration threshold and `DeploymentReadinessTest` bumped to ≥15 / V15
+- **Tests:** consulting API extended (worker/queue, document service, decimal grammar, confidence gates, SSRF/pinned-IP fetch, `WebsiteAuditJobServiceTest` 409 guard, `RateLimitFilterTest` write-route limits); consulting-web production build green
+- **MVP gap fixes (embedded scope):** `409 CRAWL_IN_PROGRESS` one-RUNNING-per-tenant guard; write-route rate limits (`POST /website-audits/jobs`, cancel, invoice document writes; GET polling stays unlimited); `GET .../export?format=csv|json` with `invoice.export.generated` audit for both formats
+
+### Added — Specification pack: Website Audit & Invoice Assistant (design, pending approval)
+
+- `docs/specs/` — product specs, API contracts, proposed database designs (design-only, nothing applied), threat models, combined test plan, and a small-task backlog (WB/IA/INF)
+- **ADR-009…ADR-012** — bounded crawl jobs with lease recovery, pinned-IP fetcher (DNS rebinding), private invoice document intake, extraction confidence gates + human approval
+- Decision register with 14 decisions for approval in `docs/specs/README.md`; no product code or schema changes in this change
+
+### Added — Website Audit & Invoice Assistant (Consulting)
+
+- **Website Audit (deterministic):** `GET/POST /api/v1/website-audits`, `GET /api/v1/website-audits/{id}`, `POST /api/v1/website-audits/{id}/fixes` — SSRF-guarded fetcher (http/https, ports 80/443 only, private/loopback/CGNAT/ULA blocked, 512 KB cap, hard timeouts, no redirects), regex-based checks (title, meta description, viewport, Open Graph, canonical, H1, img alt, charset, lang, HTTP status, HTTPS, response time, robots.txt, sitemap.xml); AI only for advisory fix suggestions (`AiUsageLog` + `AuditEvent`)
+- **Invoice Assistant:** `GET/POST /api/v1/invoices/{id}/assist/suggestions`, `POST /api/v1/assist/suggestions/{id}/apply|dismiss` — deterministic-first suggestions (missing lines, recommended due date, overdue reminder); only due-date suggestions auto-apply and only to draft invoices; optional AI line ideas are advisory and never applied automatically
+- **Permissions:** `WEBSITE_AUDIT_VIEW`, `WEBSITE_AUDIT_MANAGE`, `INVOICE_ASSIST_USE` (PLATFORM_ADMIN, CONSULTANT_ADMIN, CONSULTANT)
+- **Migrations (Consulting only):** `V10__website_audit.sql`, `V11__invoice_assist.sql`
+- **Frontend:** `/website-audits` list + run page, audit detail with checks and advisory AI fixes, invoice assistant panel on `/invoices`; `website-audit-api.ts` and invoice-assist functions in `invoices-api.ts` (zod-validated)
+- **Tests:** `WebsiteAuditorTest`, `WebsiteFetcherTest`, `WebsiteAuditApplicationServiceTest`, `InvoiceAssistApplicationServiceTest`, RBAC + `MockAiProvider` coverage — consulting API at 182 tests
+
 ### Fixed — fixna.web links, dark-hero headlines, LocalBoost header
 
 - LocalBoost hyperlinks from fixna.web now use `https://localboost.fixna.in/` — product cards (`content/products.ts`) and the contact page (now via `productLinks`, the single source of truth)
@@ -248,3 +277,14 @@ Consulting MVP unchanged; LocalBoost keeps its own database and migration histor
 - Audit, notification/file abstractions, domain events, observability
 - Flyway migration `V1__platform_core.sql`
 - Health endpoints, error envelope, tenant isolation patterns
+## 2026-10-13 � Unified Fixna design system across all five web apps
+
+**Delivered:**
+- Established @fixna/design-system as single source of truth (tokens, themes, runtime, primitives); added brand lime/dark-green palette with light/dark/system + no-flash init.
+- Integrated into all five apps: fixna-web (Next.js, plain CSS), localboost-web, consulting-web (plain CSS), hospitality-web, invoice-assistant-web, website-audit-web (Tailwind v4).
+- Added ThemeToggle to headers/shells; ThemeProvider + theme bootstrap in all layouts; Tailwind bridge with [data-theme="dark"] mapping.
+- All TypeScript checks pass (design-system + 5 apps). Design-system unit tests pass (18/18). Existing frontend unit tests passing.
+
+**Files:** packages/fixna-design-system/*, app layouts/components updated for all five apps.
+
+**Verified:** typecheck clean across all packages/apps; vitest green for design system and existing suites.

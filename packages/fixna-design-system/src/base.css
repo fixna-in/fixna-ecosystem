@@ -1,0 +1,209 @@
+/* =============================================================================
+ * Fixna Design System — shared base primitives (token-driven)
+ * -----------------------------------------------------------------------------
+ * Optional layer for apps that style with plain CSS. Every value references a
+ * semantic token from tokens.css, so these automatically follow light/dark.
+ * Tailwind apps should instead import tailwind-theme.css.
+ * ========================================================================== */
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+strong, h1, h2, h3 { letter-spacing: -0.02em; }
+h1, h2, h3, p { margin-top: 0; }
+
+a { color: var(--link); text-underline-offset: 0.2em; }
+a:hover { text-decoration-thickness: 2px; }
+
+img { display: block; max-width: 100%; }
+button, input, select, textarea { font: inherit; }
+
+/* Visible keyboard focus that stays legible on every background (WCAG 2.2) */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 200;
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--radius-sm);
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+.skip-link:focus { top: 0.75rem; }
+
+/* ---- Buttons ----------------------------------------------------------- */
+.button,
+button:not([class]) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  padding: 0.65rem 1.1rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font: inherit;
+  font-weight: 650;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition),
+    box-shadow var(--transition), border-color var(--transition);
+}
+.button:hover,
+button:not([class]):hover:not(:disabled) { background: var(--primary-hover); }
+.button:active { transform: translateY(1px); }
+.button:disabled,
+button:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.button-secondary {
+  background: var(--surface);
+  color: var(--foreground);
+  border-color: var(--border);
+}
+.button-secondary:hover { background: var(--surface-muted); }
+
+.button-quiet {
+  background: transparent;
+  color: var(--muted-foreground);
+  border-color: transparent;
+  justify-content: flex-start;
+}
+.button-quiet:hover { background: var(--surface-muted); color: var(--foreground); }
+
+.button-destructive { background: var(--danger); color: #ffffff; }
+.button-destructive:hover { filter: brightness(0.94); }
+
+.button-small { min-height: 38px; padding: 0.45rem 0.9rem; font-size: var(--text-sm); }
+
+.button-icon {
+  min-height: 44px;
+  width: 44px;
+  padding: 0;
+  background: var(--surface);
+  color: var(--foreground);
+  border-color: var(--border);
+}
+.button-icon:hover { background: var(--surface-muted); }
+
+/* ---- Cards & surfaces -------------------------------------------------- */
+.card,
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+.panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.4rem;
+  border-bottom: 1px solid var(--border);
+}
+.panel-heading h2 { margin: 0; font-size: var(--text-lg); }
+
+/* ---- Form controls ----------------------------------------------------- */
+label { font-weight: 650; }
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--input);
+  color: var(--foreground);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+textarea { min-height: 112px; resize: vertical; }
+input:focus, textarea:focus, select:focus {
+  border-color: var(--ring);
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 22%, transparent);
+}
+
+/* ---- Tables ------------------------------------------------------------ */
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--surface-muted); color: var(--muted-foreground); font-weight: 600; }
+.table-scroll { overflow-x: auto; }
+
+/* ---- Status badges ----------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-pill);
+  padding: 0.2rem 0.65rem;
+  font-size: var(--text-xs);
+  font-weight: 650;
+  white-space: nowrap;
+}
+.badge-neutral { background: var(--surface-muted); color: var(--muted-foreground); }
+.badge-positive { background: var(--success-soft); color: var(--success); }
+.badge-warning  { background: var(--warning-soft); color: var(--warning); }
+.badge-negative { background: var(--danger-soft);  color: var(--danger); }
+.badge-info     { background: var(--info-soft);    color: var(--info); }
+
+/* ---- Alerts / status --------------------------------------------------- */
+[role="alert"] {
+  color: var(--danger);
+  background: var(--danger-soft);
+  border-left: 3px solid var(--danger);
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  overflow-wrap: anywhere;
+}
+[role="status"] { color: var(--muted-foreground); }
+
+/* ---- Loading skeleton -------------------------------------------------- */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--surface-muted) 25%,
+    color-mix(in srgb, var(--surface-muted) 60%, var(--border)) 37%,
+    var(--surface-muted) 63%
+  );
+  background-size: 400% 100%;
+  animation: fixna-skeleton 1.4s ease infinite;
+  border-radius: var(--radius-sm);
+}
+@keyframes fixna-skeleton {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+/* ---- Reduced motion ---------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+input[aria-invalid="true"] { border-color: var(--danger); }
+input[type="checkbox"], input[type="radio"] { accent-color: var(--primary); }

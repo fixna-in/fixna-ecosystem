@@ -59,6 +59,12 @@ has been checked against the Consulting migrations.
 | V7 | `V7__client_portal.sql` | Portal refresh token scope |
 | V8 | `V8__public_website.sql` | Public slug, testimonials |
 | V9 | `V9__ai_assistance.sql` | AI usage logs |
+| V10 | `V10__website_audit.sql` | Website audits and audit checks |
+| V11 | `V11__invoice_assist.sql` | Invoice assist suggestions |
+| V12 | `V12__website_audit_jobs.sql` | Website audit crawl jobs (lease + recovery, ADR-009) |
+| V13 | `V13__invoice_documents.sql` | Private invoice documents, extractions, fields (ADR-011/012) |
+| V14 | `V14__invoice_document_jobs.sql` | Async invoice extraction jobs (queue/worker) |
+| V15 | `V15__tenant_quotas.sql` | Monthly upload/extraction quotas per tenant |
 
 ## Local seed data
 

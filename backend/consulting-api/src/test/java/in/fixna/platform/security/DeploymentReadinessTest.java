@@ -2,6 +2,7 @@ package in.fixna.platform.security;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -17,12 +18,16 @@ class DeploymentReadinessTest {
             List<String> versions = files
                     .filter(path -> path.getFileName().toString().startsWith("V"))
                     .map(path -> path.getFileName().toString())
-                    .sorted()
+                    .sorted(Comparator.comparingInt(DeploymentReadinessTest::migrationVersion))
                     .toList();
-            assertThat(versions).hasSizeGreaterThanOrEqualTo(9);
+            assertThat(versions).hasSizeGreaterThanOrEqualTo(15);
             assertThat(versions.getFirst()).startsWith("V1__");
-            assertThat(versions.getLast()).startsWith("V9__");
+            assertThat(versions.getLast()).startsWith("V15__");
         }
+    }
+
+    private static int migrationVersion(String fileName) {
+        return Integer.parseInt(fileName.substring(1, fileName.indexOf("__")));
     }
 
     @Test

@@ -1,5 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { AppShell } from "@/components/app-shell";
+import { ThemeProvider } from "@fixna/design-system";
+import { themeInitScript } from "@fixna/design-system/theme";
+import "@fixna/design-system/tokens.css";
+import "@fixna/design-system/base.css";
 import "./globals.css";
 import "./product.css";
 import "./workspace.css";
@@ -23,11 +27,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Apply the persisted/system theme before paint to avoid a flash. */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body>
-        <Providers><AppShell>{children}</AppShell></Providers>
+        <ThemeProvider>
+          <Providers>
+            <AppShell>{children}</AppShell>
+          </Providers>
+        </ThemeProvider>
       </body>
     </html>
   );
 }
+
 

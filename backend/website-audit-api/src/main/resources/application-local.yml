@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5434/website_audit
+    username: postgres
+    password: postgres
+  flyway:
+    baseline-on-migrate: false
+
+fixna:
+  security:
+    cors:
+      allowed-origins: http://localhost:3003,http://127.0.0.1:3003
+    hsts-enabled: false
+  file-storage:
+    base-path: ./data/files
+  website-audit:
+    max-pages: 25
+    max-concurrency: 2
+    max-depth: 2
+    max-seconds: 60
+    max-fetch-attempts: 40
+    per-host-delay-ms: 500
+    robots-crawl-delay-cap-seconds: 5
+    page-size-limit-kb: 512

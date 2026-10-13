@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import in.fixna.platform.billing.PlanLimitChecker;
+import in.fixna.platform.localboost.billing.PlanLimitChecker;
 import in.fixna.platform.business.dto.BusinessLocationRequest;
 import in.fixna.platform.business.dto.BusinessLocationResponse;
 import in.fixna.platform.business.dto.BusinessRequest;

@@ -14,7 +14,7 @@ See [`docs/database/README.md`](../database/README.md) for migration index and D
 - [ ] `FIXNA_JWT_SECRET` set to a unique 32+ character secret
 - [ ] `FIXNA_CORS_ALLOWED_ORIGINS` set to production web origin(s) only
 - [ ] `SPRING_PROFILES_ACTIVE=prod`
-- [ ] Flyway migrations V1–V9 applied (automatic on API startup)
+- [ ] Flyway migrations V1–V11 applied (automatic on API startup)
 - [ ] File storage path writable (`FIXNA_FILE_STORAGE_PATH` or default `/var/data/files`)
 
 ## API (Render)
@@ -64,6 +64,8 @@ npm run build:consulting
 | V7 | Client portal |
 | V8 | Public website |
 | V9 | AI assistance |
+| V10 | Website audits |
+| V11 | Invoice assist |
 
 Full index: `backend/consulting-api/src/main/resources/db/README.md`
 

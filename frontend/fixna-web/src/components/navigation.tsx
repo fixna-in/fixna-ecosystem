@@ -5,6 +5,7 @@ import { useState } from "react";
 import { navigation } from "@/content/navigation";
 import { productLinks } from "@/lib/product-links";
 import { FixnaBrandMark } from "@/components/brand-mark";
+import { ThemeToggle } from "@fixna/design-system";
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -24,6 +25,7 @@ export function Header() {
             <Link key={item.href} href={item.href}>{item.label}</Link>
           ))}
           <Link className="button button-primary nav-cta" href="/contact">Contact</Link>
+          <ThemeToggle className="theme-toggle" label="Toggle color theme" />
         </nav>
 
         <button
@@ -49,6 +51,7 @@ export function Header() {
           <Link className="button button-primary mobile-cta" href="/contact" onClick={() => setMobileOpen(false)}>
             Contact Us
           </Link>
+          <ThemeToggle className="theme-toggle" label="Toggle color theme" />
           <div className="mobile-products">
             <p>Products</p>
             <Link href={productLinks.localboost} target="_blank" rel="noreferrer" onClick={() => setMobileOpen(false)}>

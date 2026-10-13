@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${POSTGRES_USER}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  flyway:
+    baseline-on-migrate: true
+    baseline-version: "0"

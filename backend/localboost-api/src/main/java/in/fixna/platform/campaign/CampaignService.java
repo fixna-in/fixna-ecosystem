@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import in.fixna.platform.billing.PlanLimitChecker;
+import in.fixna.platform.localboost.billing.PlanLimitChecker;
 import in.fixna.platform.business.BusinessRepository;
 import in.fixna.platform.campaign.dto.CampaignOfferRequest;
 import in.fixna.platform.campaign.dto.CampaignOfferResponse;

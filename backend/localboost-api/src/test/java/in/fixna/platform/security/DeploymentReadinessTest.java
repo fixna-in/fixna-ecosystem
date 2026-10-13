@@ -18,11 +18,19 @@ class DeploymentReadinessTest {
             List<String> versions = files
                     .filter(path -> path.getFileName().toString().startsWith("V"))
                     .map(path -> path.getFileName().toString())
-                    .sorted()
+                    .sorted((a, b) -> {
+                        int aNum = Integer.parseInt(a.substring(1, a.indexOf("__")));
+                        int bNum = Integer.parseInt(b.substring(1, b.indexOf("__")));
+                        return Integer.compare(aNum, bNum);
+                    })
                     .toList();
-            assertThat(versions).hasSizeGreaterThanOrEqualTo(9);
+            assertThat(versions).hasSizeGreaterThanOrEqualTo(10);
             assertThat(versions.getFirst()).startsWith("V1__");
-            assertThat(versions.getLast()).startsWith("V9__");
+            // Last migration version should be sequential (V10 or higher)
+            String lastVersion = versions.getLast();
+            assertThat(lastVersion).matches("V\\d+__.*");
+            int versionNum = Integer.parseInt(lastVersion.substring(1, lastVersion.indexOf("__")));
+            assertThat(versionNum).isGreaterThanOrEqualTo(10);
         }
     }
 
