@@ -49,6 +49,58 @@ Google-Sheets contact flow (needs owner env setup — see change log).
 ## Hospitality — placeholder only (dirs + README-level). Keep marked
 planned/coming-soon everywhere. Out of scope for code changes.
 
+## Website Audit (standalone product) — API + Web, builds & tests green
+
+Separate deploy unit per the Website Audit & Invoice Assistant blueprint.
+API `backend/website-audit-api` (Spring Boot 3.5.6, port 8082, DB `website_audit`,
+Flyway V1–V3) + Web `frontend/website-audit-web` (Next.js 16, port 3003).
+Deploy: `render-website-audit.yaml` + `backend/website-audit-api/Dockerfile`
+(+ Vercel). Docs: `docs/products/website-audit.md`,
+`docs/deployment/website-audit.md`. CI: `website-audit-api` + `website-audit-web` jobs.
+
+Real and working: JWT auth + refresh + `/me`, tenant/RBAC isolation, bounded
+crawl with SSRF/DNS-rebinding-guarded pinned-IP fetcher (ADR-009/010),
+deterministic checks, async 202 job model (submit/poll/cancel) with worker,
+self-contained CSP HTML report, advisory-only AI fixes, auth rate limiting.
+Web: `/login`, `/` dashboard (submit+poll+list), `/audits/[id]` (findings,
+report download, AI suggestions). 9 API tests + 4 web tests pass; both build.
+
+Fixed to make it build (was scaffolded but never compiled): missing outer-class
+imports (WebsiteFetcher/WebsiteAuditor/WebsiteCrawler), malformed HTML-escape
+text block in WebsiteAuditReportService, duplicate RateLimitFilter constructor,
+and a missing `JwtService.properties()` accessor.
+
+## Invoice Assistant (standalone product) — API + Web, builds & tests green
+
+Separate deploy unit. API `backend/invoice-assistant-api` (Spring Boot 3.5.6,
+port 8083, DB `invoice_assistant`, Flyway V1–V6) + Web
+`frontend/invoice-assistant-web` (Next.js 16, port 3004). Deploy:
+`render-invoice-assistant.yaml` + `backend/invoice-assistant-api/Dockerfile`
+(+ Vercel). Docs: `docs/products/invoice-assistant.md`,
+`docs/deployment/invoice-assistant.md`. CI: `invoice-assistant-api` +
+`invoice-assistant-web` jobs.
+
+Real and working: JWT auth + refresh + `/me`, tenant/RBAC isolation, private
+PDF intake (ADR-011: PDF-only ≤10MB, magic-byte, sha256, private FileStorage,
+authenticated-only `/content`), async extraction job (native text → offline
+OCR), provenance + deterministic confidence, confidence gates, review workflow
+(confirm → approve/reject/post), CSV/JSON export, search, retention purge,
+monthly quotas. Web: `/login`, `/` dashboard (upload/list/delete),
+`/documents/[documentId]` (extract, review with confidence badges, edit/confirm,
+approve/reject/post, export, download original). 15 API tests + 4 web tests pass;
+both build.
+
+Fixed to make it build: package-private `document` utility classes/members
+(`ConfidenceGate`, `MoneyGrammar`, `FieldExtractor`, `PdfTextExtractor`) made
+public, missing `PdfTextExtractor` import, duplicate RateLimitFilter
+constructor, missing `JwtService.properties()` accessor, and a
+`ConfidenceGate.blocksApprovalUntilConfirmed` logic bug (hidden <0.70 fields
+incorrectly blocked approval — caught by ConfidenceGateTest).
+
+Known limitation (owner action): Render web filesystem is ephemeral — attach a
+persistent disk and set `FIXNA_FILE_STORAGE_PATH=/var/data/invoice-files` before
+live uploads, or move to object storage behind `FileStorage`.
+
 ## Shared platform (fixna-platform-common 1.0.0)
 
 Request IDs, CORS, security headers, global error envelope, password config.

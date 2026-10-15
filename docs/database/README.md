@@ -54,7 +54,7 @@ SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/fixna
 
 ## Product documentation
 
-- Consulting schema phases: [`docs/implementation/`](../implementation/) (V1–V9)
+- Consulting schema phases: [`docs/implementation/`](../implementation/) (V1–V11)
 - LocalBoost schema docs: [`docs/products/localboost/04-database/`](../products/localboost/04-database/)
 - LocalBoost requirements: [`docs/products/localboost/requirements/`](../products/localboost/requirements/)
 

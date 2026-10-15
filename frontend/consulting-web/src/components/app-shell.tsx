@@ -7,6 +7,7 @@ import { useAuth } from "@/lib/auth-context";
 import { toApiError } from "@/lib/api-client";
 import { useState } from "react";
 import { BrandMarkIcon } from "@/brand/brand-mark-icon";
+import { ThemeToggle } from "@fixna/design-system";
 
 const navigation = [
   { href: "/clients", label: "Clients" },
@@ -15,6 +16,7 @@ const navigation = [
   { href: "/proposals", label: "Proposals" },
   { href: "/invoices", label: "Invoices" },
   { href: "/website", label: "Website" },
+  { href: "/website-audits", label: "Website audits" },
   { href: "/ai", label: "AI Assistant" },
 ];
 
@@ -40,6 +42,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             <Link href="/portal">Client portal</Link>
             <Link href="/login">Sign in</Link>
             <Link href="/register" className="header-cta">Create account</Link>
+            <ThemeToggle className="theme-toggle" label="Toggle color theme" />
           </nav>
         </header>
         <main id="main-content" tabIndex={-1} className="public-content">{children}</main>
@@ -94,6 +97,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             <Link href="/login" className="sidebar-login button button-secondary">Sign in</Link>
           )}
           {!session && initialized ? <p className="muted">Sign in to manage clients.</p> : null}
+          <ThemeToggle className="theme-toggle" label="Toggle color theme" />
           {error ? <p className="sidebar-error" role="alert">{error}</p> : null}
         </div>
       </aside>

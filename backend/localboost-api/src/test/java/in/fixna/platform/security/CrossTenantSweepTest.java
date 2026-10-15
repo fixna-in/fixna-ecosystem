@@ -10,7 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import in.fixna.platform.billing.PlanLimitChecker;
+import in.fixna.platform.localboost.billing.PlanLimitChecker;
 import in.fixna.platform.business.BusinessRepository;
 import in.fixna.platform.campaign.Campaign;
 import in.fixna.platform.campaign.CampaignChannelRepository;

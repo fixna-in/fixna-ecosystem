@@ -45,7 +45,7 @@ class CampaignServiceTest {
     @Mock CampaignChannelRepository channels;
     @Mock BusinessRepository businesses;
     @Mock AuditPublisher audit;
-    @Mock in.fixna.platform.billing.PlanLimitChecker planLimits;
+    @Mock in.fixna.platform.localboost.billing.PlanLimitChecker planLimits;
 
     @InjectMocks CampaignService service;
 

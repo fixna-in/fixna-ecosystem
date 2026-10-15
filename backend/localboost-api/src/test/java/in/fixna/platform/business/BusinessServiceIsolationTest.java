@@ -33,7 +33,7 @@ class BusinessServiceIsolationTest {
     @Mock BusinessRepository businesses;
     @Mock BusinessLocationRepository locations;
     @Mock AuditPublisher audit;
-    @Mock in.fixna.platform.billing.PlanLimitChecker planLimits;
+    @Mock in.fixna.platform.localboost.billing.PlanLimitChecker planLimits;
 
     @InjectMocks BusinessService service;
 

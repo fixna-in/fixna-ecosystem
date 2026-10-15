@@ -23,12 +23,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 /**
- * Brute-force guard for the public auth surface ({@code /api/v1/auth/**} and
- * the client-portal login {@code /api/v1/portal/auth/**}): per IP + route
- * sliding window; on exhaustion responds 429 with the standard envelope and a
- * Retry-After hint. X-Forwarded-For is honored for caller IP behind the
- * platform's trusted reverse proxy; rate limiting is a mitigation layer, not
- * the credential control.
+ * Brute-force / abuse guard: per IP + route sliding window; on exhaustion
+ * responds 429 with the standard envelope and a Retry-After hint.
+ * X-Forwarded-For is honored for caller IP behind the platform's trusted
+ * reverse proxy; rate limiting is a mitigation layer, not the credential
+ * control.
+ *
+ * <p>Covered routes: the public auth surface ({@code /api/v1/auth/**} and
+ * {@code /api/v1/portal/auth/**}) for all methods, plus write (non-GET)
+ * routes for website-audit jobs and invoice document intake
+ * (ADR-009, WB-09): {@code POST /website-audits/jobs},
+ * {@code POST /website-audits/jobs/{id}/cancel},
+ * {@code POST /invoices/.../documents...}. Read/GET polling
+ * ({@code GET /website-audits/jobs/{id}}, report, extraction, search,
+ * streaming content) is intentionally not limited so 2s client polling
+ * cannot 429 under the default 20/min budget.
  *
  * <p>Adapted from the localboost-api filter so each service stays
  * independently deployable; promote to fixna-platform-common when a third
@@ -40,6 +49,16 @@ public class RateLimitFilter extends OncePerRequestFilter {
     private static final Logger RATE_LOG = LoggerFactory.getLogger("fixna.ratelimit");
 
     private static final String[] AUTH_PREFIXES = {"/api/v1/auth/", "/api/v1/portal/auth/"};
+
+    /**
+     * Write-route prefixes for audit jobs + invoice intake (WB-09). Matched
+     * only for non-GET methods so polling/reads stay unlimited.
+     */
+    private static final String[] WRITE_PREFIXES = {
+        "/api/v1/website-audits/jobs",
+        "/api/v1/invoices/",
+        "/api/v1/invoice-jobs/"
+    };
 
     private final RateLimiter limiter;
     private final ObjectMapper mapper;
@@ -74,6 +93,15 @@ public class RateLimitFilter extends OncePerRequestFilter {
         for (String prefix : AUTH_PREFIXES) {
             if (uri.startsWith(prefix)) {
                 return false;
+            }
+        }
+        // WB-09: write routes for audit jobs + invoice intake (POST/PUT/PATCH/
+        // DELETE only — GET polling/reads stay unlimited).
+        if (!"GET".equalsIgnoreCase(request.getMethod())) {
+            for (String prefix : WRITE_PREFIXES) {
+                if (uri.startsWith(prefix)) {
+                    return false;
+                }
             }
         }
         return true;

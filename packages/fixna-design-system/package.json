@@ -1,0 +1,26 @@
+{
+  "name": "@fixna/design-system",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Fixna unified design system — semantic tokens, light/dark themes, theme provider, and shared primitives consumed by every Fixna web application.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./tokens.css": "./src/tokens.css",
+    "./base.css": "./src/base.css",
+    "./tailwind-theme.css": "./src/tailwind-theme.css",
+    "./theme": "./src/theme.ts",
+    "./ThemeProvider": "./src/ThemeProvider.tsx",
+    "./ThemeToggle": "./src/ThemeToggle.tsx"
+  },
+  "scripts": {
+    "test": "vitest run"
+  },
+  "peerDependencies": {
+    "react": "^19.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "vitest": "^3.0.0"
+  }
+}

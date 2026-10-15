@@ -9,7 +9,7 @@ export default function HomePage() {
       <article className="feature-card"><span className="feature-number">02 / CREATE</span><h2>A little intelligence. A lot of possibility.</h2><p>Use advisory AI recommendations to shape your strategy and creatives. You review and approve every step.</p></article>
       <article className="feature-card"><span className="feature-number">03 / MEASURE</span><h2>See what happens next.</h2><p>Keep campaign metrics and lead progress in one workspace, from first enquiry to conversion.</p></article>
     </div>
-    <div className="landing-bottom"><p>Platform execution currently uses mock adapters for Google, Meta, and WhatsApp.</p><HealthProbe /></div>
+    <div className="landing-bottom"><p>Platform execution currently uses mock adapters for Google, Meta, and WhatsApp.</p><p>Start with planning, review every advisory suggestion, then launch with confidence from one workspace.</p><HealthProbe /></div>
   </section>;
 }
 

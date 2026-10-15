@@ -1,15 +1,10 @@
+/* Color palette, typography, and theme tokens are provided by the shared
+   Fixna Design System (@fixna/design-system/tokens.css + base.css), imported
+   in layout.tsx. Do not hardcode palette colors here — reference the semantic
+   tokens (var(--surface), var(--foreground), var(--border), …) so this app
+   follows the shared light/dark themes. */
 :root {
   color-scheme: light;
-  --background: #f5f7f4;
-  --surface: #ffffff;
-  --surface-soft: #f1f6f1;
-  --text: #17352e;
-  --muted: #607267;
-  --primary: #163e32;
-  --primary-bright: #c7ed94;
-  --primary-deep: #0e2b24;
-  --border: #d7e3db;
-  --shadow: 0 18px 48px rgb(22 62 50 / 10%);
 }
 
 * { box-sizing: border-box; }
@@ -17,21 +12,22 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   background:
-    radial-gradient(circle at top left, rgb(199 237 148 / 10%), transparent 28rem),
+    radial-gradient(circle at top left, rgb(199 237 148 / 8%), transparent 28rem),
     var(--background);
   color: var(--text);
-  font-family: Inter, "Segoe UI", "Aptos", sans-serif;
-  font-size: 1rem;
-  line-height: 1.6;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
   -webkit-font-smoothing: antialiased;
 }
-strong, h1, h2, h3 { letter-spacing: -0.03em; }
+strong, h1, h2, h3 { letter-spacing: -0.02em; }
 h1, h2, h3, p { margin-top: 0; }
 a { color: var(--primary); text-underline-offset: 0.2em; }
 a:hover { text-decoration-thickness: 2px; }
 :focus-visible {
-  outline: 3px solid var(--primary-bright);
-  outline-offset: 3px;
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 55%, transparent);
 }
 
 .brand {
@@ -54,7 +50,7 @@ a:hover { text-decoration-thickness: 2px; }
   flex-direction: column;
   gap: 1.1rem;
   padding: 1.5rem 1.25rem;
-  background: rgba(255 255 255 / 86%);
+  background: var(--sidebar-background);
   border-right: 1px solid var(--border);
   backdrop-filter: blur(18px);
 }
@@ -65,7 +61,7 @@ a:hover { text-decoration-thickness: 2px; }
   border: 1px solid var(--border);
   border-left: 3px solid var(--primary-bright);
   border-radius: 12px;
-  color: var(--muted);
+  color: var(--muted-foreground);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -79,7 +75,7 @@ a:hover { text-decoration-thickness: 2px; }
   min-height: 42px;
   padding: 0.55rem 0.75rem;
   border-radius: 10px;
-  color: var(--muted);
+  color: var(--muted-foreground);
   font-size: 0.92rem;
   font-weight: 600;
   text-decoration: none;
@@ -102,7 +98,7 @@ a:hover { text-decoration-thickness: 2px; }
   align-items: center;
   gap: 1rem;
   padding: 1rem clamp(1.25rem, 5vw, 4rem);
-  background: rgba(255 255 255 / 90%);
+  background: var(--header-background);
   border-bottom: 1px solid var(--border);
   backdrop-filter: blur(16px);
 }
@@ -111,24 +107,24 @@ a:hover { text-decoration-thickness: 2px; }
 .public-header nav a {
   padding: 0.65rem 0.9rem;
   border-radius: 9px;
-  color: var(--muted);
+  color: var(--text);
   font-size: 0.9rem;
   font-weight: 650;
   text-decoration: none;
 }
 .public-header nav a:hover { background: var(--surface-soft); color: var(--primary); }
-.public-header nav a.header-cta { background: var(--primary); color: #fff; }
-.public-header nav a.header-cta:hover { background: var(--primary-deep); color: #fff; }
-.public-footer { border-top: 1px solid var(--border); border-bottom: none; color: var(--muted); font-size: 0.8rem; }
+.public-header nav a.header-cta { background: var(--primary); color: var(--primary-foreground); }
+.public-header nav a.header-cta:hover { background: var(--primary-deep); color: var(--primary-foreground); }
+.public-footer { border-top: 1px solid var(--border); border-bottom: none; color: var(--muted-foreground); font-size: 0.8rem; }
 
 .eyebrow { margin: 0 0 1rem; color: var(--primary); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; }
-.muted { color: var(--muted); }
+.muted { color: var(--muted-foreground); }
 
-.nav-label { font-size: 0.6rem; letter-spacing: 0.12em; color: var(--muted); margin: 0.4rem 0.7rem 0; }
+.nav-label { font-size: 0.6rem; letter-spacing: 0.12em; color: var(--muted-foreground); margin: 0.4rem 0.7rem 0; }
 .sidebar-note { margin-top: auto; padding: 1.2rem 0.7rem; }
 .sidebar-note .eyebrow { font-size: 0.55rem; }
 .sidebar-note p { font-size: 0.9rem; font-weight: 550; }
-.sidebar-note small { color: var(--muted); font-size: 0.72rem; }
+.sidebar-note small { color: var(--muted-foreground); font-size: 0.72rem; }
 .workspace-label,
 .sidebar-account { display: flex; gap: 0.65rem; align-items: center; padding: 0.9rem 0.5rem; }
 .sidebar-account { border-top: 1px solid var(--border); }
@@ -147,7 +143,7 @@ a:hover { text-decoration-thickness: 2px; }
 .workspace-label strong,
 .sidebar-account strong { font-size: 0.8rem; }
 .workspace-label small,
-.sidebar-account small { display: block; font-size: 0.62rem; color: var(--muted); }
+.sidebar-account small { display: block; font-size: 0.62rem; color: var(--muted-foreground); }
 
 .primary-nav {
   max-width: 1200px;
@@ -158,7 +154,7 @@ a:hover { text-decoration-thickness: 2px; }
   flex-wrap: wrap;
   gap: 0.6rem 1.5rem;
 }
-.primary-nav a { color: var(--muted); font-weight: 600; text-decoration: none; }
+.primary-nav a { color: var(--muted-foreground); font-weight: 600; text-decoration: none; }
 .primary-nav a:hover { color: var(--primary); text-decoration: underline; }
 .primary-nav .brand { color: var(--text); font-size: 1.2rem; margin-right: auto; }
 .page-content { max-width: 1200px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
@@ -186,11 +182,11 @@ input:not([type="checkbox"]):not([type="radio"]), select, textarea {
   padding: 0.7rem 0.8rem;
   border: 1px solid var(--border);
   border-radius: 9px;
-  background: #fbfdfb;
+  background: var(--input);
   color: var(--text);
   transition: border-color 160ms ease, box-shadow 160ms ease;
 }
-input:focus, textarea:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgb(22 62 50 / 8%); outline: none; }
+input:focus, textarea:focus, select:focus { border-color: var(--ring); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 22%, transparent); outline: none; }
 textarea { min-height: 112px; resize: vertical; }
 input[type="checkbox"], input[type="radio"] { accent-color: var(--primary); }
 button,
@@ -220,18 +216,18 @@ button + button { margin-left: 0.5rem; }
 .button-secondary:hover,
 button.button-secondary:hover:not(:disabled),
 .button.button-secondary:hover { background: var(--surface-soft); color: var(--text); }
-.button-quiet { background: transparent; color: var(--muted); border-color: transparent; justify-content: flex-start; }
+.button-quiet { background: transparent; color: var(--muted-foreground); border-color: transparent; justify-content: flex-start; }
 .button-quiet:hover,
 button.button-quiet:hover:not(:disabled) { background: var(--surface-soft); color: var(--primary); transform: none; }
 [role="alert"] {
-  color: #991b1b;
-  background: #fff1f2;
-  border-left: 3px solid #be123c;
+  color: var(--danger);
+  background: var(--danger-soft);
+  border-left: 3px solid var(--danger);
   padding: 0.65rem 0.85rem;
   border-radius: 4px;
   overflow-wrap: anywhere;
 }
-[role="status"] { color: var(--muted); }
+[role="status"] { color: var(--muted-foreground); }
 .auth-card {
   max-width: 480px;
   margin: 2rem auto;
@@ -243,14 +239,14 @@ button.button-quiet:hover:not(:disabled) { background: var(--surface-soft); colo
 }
 .auth-card form { padding: 0; border: 0; border-radius: 0; box-shadow: none; }
 .auth-card h1 { margin-bottom: 0.75rem; }
-.auth-description { color: var(--muted); }
+.auth-description { color: var(--muted-foreground); }
 .auth-footer { text-align: center; font-size: 0.95rem; }
 table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; }
 th, td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
-th { background: var(--surface-soft); color: var(--muted); font-weight: 600; }
+th { background: var(--surface-soft); color: var(--muted-foreground); font-weight: 600; }
 pre { overflow-x: auto; padding: 1rem; background: var(--surface-soft); border-radius: 8px; }
 li { margin-bottom: 0.5rem; }
-.skip-link { position: absolute; left: 1rem; top: -100px; padding: 0.6rem; background: white; z-index: 10; }
+.skip-link { position: absolute; left: 1rem; top: -100px; padding: 0.6rem; background: var(--primary); color: var(--primary-foreground); z-index: 10; border-radius: 8px; }
 .skip-link:focus { top: 0.5rem; }
 @media (max-width: 600px) {
   .primary-nav { padding: 1rem; gap: 0.65rem 1rem; }

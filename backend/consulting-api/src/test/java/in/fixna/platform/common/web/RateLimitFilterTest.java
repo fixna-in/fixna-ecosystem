@@ -97,6 +97,106 @@ class RateLimitFilterTest {
     }
 
     @Test
+    void auditJobSubmitWriteRouteIsLimited() throws Exception {
+        RateLimitFilter filter = new RateLimitFilter(new RateLimiter(1, Duration.ofMinutes(1)));
+        CountingChain chain = new CountingChain();
+
+        MockHttpServletRequest submit = request("/api/v1/website-audits/jobs", "10.0.0.11");
+        submit.setMethod("POST");
+        filter.doFilter(submit, new MockHttpServletResponse(), chain);
+        MockHttpServletResponse blocked = new MockHttpServletResponse();
+        MockHttpServletRequest retry = request("/api/v1/website-audits/jobs", "10.0.0.11");
+        retry.setMethod("POST");
+        filter.doFilter(retry, blocked, chain);
+
+        assertThat(chain.hits).isEqualTo(1);
+        assertThat(blocked.getStatus()).isEqualTo(429);
+    }
+
+    @Test
+    void auditJobPollReadsStayUnlimited() throws Exception {
+        RateLimitFilter filter = new RateLimitFilter(new RateLimiter(1, Duration.ofMinutes(1)));
+        CountingChain chain = new CountingChain();
+
+        for (int i = 0; i < 10; i++) {
+            MockHttpServletRequest poll =
+                    new MockHttpServletRequest("GET", "/api/v1/website-audits/jobs/" + i);
+            poll.setRemoteAddr("10.0.0.12");
+            filter.doFilter(poll, new MockHttpServletResponse(), chain);
+        }
+
+        assertThat(chain.hits).isEqualTo(10);
+    }
+
+    @Test
+    void invoiceDocumentWriteRouteIsLimited() throws Exception {
+        RateLimitFilter filter = new RateLimitFilter(new RateLimiter(1, Duration.ofMinutes(1)));
+        CountingChain chain = new CountingChain();
+
+        MockHttpServletRequest upload =
+                request("/api/v1/invoices/123/documents", "10.0.0.13");
+        upload.setMethod("POST");
+        filter.doFilter(upload, new MockHttpServletResponse(), chain);
+        MockHttpServletResponse blocked = new MockHttpServletResponse();
+        MockHttpServletRequest retry = request("/api/v1/invoices/123/documents", "10.0.0.13");
+        retry.setMethod("POST");
+        filter.doFilter(retry, blocked, chain);
+
+        assertThat(chain.hits).isEqualTo(1);
+        assertThat(blocked.getStatus()).isEqualTo(429);
+    }
+
+    @Test
+    void auditJobSubmitWriteRouteIsLimited() throws Exception {
+        RateLimitFilter filter = new RateLimitFilter(new RateLimiter(1, Duration.ofMinutes(1)));
+        CountingChain chain = new CountingChain();
+
+        MockHttpServletRequest submit = request("/api/v1/website-audits/jobs", "10.0.0.11");
+        submit.setMethod("POST");
+        filter.doFilter(submit, new MockHttpServletResponse(), chain);
+        MockHttpServletResponse blocked = new MockHttpServletResponse();
+        MockHttpServletRequest retry = request("/api/v1/website-audits/jobs", "10.0.0.11");
+        retry.setMethod("POST");
+        filter.doFilter(retry, blocked, chain);
+
+        assertThat(chain.hits).isEqualTo(1);
+        assertThat(blocked.getStatus()).isEqualTo(429);
+    }
+
+    @Test
+    void auditJobPollReadsStayUnlimited() throws Exception {
+        RateLimitFilter filter = new RateLimitFilter(new RateLimiter(1, Duration.ofMinutes(1)));
+        CountingChain chain = new CountingChain();
+
+        for (int i = 0; i < 10; i++) {
+            MockHttpServletRequest poll =
+                    new MockHttpServletRequest("GET", "/api/v1/website-audits/jobs/" + i);
+            poll.setRemoteAddr("10.0.0.12");
+            filter.doFilter(poll, new MockHttpServletResponse(), chain);
+        }
+
+        assertThat(chain.hits).isEqualTo(10);
+    }
+
+    @Test
+    void invoiceDocumentWriteRouteIsLimited() throws Exception {
+        RateLimitFilter filter = new RateLimitFilter(new RateLimiter(1, Duration.ofMinutes(1)));
+        CountingChain chain = new CountingChain();
+
+        MockHttpServletRequest upload =
+                request("/api/v1/invoices/123/documents", "10.0.0.13");
+        upload.setMethod("POST");
+        filter.doFilter(upload, new MockHttpServletResponse(), chain);
+        MockHttpServletResponse blocked = new MockHttpServletResponse();
+        MockHttpServletRequest retry = request("/api/v1/invoices/123/documents", "10.0.0.13");
+        retry.setMethod("POST");
+        filter.doFilter(retry, blocked, chain);
+
+        assertThat(chain.hits).isEqualTo(1);
+        assertThat(blocked.getStatus()).isEqualTo(429);
+    }
+
+    @Test
     void concurrentBurstStaysWithinQuota() throws Exception {
         int quota = 20;
         RateLimitFilter filter = new RateLimitFilter(new RateLimiter(quota, Duration.ofMinutes(1)));

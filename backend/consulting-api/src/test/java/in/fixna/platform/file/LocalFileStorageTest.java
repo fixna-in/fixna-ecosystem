@@ -2,10 +2,13 @@ package in.fixna.platform.file;
 
 import java.io.ByteArrayInputStream;
 import java.nio.file.Files;
+import java.time.Duration;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+
+import in.fixna.platform.identity.auth.JwtProperties;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,7 +19,9 @@ class LocalFileStorageTest {
 
     @Test
     void storesAndOpensFile() throws Exception {
-        LocalFileStorage storage = new LocalFileStorage(new FileStorageProperties(tempDir.toString()));
+        LocalFileStorage storage = new LocalFileStorage(
+                new FileStorageProperties(tempDir.toString()),
+                new JwtProperties("test-secret-32bytes-minimum-length!!", Duration.ofMinutes(15), Duration.ofDays(7)));
         UUID tenantId = UUID.randomUUID();
         byte[] content = "hello".getBytes();
 

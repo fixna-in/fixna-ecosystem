@@ -22,6 +22,10 @@ spring:
   flyway:
     enabled: true
     locations: classpath:db/migration
+  servlet:
+    multipart:
+      max-file-size: ${FIXNA_MAX_UPLOAD_SIZE:10MB}
+      max-request-size: ${FIXNA_MAX_UPLOAD_SIZE:10MB}
   jackson:
     serialization:
       write-dates-as-timestamps: false
@@ -65,3 +69,19 @@ fixna:
       per-ip-per-minute: ${FIXNA_RATE_LIMIT_PER_IP_PER_MINUTE:20}
   file-storage:
     base-path: ${FIXNA_FILE_STORAGE_PATH:./data/files}
+
+fixna:
+  website-audit:
+    poll-ms: ${FIXNA_WEBSITE_AUDIT_POLL_MS:3000}
+  invoice:
+    max-pages: ${FIXNA_INVOICE_MAX_PAGES:50}
+    retention-cron: ${FIXNA_INVOICE_RETENTION_CRON:0 30 3 * * *}
+    quotas:
+      monthly-uploads: ${FIXNA_INVOICE_QUOTA_MONTHLY_UPLOADS:100}
+      monthly-extractions: ${FIXNA_INVOICE_QUOTA_MONTHLY_EXTRACTIONS:200}
+    signed-url-ttl-minutes: ${FIXNA_INVOICE_SIGNED_URL_TTL_MINUTES:15}
+  malware-scanner:
+    enabled: ${FIXNA_MALWARE_SCANNER_ENABLED:false}
+  ai:
+    document-processing:
+      allowed-providers: ${FIXNA_AI_DOC_PROCESSING_ALLOWED_PROVIDERS:}

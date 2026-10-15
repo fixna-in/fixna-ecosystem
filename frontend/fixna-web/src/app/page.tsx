@@ -25,28 +25,15 @@ export default function HomePage() {
   return (
     <>
       <section className="hero" aria-labelledby="hero-title">
-        <div className="container hero-grid">
-          <div className="hero-copy">
-            <p className="eyebrow">Technology • Product Engineering • AI</p>
-            <h1 id="hero-title">Build software that solves real business problems.</h1>
-            <p>We design and build practical digital products, modernize legacy systems, and apply AI where it creates meaningful business value.</p>
-            <div className="hero-actions">
-              <Link className="button button-primary" href="/what-we-do">Explore What We Do</Link>
-              <Link className="button button-secondary" href="/products">View Our Products</Link>
-            </div>
-            <p className="hero-trust">Java • Spring Boot • Confluent Kafka • AWS • Azure • AI/GenAI</p>
+        <div className="container hero-copy">
+          <p className="eyebrow">Technology · Product Engineering · AI</p>
+          <h1 id="hero-title">Build software that solves real business problems.</h1>
+          <p>We design and build practical digital products, modernize legacy systems, and apply AI where it creates meaningful business value.</p>
+          <div className="hero-actions">
+            <Link className="button button-primary" href="/what-we-do">Explore What We Do</Link>
+            <Link className="button button-secondary" href="/products">View Our Products</Link>
           </div>
-
-          <div className="hero-visual" aria-label="Fixna system architecture overview">
-            <div className="architecture-card">
-              <div className="architecture-flow">
-                <div className="flow-node"><span className="icon">01</span><div><strong>Business</strong><span>Define the real need</span></div></div>
-                <div className="flow-node"><span className="icon">02</span><div><strong>Architecture</strong><span>Build the right foundation</span></div></div>
-                <div className="flow-node"><span className="icon">03</span><div><strong>Product</strong><span>Deliver working software</span></div></div>
-                <div className="flow-node"><span className="icon">04</span><div><strong>Operate</strong><span>Measure and improve</span></div></div>
-              </div>
-            </div>
-          </div>
+          <p className="hero-trust">Java · Spring Boot · Confluent Kafka · AWS · Azure · AI/GenAI</p>
         </div>
       </section>
 
@@ -131,10 +118,10 @@ export default function HomePage() {
             <h2 id="consulting-title">Architecture decisions that hold up in production.</h2>
             <p>From technical reviews to implementation support, we help teams make better engineering decisions.</p>
           </div>
-          <div className="grid card-grid-4">
-            {consultingExpertise.map((item) => <article className="card" key={item}><h3>{item}</h3></article>)}
-          </div>
-          <div className="cta-actions" style={{ marginTop: "1.5rem" }}>
+          <ul className="tag-cloud" aria-label="Consulting expertise areas">
+            {consultingExpertise.map((item) => <li key={item}>{item}</li>)}
+          </ul>
+          <div className="cta-actions" style={{ marginTop: "2rem" }}>
             <Link className="button button-primary" href="/contact">Discuss a technology challenge</Link>
             <Link className="button button-secondary" href="/consulting">Explore Consulting</Link>
           </div>
@@ -173,7 +160,6 @@ export default function HomePage() {
               ["Enterprise Technology", "Modernization support for complex platforms and teams."],
             ].map(([title, text]) => (
               <article className="industry-card" key={title}>
-                <span className="industry-card__index">{title}</span>
                 <h3>{title}</h3>
                 <p>{text}</p>
               </article>

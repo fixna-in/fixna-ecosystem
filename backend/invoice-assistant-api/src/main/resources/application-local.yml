@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5435/invoice_assistant
+    username: postgres
+    password: postgres
+  flyway:
+    baseline-on-migrate: false
+
+fixna:
+  security:
+    cors:
+      allowed-origins: http://localhost:3004,http://127.0.0.1:3004

@@ -7,9 +7,13 @@ import { useState } from "react";
 import { listClients } from "@/lib/clients-api";
 import {
   addInvoiceLine,
+  applyInvoiceSuggestion,
   cancelInvoice,
   createInvoice,
+  dismissInvoiceSuggestion,
+  generateInvoiceSuggestions,
   getInvoice,
+  listInvoiceSuggestions,
   listInvoices,
   listPayments,
   recordPayment,
@@ -22,12 +26,14 @@ import {
   type PaymentInput,
 } from "@/lib/invoices-api";
 import { listProposals } from "@/lib/proposals-api";
+import { InvoiceDocumentIntake } from "@/components/invoice-document-intake";
 import { ErrorState, LoadingState } from "../providers";
 
 export default function InvoicesPage() {
   const [error, setError] = useState<unknown>(null);
   const [selectedClientId, setSelectedClientId] = useState("");
   const [selectedInvoiceId, setSelectedInvoiceId] = useState("");
+  const [assistUseAi, setAssistUseAi] = useState(false);
 
   const clients = useQuery({ queryKey: ["clients"], queryFn: listClients, retry: false });
   const proposals = useQuery({
@@ -54,6 +60,12 @@ export default function InvoicesPage() {
     enabled: Boolean(selectedInvoiceId),
     retry: false,
   });
+  const invoiceSuggestions = useQuery({
+    queryKey: ["invoice-suggestions", selectedInvoiceId],
+    queryFn: () => listInvoiceSuggestions(selectedInvoiceId),
+    enabled: Boolean(selectedInvoiceId),
+    retry: false,
+  });
 
   const invoiceForm = useForm<InvoiceInput>({
     resolver: zodResolver(InvoiceInputSchema),
@@ -75,6 +87,7 @@ export default function InvoicesPage() {
       invoices.refetch(),
       invoiceDetail.refetch(),
       invoicePayments.refetch(),
+      invoiceSuggestions.refetch(),
     ]);
   }
 
@@ -194,6 +207,14 @@ export default function InvoicesPage() {
           ) : (
             <p className="muted">No line items yet.</p>
           )}
+
+          <InvoiceDocumentIntake
+            invoiceId={selectedInvoice.id}
+            onInvoiceChanged={() => {
+              void invoiceDetail.refetch();
+              void invoices.refetch();
+            }}
+          />
 
           {selectedInvoice.status === "DRAFT" ? (
             <>
@@ -319,6 +340,99 @@ export default function InvoicesPage() {
               </ul>
             </section>
           ) : null}
+
+          <section>
+            <h3>Invoice assistant</h3>
+            <p className="muted">
+              Deterministic checks first — missing lines, recommended due date, overdue follow-up.
+              AI line ideas are advisory only and are never applied automatically.
+            </p>
+            <label>
+              <input
+                type="checkbox"
+                checked={assistUseAi}
+                onChange={(event) => setAssistUseAi(event.target.checked)}
+              />{" "}
+              Include AI line ideas
+            </label>
+            <button
+              type="button"
+              onClick={async () => {
+                setError(null);
+                try {
+                  await generateInvoiceSuggestions(selectedInvoice.id, assistUseAi);
+                  await invoiceSuggestions.refetch();
+                } catch (err) {
+                  setError(err);
+                }
+              }}
+            >
+              Analyze invoice
+            </button>
+            {invoiceSuggestions.isLoading ? <LoadingState label="Loading suggestions" /> : null}
+            {invoiceSuggestions.data?.length ? (
+              <ul className="resource-list">
+                {invoiceSuggestions.data.map((suggestion) => (
+                  <li key={suggestion.id}>
+                    <strong>{suggestion.suggestionType.split("_").join(" ")}</strong>
+                    <p className="muted">Status: {suggestion.status}</p>
+                    {suggestion.payload.hint ? <p>{suggestion.payload.hint}</p> : null}
+                    {suggestion.payload.dueDate ? (
+                      <p className="muted">Suggested due date: {suggestion.payload.dueDate}</p>
+                    ) : null}
+                    {suggestion.payload.daysOverdue ? (
+                      <p className="muted">Days overdue: {suggestion.payload.daysOverdue}</p>
+                    ) : null}
+                    {suggestion.payload.ideas ? (
+                      <ul>
+                        {suggestion.payload.ideas.split("\n").map((idea) => (
+                          <li key={idea}>{idea}</li>
+                        ))}
+                      </ul>
+                    ) : null}
+                    {suggestion.status === "SUGGESTED" &&
+                    suggestion.suggestionType === "DUE_DATE_RECOMMENDED" ? (
+                      <button
+                        type="button"
+                        onClick={async () => {
+                          setError(null);
+                          try {
+                            await applyInvoiceSuggestion(suggestion.id);
+                            await Promise.all([
+                              invoiceSuggestions.refetch(),
+                              invoiceDetail.refetch(),
+                            ]);
+                          } catch (err) {
+                            setError(err);
+                          }
+                        }}
+                      >
+                        Apply due date
+                      </button>
+                    ) : null}
+                    {suggestion.status === "SUGGESTED" ? (
+                      <button
+                        type="button"
+                        onClick={async () => {
+                          setError(null);
+                          try {
+                            await dismissInvoiceSuggestion(suggestion.id);
+                            await invoiceSuggestions.refetch();
+                          } catch (err) {
+                            setError(err);
+                          }
+                        }}
+                      >
+                        Dismiss
+                      </button>
+                    ) : null}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="muted">No suggestions yet. Run the assistant to check this invoice.</p>
+            )}
+          </section>
         </section>
       ) : null}
 
@@ -328,6 +442,7 @@ export default function InvoicesPage() {
       {invoices.error ? <ErrorState error={invoices.error} /> : null}
       {invoiceDetail.error ? <ErrorState error={invoiceDetail.error} /> : null}
       {invoicePayments.error ? <ErrorState error={invoicePayments.error} /> : null}
+      {invoiceSuggestions.error ? <ErrorState error={invoiceSuggestions.error} /> : null}
     </section>
   );
 }

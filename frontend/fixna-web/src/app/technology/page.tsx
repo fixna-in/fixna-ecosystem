@@ -30,6 +30,17 @@ export default function TechnologyPage() {
           </div>
         </div>
       </section>
+
+      <section className="page-section page-section--muted">
+        <div className="container narrow">
+          <h2>Practical choices, not novelty for its own sake.</h2>
+          <p>
+            Fixna prefers mature tools with clear operational models: readable
+            code, observable services, well-understood data stores, and deployment
+            paths that teams can support after launch.
+          </p>
+        </div>
+      </section>
     </>
   );
 }

@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "@/lib/auth-context";
 import { Brand } from "./ui";
+import { ThemeToggle } from "@fixna/design-system";
 import { toApiError } from "@/lib/api-client";
 
 const navigation = [
@@ -28,7 +29,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   if (publicPage) return <>
     <a className="skip-link" href="#main-content">Skip to content</a>
-    <header className="public-header"><Brand /><nav aria-label="Primary"><Link href="/dashboard">Workspace</Link><Link href="/login">Sign in</Link><Link className="header-cta" href="/register">Get started <span aria-hidden="true">↗</span></Link></nav></header>
+    <header className="public-header"><Brand /><nav aria-label="Primary"><Link href="/dashboard">Workspace</Link><Link href="/login">Sign in</Link><Link className="header-cta" href="/register">Get started <span aria-hidden="true">↗</span></Link><ThemeToggle className="theme-toggle" label="Toggle color theme" /></nav></header>
     <main id="main-content" tabIndex={-1} className="public-content">{children}</main>
     <footer className="public-footer"><span>© {new Date().getFullYear()} Fixna · LocalBoost</span><span>Built for local ambition.</span></footer>
   </>;
@@ -51,6 +52,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         catch (err) { setError(toApiError(err).message); }
         finally { setBusy(false); }
       }}>{busy ? "Signing out…" : "Sign out"}</button> : <Link className="button button-secondary" href="/login">Sign in</Link>}
+      <ThemeToggle className="theme-toggle" label="Toggle color theme" />
       {error ? <p role="alert">{error}</p> : null}
     </aside>
     <div className="workspace-body"><header className="workspace-topbar"><div><span className="muted">Workspace</span><span className="breadcrumb-divider">/</span><strong>{current?.label ?? "Overview"}</strong></div><Link className="button button-small" href="/campaigns/new">+ Create campaign</Link></header><main id="main-content" tabIndex={-1} className="page-content">{children}</main><footer className="workspace-footer">Fixna LocalBoost <span>Plan thoughtfully. Grow locally.</span></footer></div>

@@ -1,0 +1,55 @@
+# Invoice Assistant API deployment from fixna-ecosystem monorepo.
+# Frontend: deploy frontend/invoice-assistant-web separately (e.g. Vercel → invoices.fixna.in)
+# NOTE: uploaded PDFs are stored on local disk (FIXNA_FILE_STORAGE_PATH). A Render web
+# service has an ephemeral filesystem — attach a persistent disk before going live.
+
+services:
+  - type: web
+    name: fixna-invoice-assistant-api
+    runtime: docker
+    plan: starter
+    region: oregon
+    dockerfilePath: ./backend/invoice-assistant-api/Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/v1/health/ready
+    buildFilter:
+      paths:
+        - backend/invoice-assistant-api/**
+        - backend/libs/fixna-platform-common/**
+        - pom.xml
+        - render-invoice-assistant.yaml
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: FIXNA_APP_ENV
+        value: prod
+      - key: FIXNA_JWT_SECRET
+        sync: false
+      - key: FIXNA_CORS_ALLOWED_ORIGINS
+        sync: false
+      - key: FIXNA_FILE_STORAGE_PATH
+        value: /var/data/invoice-files
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: fixna-invoice-assistant-db
+          property: connectionString
+      - key: POSTGRES_USER
+        fromDatabase:
+          name: fixna-invoice-assistant-db
+          property: user
+      - key: POSTGRES_PASSWORD
+        fromDatabase:
+          name: fixna-invoice-assistant-db
+          property: password
+      - key: SPRING_FLYWAY_BASELINE_ON_MIGRATE
+        value: true
+      - key: FIXNA_HSTS_ENABLED
+        value: true
+      - key: JAVA_TOOL_OPTIONS
+        value: -XX:+UseContainerSupport -Xms256m -Xmx384m
+
+databases:
+  - name: fixna-invoice-assistant-db
+    databaseName: invoice_assistant
+    plan: basic-256mb
+    region: oregon

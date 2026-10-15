@@ -55,10 +55,9 @@ export default function IndustriesPage() {
           />
           <div className="industry-grid industry-grid--detail">
             {industries.map((industry) => (
-              <article className="industry-card" key={industry.title}>
-                <span className="industry-card__index">{industry.title}</span>
-                <h3>{industry.title}</h3>
-                <p>{industry.description}</p>
+               <article className="industry-card" key={industry.title}>
+                 <h3>{industry.title}</h3>
+                 <p>{industry.description}</p>
                 <div>
                   <strong>Business problem</strong>
                   <p>{industry.problem}</p>

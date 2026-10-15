@@ -1,0 +1,14 @@
+/* Fixna Design System bridge + Tailwind.
+   tokens.css provides the light/dark semantic tokens; tailwind-theme.css maps
+   them onto Tailwind utilities and redirects `dark:` to the theme toggle. */
+@import "@fixna/design-system/tokens.css";
+@import "@fixna/design-system/tailwind-theme.css";
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Theme toggle: dimensions + hover come from
+   @fixna/design-system (tailwind-theme.css). No local re-declaration. */
+

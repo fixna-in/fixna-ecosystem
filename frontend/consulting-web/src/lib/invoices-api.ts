@@ -125,3 +125,37 @@ export async function recordPayment(invoiceId: string, input: PaymentInput): Pro
   const { data } = await apiClient.post(`/invoices/${invoiceId}/payments`, input);
   return PaymentSchema.parse(data);
 }
+
+export const InvoiceSuggestionSchema = z.object({
+  id: z.string(),
+  invoiceId: z.string(),
+  suggestionType: z.string(),
+  status: z.string(),
+  payload: z.record(z.string(), z.string()).optional().default({}),
+  createdAt: z.string(),
+});
+
+export type InvoiceSuggestion = z.infer<typeof InvoiceSuggestionSchema>;
+
+export async function listInvoiceSuggestions(invoiceId: string): Promise<InvoiceSuggestion[]> {
+  const { data } = await apiClient.get(`/invoices/${invoiceId}/assist/suggestions`);
+  return z.array(InvoiceSuggestionSchema).parse(data);
+}
+
+export async function generateInvoiceSuggestions(
+  invoiceId: string,
+  useAi: boolean,
+): Promise<InvoiceSuggestion[]> {
+  const { data } = await apiClient.post(`/invoices/${invoiceId}/assist/suggestions`, { useAi });
+  return z.array(InvoiceSuggestionSchema).parse(data);
+}
+
+export async function applyInvoiceSuggestion(suggestionId: string): Promise<InvoiceSuggestion> {
+  const { data } = await apiClient.post(`/assist/suggestions/${suggestionId}/apply`);
+  return InvoiceSuggestionSchema.parse(data);
+}
+
+export async function dismissInvoiceSuggestion(suggestionId: string): Promise<InvoiceSuggestion> {
+  const { data } = await apiClient.post(`/assist/suggestions/${suggestionId}/dismiss`);
+  return InvoiceSuggestionSchema.parse(data);
+}
