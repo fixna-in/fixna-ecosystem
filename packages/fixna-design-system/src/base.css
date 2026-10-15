@@ -105,6 +105,31 @@ button:disabled { opacity: 0.55; cursor: not-allowed; }
 }
 .button-icon:hover { background: var(--surface-muted); }
 
+/* ---- Theme toggle ------------------------------------------------------- */
+/* Canonical control used by <ThemeToggle /> across ALL Fixna apps. Imported
+   via base.css (plain-CSS apps) and tailwind-theme.css (Tailwind apps) so no
+   product re-declares these dimensions or the hover state. Product layouts may
+   still add sizing/alignment overrides (e.g. .sidebar-footer .theme-toggle).  */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--foreground);
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+.theme-toggle:hover {
+  background: var(--surface-muted);
+  border-color: var(--primary);
+}
+
 /* ---- Cards & surfaces -------------------------------------------------- */
 .card,
 .panel {

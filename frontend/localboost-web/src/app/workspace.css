@@ -1,22 +1,8 @@
 
 .sidebar { overflow-y: auto; }
-/* Shared light/dark toggle control. */
-.theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  flex: 0 0 auto;
-  padding: 0;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: var(--surface);
-  color: var(--foreground);
-  cursor: pointer;
-  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
-}
-.theme-toggle:hover { background: var(--surface-muted); border-color: var(--primary); }
+
+/* Light/dark toggle: dimensions + hover come from @fixna/design-system (base.css).
+   Only the shared layout alignment is declared here. */
 .public-header .theme-toggle { align-self: center; }
 .workspace-body { min-width: 0; display: flex; flex-direction: column; }
 .workspace-topbar { position: sticky; top: 0; z-index: 15; display: flex; align-items: center; justify-content: space-between; gap: 1rem; background: var(--header-background); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); min-height: 78px; padding: 1rem 2.5rem; font-size: 0.78rem; }

@@ -9,21 +9,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Shared light/dark toggle control (mirrors the plain-CSS apps). */
-.theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  flex: 0 0 auto;
-  padding: 0;
-  border: 1px solid var(--border);
-  border-radius: 0.6rem;
-  background: var(--surface);
-  color: var(--foreground);
-  cursor: pointer;
-  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
-}
-.theme-toggle:hover { background: var(--surface-muted); border-color: var(--primary); }
+/* Theme toggle: dimensions + hover come from
+   @fixna/design-system (tailwind-theme.css). No local re-declaration. */
 

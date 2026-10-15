@@ -73,3 +73,29 @@
     font-family: var(--font-sans);
   }
 }
+
+/* ---- Theme toggle ------------------------------------------------------- */
+/* Canonical control used by <ThemeToggle /> across ALL Fixna apps. The
+   plain-CSS variant lives in base.css; this duplicate keeps it available to
+   Tailwind apps (which import tailwind-theme.css, not base.css) so no product
+   re-declares these dimensions or the hover state. Product layouts may still
+   add sizing/alignment overrides. */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--foreground);
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+.theme-toggle:hover {
+  background: var(--surface-muted);
+  border-color: var(--primary);
+}

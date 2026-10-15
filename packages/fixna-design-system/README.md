@@ -12,8 +12,8 @@ Brand: primary dark green `#163e32` · accent lime `#c7ed94`.
 | Path | Purpose |
 |------|---------|
 | `src/tokens.css` | Semantic tokens for **light** (`:root`) and **dark** (`:root[data-theme="dark"]`), plus a `prefers-color-scheme` fallback and backward-compatible aliases (`--text`, `--surface-soft`, `--primary-bright`, `--primary-deep`). |
-| `src/base.css` | Optional token-driven primitives for plain-CSS apps: buttons, cards, inputs, tables, badges, alerts, focus ring, skip-link, skeletons, reduced-motion. |
-| `src/tailwind-theme.css` | Tailwind v4 bridge: maps tokens to utilities (`bg-surface`, `text-foreground`, `bg-primary`, …) and redirects the `dark:` variant to the `[data-theme="dark"]` toggle. |
+| `src/base.css` | Optional token-driven primitives for plain-CSS apps: buttons, cards, inputs, tables, badges, alerts, focus ring, skip-link, **theme toggle**, skeletons, reduced-motion. |
+| `src/tailwind-theme.css` | Tailwind v4 bridge: maps tokens to utilities (`bg-surface`, `text-foreground`, `bg-primary`, …) and redirects the `dark:` variant to the `[data-theme="dark"]` toggle. Also ships the shared `.theme-toggle` control so Tailwind apps don't re-declare it. |
 | `src/theme.ts` | Framework-neutral theme logic (resolve/persist/apply + no-flash `themeInitScript`). |
 | `src/ThemeProvider.tsx` | `ThemeProvider` + `useTheme` — `light | dark | system`, persisted per-origin, follows OS while on "system". |
 | `src/ThemeToggle.tsx` | Accessible icon toggle with dynamic accessible name + tooltip. |
