@@ -76,6 +76,43 @@ export default function Home() {
         </div>
       </div>
 
+      <section className="border-t border-border bg-surface py-12">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-2xl font-semibold text-foreground mb-3">
+            Built for front-desk and operations teams
+          </h2>
+          <p className="text-muted-foreground mb-6 max-w-3xl">
+            Keep the workflows that matter most visible: guest status, bookings,
+            staff coverage, inventory movement, and service follow-up. The
+            interface is designed to stay calm under pressure and quick to scan
+            in both light and dark themes.
+          </p>
+          <div className="grid gap-4 sm:grid-cols-3">
+            <article className="bg-surface-muted border border-border rounded-xl p-5">
+              <h3 className="font-semibold text-foreground mb-2">Bookings</h3>
+              <p className="text-sm text-muted-foreground">
+                Track arrivals, departures, and availability without leaving the
+                daily overview.
+              </p>
+            </article>
+            <article className="bg-surface-muted border border-border rounded-xl p-5">
+              <h3 className="font-semibold text-foreground mb-2">Service</h3>
+              <p className="text-sm text-muted-foreground">
+                Surface guest requests and staff ownership so nothing is lost
+                during shift changes.
+              </p>
+            </article>
+            <article className="bg-surface-muted border border-border rounded-xl p-5">
+              <h3 className="font-semibold text-foreground mb-2">Operations</h3>
+              <p className="text-sm text-muted-foreground">
+                Monitor inventory, schedules, and daily summaries from one
+                consistent workspace.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <footer className="border-t border-border bg-surface py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} Fixna. All rights reserved.</p>

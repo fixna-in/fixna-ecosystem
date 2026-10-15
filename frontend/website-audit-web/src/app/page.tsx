@@ -93,7 +93,10 @@ export default function Dashboard() {
 
       <div className="max-w-5xl mx-auto px-4 py-8 space-y-8">
         <section className="bg-surface border border-border rounded-xl p-6">
-          <h2 className="text-lg font-semibold text-foreground mb-4">Run an audit</h2>
+          <h2 className="text-lg font-semibold text-foreground mb-2">Run an audit</h2>
+          <p className="text-sm text-muted-foreground mb-4">
+            Scan a URL for technical SEO, accessibility, performance, broken links, and content quality. Findings are deterministic where possible, with AI-assisted suggestions only when configured.
+          </p>
           <form onSubmit={onSubmit} className="flex flex-col sm:flex-row gap-3">
             <input
               type="url"

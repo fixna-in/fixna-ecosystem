@@ -42,6 +42,17 @@ export default function ProductsPage() {
           </div>
         </div>
       </section>
+
+      <section className="page-section page-section--muted">
+        <div className="container narrow">
+          <h2>Each product earns its place.</h2>
+          <p>
+            Fixna ships focused products instead of one overloaded platform.
+            Status notes make integration reality explicit before a buyer, reviewer,
+            or teammate has to discover it later.
+          </p>
+        </div>
+      </section>
     </>
   );
 }

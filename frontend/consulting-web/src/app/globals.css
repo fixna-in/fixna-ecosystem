@@ -146,10 +146,8 @@ a:hover { text-decoration-thickness: 2px; }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: #f7faf6;
-  background:
-    radial-gradient(circle at 82% 56%, rgba(199, 237, 148, 0.18), transparent 15rem),
-    var(--surface-hero);
+  color: var(--foreground);
+  background: var(--background);
 }
 .home-intro::before {
   position: absolute;
@@ -157,16 +155,16 @@ a:hover { text-decoration-thickness: 2px; }
   bottom: -12rem;
   width: clamp(20rem, 36vw, 35rem);
   height: clamp(20rem, 36vw, 35rem);
-  border: 1px solid rgb(199 237 148 / 12%);
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
   border-radius: 50%;
-  box-shadow: 0 0 0 3rem rgb(199 237 148 / 4%), 0 0 0 6rem rgb(199 237 148 / 3%);
+  box-shadow: 0 0 0 3rem color-mix(in srgb, var(--accent) 4%, transparent), 0 0 0 6rem color-mix(in srgb, var(--accent) 3%, transparent);
   content: "";
   pointer-events: none;
 }
 .home-intro::after {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(rgba(255 255 255 / 4%) 1px, transparent 1px), linear-gradient(90deg, rgba(255 255 255 / 4%) 1px, transparent 1px);
+  background-image: linear-gradient(color-mix(in srgb, var(--border) 80%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--border) 80%, transparent) 1px, transparent 1px);
   background-size: 42px 42px;
   mask-image: linear-gradient(90deg, transparent, black 20%, black 80%, transparent);
   content: "";
@@ -175,7 +173,7 @@ a:hover { text-decoration-thickness: 2px; }
 .eyebrow { margin: 0 0 1rem; color: var(--primary); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; }
 .home-intro .eyebrow { color: var(--accent); }
 .home-intro h1 { position: relative; z-index: 1; max-width: 760px; margin: 0; font-size: clamp(3rem, 7vw, 6rem); line-height: 0.96; letter-spacing: -0.02em; }
-.home-summary { position: relative; z-index: 1; max-width: 620px; margin: 1.4rem 0 0; color: #cbd5e1; font-size: clamp(1.04rem, 2vw, 1.22rem); }
+.home-summary { position: relative; z-index: 1; max-width: 620px; margin: 1.4rem 0 0; color: var(--muted-foreground); font-size: clamp(1.04rem, 2vw, 1.22rem); }
 .home-actions { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 2.25rem; }
 .home-primary, .home-secondary {
   display: inline-flex;
@@ -190,12 +188,12 @@ a:hover { text-decoration-thickness: 2px; }
   text-decoration: none;
   transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
 }
-.home-primary { background: #c7ed94; color: var(--accent-foreground); box-shadow: 0 8px 22px rgb(199 237 148 / 18%); }
-.home-primary:hover { background: #dcf6af; transform: translateY(-1px); text-decoration: none; }
-.home-secondary { border-color: rgb(255 255 255 / 18%); color: #f7faf6; }
-.home-secondary:hover { background: rgb(255 255 255 / 8%); border-color: rgb(255 255 255 / 24%); text-decoration: none; }
-.home-index { position: absolute; z-index: 1; right: max(7vw, calc((100vw - 1180px) / 2)); bottom: 2rem; display: flex; align-items: center; gap: 1rem; color: #9ca3af; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.09em; }
-.home-index i { width: 1.5rem; height: 1px; background: #4b5563; }
+.home-primary { background: var(--primary); color: var(--primary-foreground); box-shadow: 0 8px 22px color-mix(in srgb, var(--accent) 18%, transparent); }
+.home-primary:hover { background: var(--primary-hover); transform: translateY(-1px); text-decoration: none; }
+.home-secondary { border-color: var(--border); color: var(--foreground); }
+.home-secondary:hover { background: var(--surface-muted); border-color: var(--primary); text-decoration: none; }
+.home-index { position: absolute; z-index: 1; right: max(7vw, calc((100vw - 1180px) / 2)); bottom: 2rem; display: flex; align-items: center; gap: 1rem; color: var(--muted-foreground); font-size: 0.62rem; font-weight: 800; letter-spacing: 0.09em; }
+.home-index i { width: 1.5rem; height: 1px; background: var(--border); }
 .workspace-links { max-width: 1180px; margin: 0 auto; padding: 4rem 1.5rem 5rem; }
 .workspace-heading { display: flex; align-items: end; justify-content: space-between; gap: 1.5rem; margin-bottom: 1.75rem; }
 .workspace-heading .eyebrow { margin-bottom: 0.45rem; color: var(--primary); }
