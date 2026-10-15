@@ -69,8 +69,6 @@ fixna:
       per-ip-per-minute: ${FIXNA_RATE_LIMIT_PER_IP_PER_MINUTE:20}
   file-storage:
     base-path: ${FIXNA_FILE_STORAGE_PATH:./data/files}
-
-fixna:
   website-audit:
     poll-ms: ${FIXNA_WEBSITE_AUDIT_POLL_MS:3000}
   invoice:
