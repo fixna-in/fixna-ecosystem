@@ -92,8 +92,27 @@ function safeLocalStorage(): Storage | undefined {
  *
  * Inject via: <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
  */
-export const themeInitScript = `(function(){try{var p=localStorage.getItem(${JSON.stringify(
-  THEME_STORAGE_KEY,
-)});var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;var r=p==='light'||p==='dark'?p:(d?'dark':'light');var e=document.documentElement;e.setAttribute(${JSON.stringify(
-  THEME_ATTRIBUTE,
+const INLINE_SCRIPT_ESCAPE_MAP: Record<string, string> = {
+  "<": "\\u003C",
+  ">": "\\u003E",
+  "/": "\\u002F",
+  "\\": "\\\\",
+  "\b": "\\b",
+  "\f": "\\f",
+  "\n": "\\n",
+  "\r": "\\r",
+  "\t": "\\t",
+  "\0": "\\0",
+  "\u2028": "\\u2028",
+  "\u2029": "\\u2029",
+};
+
+function escapeForInlineScript(value: string): string {
+  return value.replace(/[<>\/\\\b\f\n\r\t\0\u2028\u2029]/g, (ch) => INLINE_SCRIPT_ESCAPE_MAP[ch] ?? ch);
+}
+
+export const themeInitScript = `(function(){try{var p=localStorage.getItem(${escapeForInlineScript(
+  JSON.stringify(THEME_STORAGE_KEY),
+)});var d=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;var r=p==='light'||p==='dark'?p:(d?'dark':'light');var e=document.documentElement;e.setAttribute(${escapeForInlineScript(
+  JSON.stringify(THEME_ATTRIBUTE),
 )},r);e.style.colorScheme=r;}catch(e){}})();`;
