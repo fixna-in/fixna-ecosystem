@@ -12,7 +12,8 @@
  *   5. Backward-compatible aliases used by existing Fixna CSS
  *
  * Brand:  primary dark green #163e32 · accent lime #c7ed94
- * Palette: neutral backgrounds, clean text — no green tint
+ * Palette: calm neutral backgrounds, dark neutral text — no pure-black
+ * sections, no green-tinted surfaces, lime reserved for small accents.
  * ========================================================================== */
 
 /* ---------- 1. Brand + scale constants (theme-independent) --------------- */
@@ -20,15 +21,15 @@
   --font-sans: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
   --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Code", Menlo, monospace;
 
-  --text-xs: 0.72rem;
-  --text-sm: 0.82rem;
-  --text-base: 0.95rem;
-  --text-lg: 1.08rem;
-  --text-xl: 1.35rem;
-  --text-2xl: clamp(1.6rem, 3vw, 2rem);
-  --text-3xl: clamp(2rem, 5vw, 3.1rem);
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: clamp(1.5rem, 2.5vw, 1.875rem);
+  --text-3xl: clamp(1.875rem, 4vw, 2.5rem);
   --leading-normal: 1.6;
-  --leading-tight: 1.15;
+  --leading-tight: 1.2;
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -39,43 +40,43 @@
   --space-7: 3rem;
 
   --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
   --radius-pill: 999px;
 
-  --container: 1180px;
+  --container: 1140px;
   --container-wide: 1440px;
 
-  --transition: 180ms ease;
+  --transition: 160ms ease;
 }
 
 /* ---------- 2. Light theme (default) ------------------------------------- */
 :root {
   color-scheme: light;
 
-  --background: #ffffff;            /* pure white */
-  --surface-hero: #000000;          /* deep black for hero emphasis */
-  --foreground: #111827;            /* near-black readable text */
-  --surface: #ffffff;               /* cards, panels */
-  --surface-elevated: #ffffff;      /* popovers, dropdowns */
-  --surface-muted: #f4f4f4;         /* table headers, subtle fills */
+  --background: #F8F9F7;        /* calm off-white page */
+  --surface-hero: #F8F9F7;      /* heroes use the page background, never black */
+  --foreground: #17211D;        /* main text */
+  --surface: #ffffff;           /* cards, panels */
+  --surface-elevated: #ffffff;  /* popovers, dropdowns */
+  --surface-muted: #EFF1EE;     /* subtle fills */
 
-  --primary: #163e32;               /* brand dark green — actions */
+  --primary: #163e32;           /* brand dark green — primary actions */
   --primary-foreground: #ffffff;
-  --primary-hover: #0e2b24;
-  --accent: #c7ed94;                /* brand lime — highlights, selection */
+  --primary-hover: #0f2f26;
+  --accent: #c7ed94;            /* brand lime — small accents only */
   --accent-foreground: #14342a;
 
-  --secondary: #f3f3f3;
+  --secondary: #EEF1EE;
   --secondary-foreground: #163e32;
 
-  --muted: #f0f0f0;
-  --muted-foreground: #6b7280;      /* neutral secondary text */
+  --muted: #EFF1EE;
+  --muted-foreground: #59645E;  /* secondary text */
 
-  --border: #e5e7eb;                /* neutral light gray */
+  --border: #E3E6E2;            /* subtle neutral grey */
   --input: #ffffff;
-  --ring: #2563eb;                  /* blue focus ring */
+  --ring: #163e32;              /* focus ring follows the brand green */
   --link: #163e32;
 
   --success: #1f7a3d;        --success-soft: #e3f4e7;
@@ -83,57 +84,57 @@
   --danger: #b42318;         --danger-soft: #fdeceb;
   --info: #1d5fb0;           --info-soft: #e7f0fb;
 
-  --sidebar-background: #ffffff;
-  --sidebar-foreground: #111827;
-  --header-background: rgb(255 255 255 / 90%);
-  --overlay-background: rgb(17 17 17 / 45%);
+  --sidebar-background: #F8F9F7;
+  --sidebar-foreground: #17211D;
+  --header-background: #F8F9F7;
+  --overlay-background: rgb(23 33 29 / 45%);
 
-  --shadow-sm: 0 6px 16px rgb(17 17 17 / 4%);
-  --shadow-md: 0 12px 28px rgb(17 17 17 / 6%);
-  --shadow-lg: 0 20px 52px rgb(17 17 17 / 8%);
+  --shadow-sm: 0 1px 2px rgb(23 33 29 / 4%);
+  --shadow-md: 0 4px 14px rgb(23 33 29 / 6%);
+  --shadow-lg: 0 12px 34px rgb(23 33 29 / 10%);
 }
 
 /* ---------- 3. Dark theme (explicit user choice) ------------------------- */
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  --background: #171a18;            /* soft charcoal — comfortable, not pure black */
-  --surface-hero: #0f1110;          /* slightly deeper than bg for hero emphasis */
-  --foreground: #f3f4f6;            /* clean light gray text */
-  --surface: #1f2421;               /* card surface — visible separation from bg */
-  --surface-elevated: #262c28;      /* elevated popovers/dropdowns */
-  --surface-muted: #2b312d;
+  --background: #202521;        /* soft charcoal — comfortable, not pure black */
+  --surface-hero: #202521;      /* heroes match the page background */
+  --foreground: #F5F6F4;        /* main text */
+  --surface: #272D29;           /* card surface — subtle separation from bg */
+  --surface-elevated: #2E352F;  /* elevated popovers/dropdowns */
+  --surface-muted: #2E352F;
 
-  --primary: #2a7a63;               /* brightened green separates from bg */
+  --primary: #2a7a63;           /* brightened green separates from bg */
   --primary-foreground: #ffffff;
   --primary-hover: #349077;
-  --accent: #c7ed94;                /* lime still pops on dark */
-  --accent-foreground: #000000;
+  --accent: #c7ed94;            /* lime remains a small accent */
+  --accent-foreground: #14342a;
 
-  --secondary: #262c28;
-  --secondary-foreground: #f3f4f6;
+  --secondary: #2E352F;
+  --secondary-foreground: #F5F6F4;
 
-  --muted: #262c28;
-  --muted-foreground: #a1a1aa;      /* neutral gray text */
+  --muted: #2E352F;
+  --muted-foreground: #C3CBC5;  /* secondary text */
 
-  --border: #343b36;
-  --input: #1f2421;
-  --ring: #60a5fa;                  /* light blue focus */
-  --link: #86efac;
+  --border: #383F3A;            /* subtle charcoal-grey */
+  --input: #272D29;
+  --ring: #c7ed94;              /* lime ring stays visible on dark */
+  --link: #9fd6b0;              /* soft green — calmer than full lime */
 
   --success: #5fd39a;        --success-soft: #10281d;
   --warning: #e6b53f;        --warning-soft: #2a2210;
   --danger: #f2897a;         --danger-soft: #2c1614;
   --info: #6aa9f0;           --info-soft: #101f30;
 
-  --sidebar-background: #171a18;
-  --sidebar-foreground: #f3f4f6;
-  --header-background: rgb(23 26 24 / 85%);
+  --sidebar-background: #202521;
+  --sidebar-foreground: #F5F6F4;
+  --header-background: #202521;
   --overlay-background: rgb(15 17 16 / 58%);
 
-  --shadow-sm: 0 6px 16px rgb(0 0 0 / 45%);
-  --shadow-md: 0 12px 30px rgb(0 0 0 / 55%);
-  --shadow-lg: 0 22px 54px rgb(0 0 0 / 60%);
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 40%);
+  --shadow-md: 0 4px 14px rgb(0 0 0 / 45%);
+  --shadow-lg: 0 12px 34px rgb(0 0 0 / 55%);
 }
 
 /* ---------- 4. System preference (only until an explicit choice exists) -- */
@@ -141,43 +142,43 @@
   :root:not([data-theme]) {
     color-scheme: dark;
 
-    --background: #171a18;
-    --surface-hero: #0f1110;
-    --foreground: #f3f4f6;
-    --surface: #1f2421;
-    --surface-elevated: #262c28;
-    --surface-muted: #2b312d;
+    --background: #202521;
+    --surface-hero: #202521;
+    --foreground: #F5F6F4;
+    --surface: #272D29;
+    --surface-elevated: #2E352F;
+    --surface-muted: #2E352F;
 
     --primary: #2a7a63;
     --primary-foreground: #ffffff;
     --primary-hover: #349077;
     --accent: #c7ed94;
-    --accent-foreground: #000000;
+    --accent-foreground: #14342a;
 
-    --secondary: #262c28;
-    --secondary-foreground: #f3f4f6;
+    --secondary: #2E352F;
+    --secondary-foreground: #F5F6F4;
 
-    --muted: #262c28;
-    --muted-foreground: #a1a1aa;
+    --muted: #2E352F;
+    --muted-foreground: #C3CBC5;
 
-    --border: #343b36;
-    --input: #1f2421;
-    --ring: #60a5fa;
-    --link: #86efac;
+    --border: #383F3A;
+    --input: #272D29;
+    --ring: #c7ed94;
+    --link: #9fd6b0;
 
     --success: #5fd39a;        --success-soft: #10281d;
     --warning: #e6b53f;        --warning-soft: #2a2210;
     --danger: #f2897a;         --danger-soft: #2c1614;
     --info: #6aa9f0;           --info-soft: #101f30;
 
-    --sidebar-background: #171a18;
-    --sidebar-foreground: #f3f4f6;
-    --header-background: rgb(23 26 24 / 85%);
+    --sidebar-background: #202521;
+    --sidebar-foreground: #F5F6F4;
+    --header-background: #202521;
     --overlay-background: rgb(15 17 16 / 58%);
 
-    --shadow-sm: 0 6px 16px rgb(0 0 0 / 45%);
-    --shadow-md: 0 12px 30px rgb(0 0 0 / 55%);
-    --shadow-lg: 0 22px 54px rgb(0 0 0 / 60%);
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 40%);
+    --shadow-md: 0 4px 14px rgb(0 0 0 / 45%);
+    --shadow-lg: 0 12px 34px rgb(0 0 0 / 55%);
   }
 }
 

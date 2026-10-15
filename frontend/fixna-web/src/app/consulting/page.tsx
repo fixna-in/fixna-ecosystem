@@ -75,10 +75,10 @@ export default function ConsultingPage() {
       <section className="cta-band" aria-labelledby="consulting-cta-title">
         <div className="container">
           <div className="cta-card">
-            <div>
-              <p className="eyebrow" style={{ color: "#c7ed94" }}>Let’s discuss your requirement</p>
-              <h2 id="consulting-cta-title">Tell us what needs to be built, modernized, or improved.</h2>
-            </div>
+          <div>
+            <p className="eyebrow">Let’s discuss your requirement</p>
+            <h2 id="consulting-cta-title">Tell us what needs to be built, modernized, or improved.</h2>
+          </div>
             <Link className="button button-primary" href="/contact">Discuss Your Requirement</Link>
           </div>
         </div>
