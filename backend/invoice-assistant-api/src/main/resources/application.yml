@@ -7,7 +7,7 @@ spring:
   application:
     name: fixna-invoice-assistant-api
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5435/invoice_assistant}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/invoice_assistant}
     username: ${POSTGRES_USER:postgres}
     password: ${POSTGRES_PASSWORD:change-me}
     hikari:
