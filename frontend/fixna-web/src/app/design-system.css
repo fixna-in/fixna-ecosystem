@@ -130,8 +130,8 @@ main { overflow: clip; }
 .mobile-nav { display: none; padding: 0.8rem 1rem 1.4rem; border-top: 1px solid var(--line); background: var(--surface); }
 .mobile-nav a { display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 0.25rem; border-bottom: 1px solid var(--surface-muted); color: var(--text); text-decoration: none; }
 .mobile-products { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); }
-.mobile-products p { margin: 0 0 0.4rem; color: var(--muted); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.01em; }
-.status { color: var(--muted); font-size: 0.72rem; }
+.mobile-products p { margin: 0 0 0.4rem; color: var(--muted-foreground); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.01em; }
+.status { color: var(--muted-foreground); font-size: 0.72rem; }
 
 /* ---- Buttons -------------------------------------------------------------- */
 .button {
@@ -172,7 +172,7 @@ h1, h2, h3 { margin-top: 0; color: var(--ink); line-height: var(--leading-tight)
 h1 { font-size: clamp(2.1rem, 4vw, 3rem); }
 h2 { font-size: clamp(1.6rem, 2.8vw, 2.2rem); }
 h3 { font-size: 1.125rem; }
-p { margin: 0; color: var(--muted); }
+p { margin: 0; color: var(--muted-foreground); }
 
 /* ---- Hero ------------------------------------------------------------------ */
 .hero {
@@ -221,7 +221,7 @@ p { margin: 0; color: var(--muted); }
 .capability-card { display: grid; gap: 1rem; padding: clamp(1.25rem, 2vw, 1.6rem); border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--surface); box-shadow: none; }
 .capability-card__meta { padding-top: 0.9rem; border-top: 1px solid var(--line); }
 .capability-card__meta strong { display: block; margin-bottom: 0.2rem; color: var(--foreground); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.01em; }
-.capability-card__meta span { color: var(--muted); }
+.capability-card__meta span { color: var(--muted-foreground); }
 /* Soft, neutral index — no lime block. */
 .capability-index {
   display: grid;
@@ -331,13 +331,13 @@ p { margin: 0; color: var(--muted); }
 /* Theme-aware placeholder so helper text is readable against both light and dark inputs. */
 .field input::placeholder,
 .field textarea::placeholder { color: color-mix(in srgb, var(--muted-foreground) 60%, transparent); }
-.form-note { color: var(--muted); font-size: 0.8rem; }
+.form-note { color: var(--muted-foreground); font-size: 0.8rem; }
 .field-error { color: var(--danger); font-size: 0.8rem; font-weight: 600; }
 /* Honeypot field: visually hidden, unreachable by keyboard/assistive tech. */
 .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .contact-success { display: grid; gap: 0.7rem; }
 .contact-success h2 { margin: 0; }
-.muted-text { color: var(--muted); font-size: 0.85rem; }
+.muted-text { color: var(--muted-foreground); font-size: 0.85rem; }
 
 .prose { display: grid; gap: 1.2rem; }
 .prose h2 { font-size: 1.5rem; margin-top: 0.7rem; }

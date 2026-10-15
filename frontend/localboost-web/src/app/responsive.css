@@ -1,10 +1,10 @@
-.landing { max-width: 1240px; margin: auto; padding: 3rem 3rem 1rem; }
-.landing-hero { text-align: center; background: radial-gradient(ellipse at 50% 100%, color-mix(in srgb, var(--accent) 22%, var(--surface)), var(--surface) 75%); border: 1px solid var(--border); border-radius: 24px; padding: 4rem 2rem; }
+.landing { max-width: 1240px; margin: 0 auto; padding: 3rem 1.5rem 1rem; text-align: left; }
+.landing-hero { text-align: left; background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 3rem 2rem; }
 .landing-hero .story-pill { color: var(--primary); border-color: var(--border); }
 .landing-hero h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.08; margin: 1.8rem 0; font-weight: 600; }
 .landing-hero em { font-style: normal; color: var(--primary); }
-.landing-hero > p { max-width: 540px; margin: 1rem auto; color: var(--muted-foreground); }
-.hero-actions { display: flex; gap: 0.8rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap; }
+.landing-hero > p { max-width: 620px; margin: 1rem 0; color: var(--muted-foreground); }
+.hero-actions { display: flex; gap: 0.8rem; justify-content: flex-start; margin: 2rem 0; flex-wrap: wrap; }
 .landing-hero .hero-note { font-size: 0.75rem; }
 .feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.3rem; margin-top: 1.5rem; }
 .feature-card { padding: 1.8rem; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; }

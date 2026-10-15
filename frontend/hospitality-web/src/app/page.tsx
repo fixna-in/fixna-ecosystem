@@ -49,17 +49,20 @@ export default function Home() {
         </div>
       </header>
 
-      <div className="flex-1 flex items-center justify-center px-4">
-        <div className="max-w-3xl text-center">
+      <div className="flex-1 flex items-start px-4 py-16 sm:py-24">
+        <div className="max-w-3xl">
+          <p className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-primary mb-4">
+            Hospitality operations
+          </p>
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground mb-6">
             Hospitality Management Made Simple
           </h1>
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground mb-8 max-w-2xl">
             Streamline your hotel, restaurant, or venue operations with Fixna's
             purpose-built platform. Manage bookings, staff, inventory, and guest
             experiences all in one place.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-start gap-4">
             <Link
               href="/register"
               className="w-full sm:w-auto px-8 py-3 text-base font-medium text-primary-foreground bg-primary rounded-lg hover:bg-primary-hover transition-colors"
