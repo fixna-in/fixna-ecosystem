@@ -232,3 +232,20 @@ th { background: var(--surface-muted); color: var(--muted-foreground); font-weig
 
 input[aria-invalid="true"] { border-color: var(--danger); }
 input[type="checkbox"], input[type="radio"] { accent-color: var(--primary); }
+
+/* ---- aiwithhassan-inspired editorial details ----------------------------- */
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  letter-spacing: -0.025em;
+}
+::selection {
+  background: var(--accent);
+  color: #ffffff;
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+html { scroll-behavior: smooth; }
+section[id], article[id] { scroll-margin-top: 5.5rem; }

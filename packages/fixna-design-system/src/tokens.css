@@ -1,25 +1,17 @@
 /* =============================================================================
  * Fixna Unified Design System — Semantic tokens (single source of truth)
  * -----------------------------------------------------------------------------
- * Consumed by every Fixna web application. Do NOT scatter raw color values in
- * components; reference these semantic tokens instead so a token change
- * propagates to all apps and both themes.
- *
- *   1. Brand + scale constants (theme-independent)
- *   2. Light theme  -> :root
- *   3. Dark  theme  -> :root[data-theme="dark"]
- *   4. System fallback (no explicit choice yet) -> :root:not([data-theme])
- *   5. Backward-compatible aliases used by existing Fixna CSS
- *
- * Brand:  primary dark green #163e32 · accent lime #c7ed94
- * Palette: calm neutral backgrounds, dark neutral text — no pure-black
- * sections, no green-tinted surfaces, lime reserved for small accents.
+ * Theme direction inspired by the clean, modern aiwithhassan.com aesthetic:
+ * warm neutral surfaces, high-contrast ink text, terracotta accent, serif
+ * headlines, sans body, mono micro-labels. Tokens are consumed by every Fixna
+ * web application. Do NOT scatter raw color values in components.
  * ========================================================================== */
 
 /* ---------- 1. Brand + scale constants (theme-independent) --------------- */
 :root {
-  --font-sans: Inter, "Segoe UI", system-ui, -apple-system, sans-serif;
-  --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Code", Menlo, monospace;
+  --font-sans: var(--font-inter, "Inter"), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument-serif, "Instrument Serif"), Georgia, serif;
+  --font-mono: var(--font-ibm-plex-mono, "IBM Plex Mono"), ui-monospace, monospace;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -29,7 +21,8 @@
   --text-2xl: clamp(1.5rem, 2.5vw, 1.875rem);
   --text-3xl: clamp(1.875rem, 4vw, 2.5rem);
   --leading-normal: 1.6;
-  --leading-tight: 1.2;
+  --leading-tight: 1.1;
+  --leading-relaxed: 1.625;
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -39,98 +32,105 @@
   --space-6: 2rem;
   --space-7: 3rem;
 
-  --radius-sm: 8px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --radius-xl: 20px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
   --radius-pill: 999px;
 
   --container: 1140px;
-  --container-wide: 1440px;
+  --container-wide: 1400px;
 
-  --transition: 160ms ease;
+  --transition: 180ms ease;
 }
 
 /* ---------- 2. Light theme (default) ------------------------------------- */
 :root {
   color-scheme: light;
 
-  --background: #F8F9F7;        /* calm off-white page */
-  --surface-hero: #F8F9F7;      /* heroes use the page background, never black */
-  --foreground: #17211D;        /* main text */
-  --surface: #ffffff;           /* cards, panels */
-  --surface-elevated: #ffffff;  /* popovers, dropdowns */
-  --surface-muted: #EFF1EE;     /* subtle fills */
+  --background: #fafaf9;       /* warm off-white page */
+  --surface-hero: #fafaf9;
+  --foreground: #1c1917;       /* warm near-black ink */
+  --surface: #ffffff;          /* cards, panels */
+  --surface-elevated: #ffffff;
+  --surface-muted: #f4f3f1;    /* subtle warm alt surface */
 
-  --primary: #163e32;           /* brand dark green — primary actions */
+  --primary: #b64d2e;          /* terracotta accent doubles as primary action */
   --primary-foreground: #ffffff;
-  --primary-hover: #0f2f26;
-  --accent: #c7ed94;            /* brand lime — small accents only */
-  --accent-foreground: #14342a;
+  --primary-hover: #9a3f24;
+  --accent: #b64d2e;
+  --accent-foreground: #ffffff;
+  --accent-hover: #9a3f24;
+  --accent-soft: #f6e9e3;
 
-  --secondary: #EEF1EE;
-  --secondary-foreground: #163e32;
+  --secondary: #f4f3f1;
+  --secondary-foreground: #1c1917;
 
-  --muted: #EFF1EE;
-  --muted-foreground: #59645E;  /* secondary text */
+  --muted: #f4f3f1;
+  --muted-foreground: #8d8781; /* muted text */
+  --foreground-muted: #57534e; /* secondary body text (ink-light) */
 
-  --border: #E3E6E2;            /* subtle neutral grey */
+  --border: #e7e4e0;
   --input: #ffffff;
-  --ring: #163e32;              /* focus ring follows the brand green */
-  --link: #163e32;
+  --ring: #b64d2e;
+  --link: #b64d2e;
 
-  --success: #1f7a3d;        --success-soft: #e3f4e7;
+  --success: #2f7d4a;        --success-soft: #e7f2eb;
   --warning: #8a5a00;        --warning-soft: #fbf0d5;
   --danger: #b42318;         --danger-soft: #fdeceb;
   --info: #1d5fb0;           --info-soft: #e7f0fb;
 
-  --sidebar-background: #F8F9F7;
-  --sidebar-foreground: #17211D;
-  --header-background: #F8F9F7;
-  --overlay-background: rgb(23 33 29 / 45%);
+  --sidebar-background: #fafaf9;
+  --sidebar-foreground: #1c1917;
+  --header-background: #fafaf9;
+  --overlay-background: rgb(28 25 23 / 45%);
 
-  --shadow-sm: 0 1px 2px rgb(23 33 29 / 4%);
-  --shadow-md: 0 4px 14px rgb(23 33 29 / 6%);
-  --shadow-lg: 0 12px 34px rgb(23 33 29 / 10%);
+  --shadow-sm: 0 1px 2px rgb(28 25 23 / 4%);
+  --shadow-md: 0 4px 14px rgb(28 25 23 / 6%);
+  --shadow-lg: 0 12px 34px rgb(28 25 23 / 10%);
 }
 
 /* ---------- 3. Dark theme (explicit user choice) ------------------------- */
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  --background: #202521;        /* soft charcoal — comfortable, not pure black */
-  --surface-hero: #202521;      /* heroes match the page background */
-  --foreground: #F5F6F4;        /* main text */
-  --surface: #272D29;           /* card surface — subtle separation from bg */
-  --surface-elevated: #2E352F;  /* elevated popovers/dropdowns */
-  --surface-muted: #2E352F;
+  --background: #0c0a09;
+  --surface-hero: #0c0a09;
+  --foreground: #f5f4f2;
+  --surface: #161412;
+  --surface-elevated: #1c1917;
+  --surface-muted: #161412;
 
-  --primary: #2a7a63;           /* brightened green separates from bg */
+  --primary: #e07050;
   --primary-foreground: #ffffff;
-  --primary-hover: #349077;
-  --accent: #c7ed94;            /* lime remains a small accent */
-  --accent-foreground: #14342a;
+  --primary-hover: #eb8663;
+  --accent: #e07050;
+  --accent-foreground: #ffffff;
+  --accent-hover: #eb8663;
+  --accent-soft: #241612;
 
-  --secondary: #2E352F;
-  --secondary-foreground: #F5F6F4;
+  --secondary: #161412;
+  --secondary-foreground: #f5f4f2;
 
-  --muted: #2E352F;
-  --muted-foreground: #C3CBC5;  /* secondary text */
+  --muted: #161412;
+  --muted-foreground: #8a8580;
+  --foreground-muted: #cfccc8;
 
-  --border: #383F3A;            /* subtle charcoal-grey */
-  --input: #272D29;
-  --ring: #c7ed94;              /* lime ring stays visible on dark */
-  --link: #9fd6b0;              /* soft green — calmer than full lime */
+  --border: #262320;
+  --input: #161412;
+  --ring: #e07050;
+  --link: #e07050;
 
   --success: #5fd39a;        --success-soft: #10281d;
   --warning: #e6b53f;        --warning-soft: #2a2210;
   --danger: #f2897a;         --danger-soft: #2c1614;
   --info: #6aa9f0;           --info-soft: #101f30;
 
-  --sidebar-background: #202521;
-  --sidebar-foreground: #F5F6F4;
-  --header-background: #202521;
-  --overlay-background: rgb(15 17 16 / 58%);
+  --sidebar-background: #0c0a09;
+  --sidebar-foreground: #f5f4f2;
+  --header-background: #0c0a09;
+  --overlay-background: rgb(12 10 9 / 58%);
 
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 40%);
   --shadow-md: 0 4px 14px rgb(0 0 0 / 45%);
@@ -142,39 +142,42 @@
   :root:not([data-theme]) {
     color-scheme: dark;
 
-    --background: #202521;
-    --surface-hero: #202521;
-    --foreground: #F5F6F4;
-    --surface: #272D29;
-    --surface-elevated: #2E352F;
-    --surface-muted: #2E352F;
+    --background: #0c0a09;
+    --surface-hero: #0c0a09;
+    --foreground: #f5f4f2;
+    --surface: #161412;
+    --surface-elevated: #1c1917;
+    --surface-muted: #161412;
 
-    --primary: #2a7a63;
+    --primary: #e07050;
     --primary-foreground: #ffffff;
-    --primary-hover: #349077;
-    --accent: #c7ed94;
-    --accent-foreground: #14342a;
+    --primary-hover: #eb8663;
+    --accent: #e07050;
+    --accent-foreground: #ffffff;
+    --accent-hover: #eb8663;
+    --accent-soft: #241612;
 
-    --secondary: #2E352F;
-    --secondary-foreground: #F5F6F4;
+    --secondary: #161412;
+    --secondary-foreground: #f5f4f2;
 
-    --muted: #2E352F;
-    --muted-foreground: #C3CBC5;
+    --muted: #161412;
+    --muted-foreground: #8a8580;
+    --foreground-muted: #cfccc8;
 
-    --border: #383F3A;
-    --input: #272D29;
-    --ring: #c7ed94;
-    --link: #9fd6b0;
+    --border: #262320;
+    --input: #161412;
+    --ring: #e07050;
+    --link: #e07050;
 
     --success: #5fd39a;        --success-soft: #10281d;
     --warning: #e6b53f;        --warning-soft: #2a2210;
     --danger: #f2897a;         --danger-soft: #2c1614;
     --info: #6aa9f0;           --info-soft: #101f30;
 
-    --sidebar-background: #202521;
-    --sidebar-foreground: #F5F6F4;
-    --header-background: #202521;
-    --overlay-background: rgb(15 17 16 / 58%);
+    --sidebar-background: #0c0a09;
+    --sidebar-foreground: #f5f4f2;
+    --header-background: #0c0a09;
+    --overlay-background: rgb(12 10 9 / 58%);
 
     --shadow-sm: 0 1px 2px rgb(0 0 0 / 40%);
     --shadow-md: 0 4px 14px rgb(0 0 0 / 45%);
@@ -182,13 +185,20 @@
   }
 }
 
-/* ---------- 5. Backward-compatible aliases (existing Fixna CSS) ---------- */
-/* Let current plain-CSS apps adopt dark mode with near-zero churn: each alias
-   resolves through the semantic token, so it follows the active theme.       */
+/* ---------- 5. Compatibility aliases (existing Fixna + aiwithhassan style) -- */
 :root {
+  /* Existing aliases */
   --text: var(--foreground);
   --surface-soft: var(--surface-muted);
   --primary-bright: var(--accent);
   --primary-deep: var(--primary-hover);
   --shadow: var(--shadow-lg);
+
+  /* aiwithhassan-inspired aliases */
+  --bg: var(--background);
+  --bg-alt: var(--surface-muted);
+  --ink: var(--foreground);
+  --ink-light: var(--foreground-muted);
+  --accent-hover: var(--primary-hover);
+  --accent-soft: var(--accent-soft);
 }

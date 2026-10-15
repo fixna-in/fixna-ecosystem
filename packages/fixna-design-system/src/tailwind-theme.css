@@ -24,6 +24,12 @@
   --color-surface: var(--surface);
   --color-surface-elevated: var(--surface-elevated);
   --color-surface-muted: var(--surface-muted);
+  --color-bg: var(--background);
+  --color-bg-alt: var(--surface-muted);
+  --color-ink: var(--foreground);
+  --color-ink-light: var(--foreground-muted);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
 
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
@@ -56,7 +62,10 @@
   --color-overlay: var(--overlay-background);
 
   --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
   --font-mono: var(--font-mono);
+
+  --radius-2xl: var(--radius-2xl);
 
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
@@ -98,4 +107,16 @@
 .theme-toggle:hover {
   background: var(--surface-muted);
   border-color: var(--primary);
+}
+
+/* Editorial defaults for Tailwind apps */
+@layer base {
+  h1, h2, h3 {
+    font-family: var(--font-serif);
+    letter-spacing: -0.025em;
+  }
+  ::selection {
+    background: var(--accent);
+    color: #ffffff;
+  }
 }
