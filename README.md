@@ -300,6 +300,85 @@ Create product-specific files before running the apps. Never commit real secrets
 | `NEXT_PUBLIC_API_BASE_URL` | `http://localhost:8081/api` | `https://api.consulting.fixna.in/api` |
 | `NEXT_PUBLIC_APP_ENV` | `local` | `prod` |
 
+#### Website Audit API (`backend/website-audit-api`)
+
+| Variable | Local value | Production value |
+|----------|-------------|------------------|
+| `SPRING_PROFILES_ACTIVE` | `local` | `prod` |
+| `SERVER_PORT` | `8082` | Render `PORT` |
+| `SPRING_DATASOURCE_URL` | `jdbc:postgresql://localhost:5434/website_audit` | Render PostgreSQL connection string |
+| `POSTGRES_USER` | `postgres` | Render PostgreSQL user |
+| `POSTGRES_PASSWORD` | `change-me` | Render PostgreSQL password |
+| `FIXNA_JWT_SECRET` | Long random secret | Render secret, never committed |
+| `FIXNA_CORS_ALLOWED_ORIGINS` | `http://localhost:3003,http://127.0.0.1:3003` | `https://websiteaudit.fixna.in` |
+| `FIXNA_APP_ENV` | `local` | `prod` |
+| `FIXNA_HSTS_ENABLED` | `false` | `true` |
+| `FIXNA_JWT_ACCESS_TTL` | `PT15M` | `PT15M` |
+| `FIXNA_JWT_REFRESH_TTL` | `P7D` | `P7D` |
+| `DB_POOL_MAX` | `10` | `10` |
+| `DB_POOL_MIN` | `2` | `2` |
+| `DB_CONN_TIMEOUT_MS` | `5000` | `5000` |
+
+#### Invoice Assistant API (`backend/invoice-assistant-api`)
+
+| Variable | Local value | Production value |
+|----------|-------------|------------------|
+| `SPRING_PROFILES_ACTIVE` | `local` | `prod` |
+| `SERVER_PORT` | `8083` | Render `PORT` |
+| `SPRING_DATASOURCE_URL` | `jdbc:postgresql://localhost:5435/invoice_assistant` | Render PostgreSQL connection string |
+| `POSTGRES_USER` | `postgres` | Render PostgreSQL user |
+| `POSTGRES_PASSWORD` | `change-me` | Render PostgreSQL password |
+| `FIXNA_JWT_SECRET` | Long random secret | Render secret, never committed |
+| `FIXNA_CORS_ALLOWED_ORIGINS` | `http://localhost:3004,http://127.0.0.1:3004` | `https://invoice.fixna.in` |
+| `FIXNA_APP_ENV` | `local` | `prod` |
+| `FIXNA_HSTS_ENABLED` | `false` | `true` |
+| `FIXNA_FILE_STORAGE_PATH` | `./data/invoice-files` | `/var/data/invoice-files` (with persistent disk) |
+| `FIXNA_JWT_ACCESS_TTL` | `PT15M` | `PT15M` |
+| `FIXNA_JWT_REFRESH_TTL` | `P7D` | `P7D` |
+| `DB_POOL_MAX` | `10` | `10` |
+| `DB_POOL_MIN` | `2` | `2` |
+| `DB_CONN_TIMEOUT_MS` | `5000` | `5000` |
+
+#### Hospitality API (`backend/hospitality-api`)
+
+| Variable | Local value | Production value |
+|----------|-------------|------------------|
+| `SPRING_PROFILES_ACTIVE` | `local` | `prod` |
+| `SERVER_PORT` | `8084` | Render `PORT` |
+| `SPRING_DATASOURCE_URL` | `jdbc:postgresql://localhost:5436/hospitality` | Render PostgreSQL connection string |
+| `POSTGRES_USER` | `postgres` | Render PostgreSQL user |
+| `POSTGRES_PASSWORD` | `change-me` | Render PostgreSQL password |
+| `FIXNA_JWT_SECRET` | Long random secret | Render secret, never committed |
+| `FIXNA_CORS_ALLOWED_ORIGINS` | `http://localhost:3005,http://127.0.0.1:3005` | `https://hospitality.fixna.in` |
+| `FIXNA_APP_ENV` | `local` | `prod` |
+| `FIXNA_HSTS_ENABLED` | `false` | `true` |
+| `FIXNA_JWT_ACCESS_TTL` | `PT15M` | `PT15M` |
+| `FIXNA_JWT_REFRESH_TTL` | `P7D` | `P7D` |
+| `DB_POOL_MAX` | `10` | `10` |
+| `DB_POOL_MIN` | `2` | `2` |
+| `DB_CONN_TIMEOUT_MS` | `5000` | `5000` |
+
+#### Website Audit web (`frontend/website-audit-web`)
+
+| Variable | Local value | Production value |
+|----------|-------------|------------------|
+| `NEXT_PUBLIC_API_BASE_URL` | `http://localhost:8082/api` | `https://api.websiteaudit.fixna.in/api` |
+| `NEXT_PUBLIC_APP_ENV` | `local` | `prod` |
+
+#### Invoice Assistant web (`frontend/invoice-assistant-web`)
+
+| Variable | Local value | Production value |
+|----------|-------------|------------------|
+| `NEXT_PUBLIC_API_BASE_URL` | `http://localhost:8083/api` | `https://api.invoice.fixna.in/api` |
+| `NEXT_PUBLIC_APP_ENV` | `local` | `prod` |
+
+#### Hospitality web (`frontend/hospitality-web`)
+
+| Variable | Local value | Production value |
+|----------|-------------|------------------|
+| `NEXT_PUBLIC_API_BASE_URL` | `http://localhost:8084/api` | `https://api.hospitality.fixna.in/api` |
+| `NEXT_PUBLIC_APP_ENV` | `local` | `prod` |
+
 > The current Consulting API client adds `/v1` automatically. For other clients, the API URL may be configured with `/api/v1` instead.
 
 #### Environment templates
@@ -329,6 +408,15 @@ mvn -f backend/localboost-api/pom.xml spring-boot:run
 
 # Consulting — port 8081, native PostgreSQL localhost:5432/consulting
 SPRING_PROFILES_ACTIVE="local" POSTGRES_USER="postgres" POSTGRES_PASSWORD="admin" mvn -f backend/consulting-api/pom.xml spring-boot:run
+
+# Website Audit — port 8082, native PostgreSQL localhost:5434/website_audit
+SPRING_PROFILES_ACTIVE="local" POSTGRES_USER="postgres" POSTGRES_PASSWORD="admin" mvn -f backend/website-audit-api/pom.xml spring-boot:run
+
+# Invoice Assistant — port 8083, native PostgreSQL localhost:5435/invoice_assistant
+SPRING_PROFILES_ACTIVE="local" POSTGRES_USER="postgres" POSTGRES_PASSWORD="admin" mvn -f backend/invoice-assistant-api/pom.xml spring-boot:run
+
+# Hospitality — port 8084, native PostgreSQL localhost:5436/hospitality
+SPRING_PROFILES_ACTIVE="local" POSTGRES_USER="postgres" POSTGRES_PASSWORD="admin" mvn -f backend/hospitality-api/pom.xml spring-boot:run
 ```
 
 ### 6. Run web apps
@@ -342,11 +430,26 @@ cp frontend/localboost-web/.env.example frontend/localboost-web/.env.local
 # Consulting
 echo NEXT_PUBLIC_API_BASE_URL=http://localhost:8081/api > frontend/consulting-web/.env.local
 echo NEXT_PUBLIC_APP_ENV=local >> frontend/consulting-web/.env.local
+
+# Website Audit
+echo NEXT_PUBLIC_API_BASE_URL=http://localhost:8082/api > frontend/website-audit-web/.env.local
+echo NEXT_PUBLIC_APP_ENV=local >> frontend/website-audit-web/.env.local
+
+# Invoice Assistant
+echo NEXT_PUBLIC_API_BASE_URL=http://localhost:8083/api > frontend/invoice-assistant-web/.env.local
+echo NEXT_PUBLIC_APP_ENV=local >> frontend/invoice-assistant-web/.env.local
+
+# Hospitality
+echo NEXT_PUBLIC_API_BASE_URL=http://localhost:8084/api > frontend/hospitality-web/.env.local
+echo NEXT_PUBLIC_APP_ENV=local >> frontend/hospitality-web/.env.local
 ```
 
 ```bash
-npm --prefix frontend/localboost-web run dev      # http://localhost:3000
-npm --prefix frontend/consulting-web run dev      # http://localhost:3001
+npm --prefix frontend/localboost-web run dev           # http://localhost:3000
+npm --prefix frontend/consulting-web run dev           # http://localhost:3001
+npm --prefix frontend/website-audit-web run dev        # http://localhost:3003
+npm --prefix frontend/invoice-assistant-web run dev    # http://localhost:3004
+npm --prefix frontend/hospitality-web run dev          # http://localhost:3005
 ```
 
 ### Build & test (all products)
@@ -363,15 +466,24 @@ npm run package:all-apis                          # JAR packages
 | `npm run bootstrap:maven` | Install parent POM + platform-common to local `.m2` |
 | `npm run build:localboost` | Production build — LocalBoost web |
 | `npm run build:consulting` | Production build — Consulting web |
+| `npm run build:website-audit` | Production build — Website Audit web |
+| `npm run build:invoice-assistant` | Production build — Invoice Assistant web |
+| `npm run build:hospitality` | Production build — Hospitality web |
 | `npm run test:localboost-api` | LocalBoost API tests |
 | `npm run test:consulting-api` | Consulting API tests |
+| `npm run test:website-audit-api` | Website Audit API tests |
+| `npm run test:invoice-assistant-api` | Invoice Assistant API tests |
+| `npm run test:hospitality-api` | Hospitality API tests |
 
 | Module | API tests |
 |--------|-----------|
 | LocalBoost | 229 |
 | Consulting | 136 |
+| Website Audit | 9 |
+| Invoice Assistant | 15 |
+| Hospitality | TBD |
 | Platform common | 7 |
-| **Total** | **372** |
+| **Total** | **396+** |
 
 ---
 
