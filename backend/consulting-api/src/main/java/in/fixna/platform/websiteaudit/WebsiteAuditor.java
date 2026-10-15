@@ -390,69 +390,6 @@ public class WebsiteAuditor {
                 || page.contentType().toLowerCase(Locale.ROOT).contains("html");
     }
 
-    /** Site score = weighted mean of seed score and mean per-page content score. */
-    static int siteOverall(int seedScore, List<FetchedPage> pages) {
-        List<Integer> pageScores = new ArrayList<>();
-        for (int i = 1; i < pages.size(); i++) {
-            int score = contentScore(pages.get(i));
-            if (score >= 0) {
-                pageScores.add(score);
-            }
-        }
-        if (pageScores.isEmpty()) {
-            return seedScore;
-        }
-        double mean = pageScores.stream().mapToInt(Integer::intValue).average().orElse(seedScore);
-        return (int) Math.round(SEED_WEIGHT * seedScore + SITE_WEIGHT * mean);
-    }
-
-    /** Per-page content score from title/meta/h1/alt; -1 when not scorable. */
-    static int contentScore(FetchedPage page) {
-        if (page.statusCode() < 200 || page.statusCode() >= 300 || !isHtmlPage(page)) {
-            return -1;
-        }
-        String html = page.body();
-        int score = 0;
-        String title = firstGroup(TITLE, html);
-        if (title != null && !title.isBlank()) {
-            score += 25;
-        }
-        Map<String, String> meta = metaAttributes(html);
-        if (meta.containsKey("description") && !meta.get("description").isBlank()) {
-            score += 25;
-        }
-        if (H1.matcher(html).find()) {
-            score += 25;
-        }
-        int total = 0;
-        int withAlt = 0;
-        Matcher imgs = IMG_TAG.matcher(html);
-        while (imgs.find()) {
-            total++;
-            String alt = attr(imgs.group(), "alt");
-            if (alt != null && !alt.isBlank()) {
-                withAlt++;
-            }
-        }
-        score += total == 0 ? 25 : (int) Math.round(withAlt * 25.0 / total);
-        return score;
-    }
-
-    private static int wordCount(String html) {
-        String text = html.replaceAll("(?is)<script[^>]*>.*?</script>", " ")
-                .replaceAll("(?is)<style[^>]*>.*?</style>", " ")
-                .replaceAll("(?s)<[^>]+>", " ");
-        if (text.isBlank()) {
-            return 0;
-        }
-        return text.trim().split("\\s+").length;
-    }
-
-    private static boolean isHtmlPage(FetchedPage page) {
-        return page.contentType() == null
-                || page.contentType().toLowerCase(Locale.ROOT).contains("html");
-    }
-
     static String attr(String tag, String name) {
         Pattern pattern = Pattern.compile(
                 "(?i)(?:^|\\s)" + Pattern.quote(name) + "\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\s>]+))");
