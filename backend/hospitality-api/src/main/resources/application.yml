@@ -7,7 +7,7 @@ spring:
   application:
     name: fixna-hospitality-api
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5434/hospitality}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/hospitality}
     username: ${POSTGRES_USER:postgres}
     password: ${POSTGRES_PASSWORD:change-me}
     hikari:

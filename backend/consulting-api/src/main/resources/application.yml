@@ -7,7 +7,7 @@ spring:
   application:
     name: fixna-consulting-api
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5433/consulting}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/consulting}
     username: ${POSTGRES_USER:postgres}
     password: ${POSTGRES_PASSWORD:change-me}
     hikari:

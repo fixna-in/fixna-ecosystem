@@ -7,7 +7,7 @@ spring:
   application:
     name: fixna-website-audit-api
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5434/website_audit}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/website_audit}
     username: ${POSTGRES_USER:postgres}
     password: ${POSTGRES_PASSWORD:change-me}
     hikari:
