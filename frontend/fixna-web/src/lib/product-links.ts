@@ -3,5 +3,7 @@ export { siteUrl } from "./site-url";
 export const productLinks = {
   localboost: "https://localboost.fixna.in/",
   consulting: "https://consulting.fixna.in/",
-  hospitality: null,
+  "website-audit": "https://websiteaudit.fixna.in/",
+  "invoice-assistant": "https://invoice.fixna.in/",
+  hospitality: "https://hospitality.fixna.in/",
 } as const;

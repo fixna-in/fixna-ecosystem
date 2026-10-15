@@ -3,17 +3,17 @@
 Multi-product monorepo: independently deployable products sharing a controlled Java platform library.
 
 ```text
-                         FIXNA ECOSYSTEM
-                               |
-             +-----------------+------------------+
-             |                 |                  |
-        LocalBoost         Consulting        Hospitality
-        Web + API          Web + API          (future)
-             |                 |
-        DB: fixna          DB: consulting
-             \________________|_________________/
-                               |
-              backend/libs/fixna-platform-common
+                          FIXNA ECOSYSTEM
+                                |
+        +-------+--------+--------+--------+--------+
+        |       |        |        |        |        |
+   LocalBoost  Consulting  Website Audit  Invoice Assistant  Hospitality
+   Web + API   Web + API   Web + API      Web + API         Web + API
+        |       |        |        |        |        |
+   DB: fixna   DB: consulting  DB: website_audit  DB: invoice_assistant  DB: hospitality
+        \________________|_________________|________________|________________/
+                                |
+               backend/libs/fixna-platform-common
 ```
 
 ## Principles
@@ -21,7 +21,7 @@ Multi-product monorepo: independently deployable products sharing a controlled J
 | Principle | Implementation |
 |-----------|----------------|
 | Modular monolith per product | One Spring Boot API + one Next.js app per product |
-| No product coupling | LocalBoost and Consulting never import each other's domain code |
+| No product coupling | Products never import each other's domain code |
 | Shared infra only | `fixna-platform-common` holds web/security/logging — not business domains |
 | Separate databases | Each product owns Flyway migrations and PostgreSQL database |
 | Independent deploy | `render-{product}.yaml` + Vercel per frontend |

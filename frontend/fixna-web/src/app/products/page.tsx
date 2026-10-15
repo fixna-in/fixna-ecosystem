@@ -4,7 +4,7 @@ import { canonicalFor } from "@/lib/canonical";
 
 export const metadata = {
   title: "Products",
-  description: "Explore Fixna LocalBoost, Fixna Consulting, and the upcoming Fixna Hospitality platform.",
+  description: "Explore Fixna LocalBoost, Fixna Consulting, Fixna Website Audit, Fixna Invoice Assistant, and Fixna Hospitality.",
   ...canonicalFor("/products"),
 };
 

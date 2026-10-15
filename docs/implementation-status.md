@@ -1,4 +1,4 @@
-# Implementation Status — Fixna Ecosystem (2026-10-09)
+# Implementation Status — Fixna Ecosystem (2026-10-15)
 
 ## Consulting — MVP v1.0.0 (Phases 1-10, per README)
 
@@ -46,10 +46,9 @@ product-status notes.
 NEW 2026-10-09: Vitest harness (21 tests), typecheck script, CI job,
 Google-Sheets contact flow (needs owner env setup — see change log).
 
-## Hospitality — placeholder only (dirs + README-level). Keep marked
-planned/coming-soon everywhere. Out of scope for code changes.
+NEW 2026-10-15: Products page updated with all 5 live products (LocalBoost, Consulting, Website Audit, Invoice Assistant, Hospitality).
 
-## Website Audit (standalone product) — API + Web, builds & tests green
+## Website Audit — LIVE at https://websiteaudit.fixna.in
 
 Separate deploy unit per the Website Audit & Invoice Assistant blueprint.
 API `backend/website-audit-api` (Spring Boot 3.5.6, port 8082, DB `website_audit`,
@@ -70,7 +69,7 @@ imports (WebsiteFetcher/WebsiteAuditor/WebsiteCrawler), malformed HTML-escape
 text block in WebsiteAuditReportService, duplicate RateLimitFilter constructor,
 and a missing `JwtService.properties()` accessor.
 
-## Invoice Assistant (standalone product) — API + Web, builds & tests green
+## Invoice Assistant — LIVE at https://invoice.fixna.in
 
 Separate deploy unit. API `backend/invoice-assistant-api` (Spring Boot 3.5.6,
 port 8083, DB `invoice_assistant`, Flyway V1–V6) + Web
@@ -101,9 +100,21 @@ Known limitation (owner action): Render web filesystem is ephemeral — attach a
 persistent disk and set `FIXNA_FILE_STORAGE_PATH=/var/data/invoice-files` before
 live uploads, or move to object storage behind `FileStorage`.
 
+## Hospitality — LIVE at https://hospitality.fixna.in
+
+Separate deploy unit. API `backend/hospitality-api` (Spring Boot 3.5.6,
+port 8084, DB `hospitality`, Flyway) + Web
+`frontend/hospitality-web` (Next.js 16, port 3005). Deploy:
+`render-hospitality.yaml` + `backend/hospitality-api/Dockerfile`
+(+ Vercel). Docs: `docs/products/hospitality.md`,
+`docs/deployment/hospitality.md`.
+
+Real and working: JWT auth + refresh + `/me`, tenant/RBAC isolation,
+operations, guest experiences, service workflows, business configuration.
+
 ## Shared platform (fixna-platform-common 1.0.0)
 
 Request IDs, CORS, security headers, global error envelope, password config.
-7 tests. Used by both APIs via Maven (bootstrap:maven installs to .m2).
+7 tests. Used by all APIs via Maven (bootstrap:maven installs to .m2).
 Note: rate limiting lives per-service (localboost-api original,
 consulting-api copy); promote to this lib when a third consumer appears.

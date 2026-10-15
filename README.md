@@ -34,18 +34,25 @@ fixna-ecosystem/
 │   ├── libs/fixna-platform-common/   # Shared Java infrastructure
 │   ├── localboost-api/               # LocalBoost Spring Boot API
 │   ├── consulting-api/               # Consulting MVP v1.0.0
-│   └── hospitality-api/              # placeholder
+│   ├── website-audit-api/            # Website Audit Spring Boot API
+│   ├── invoice-assistant-api/        # Invoice Assistant Spring Boot API
+│   └── hospitality-api/              # Hospitality Spring Boot API
 ├── frontend/
 │   ├── localboost-web/               # Next.js admin app
 │   ├── consulting-web/               # Next.js admin + portal + public site
-│   └── hospitality-web/              # placeholder
+│   ├── website-audit-web/            # Next.js audit dashboard
+│   ├── invoice-assistant-web/        # Next.js invoice review app
+│   └── hospitality-web/              # Next.js hospitality platform
 ├── docs/                             # Architecture, deployment, requirements
 ├── scripts/                          # Dev lifecycle scripts
 ├── tools/                            # SQL, demo utilities
 ├── ai/                               # AI prompts/schemas (LocalBoost)
 ├── docker-compose.yml                # Local Postgres + Redis + Mailhog
 ├── render-localboost.yaml            # Render blueprint — LocalBoost API
-└── render-consulting.yaml            # Render blueprint — Consulting API
+├── render-consulting.yaml            # Render blueprint — Consulting API
+├── render-website-audit.yaml         # Render blueprint — Website Audit API
+├── render-invoice-assistant.yaml     # Render blueprint — Invoice Assistant API
+└── render-hospitality.yaml           # Render blueprint — Hospitality API
 ```
 
 Layer pattern for each product: `backend/{product}-api` + `frontend/{product}-web` + `render-{product}.yaml`. See [`docs/scaffolding.md`](docs/scaffolding.md).
@@ -58,7 +65,9 @@ Layer pattern for each product: `backend/{product}-api` + `frontend/{product}-we
 |---------|--------|---------|----------|--------|
 | **LocalBoost** | Campaigns, businesses, leads, analytics | Spring Boot 3.5.6, Java 21, Flyway, Redis | Next.js 16, React 19, TanStack Query | ✅ In monorepo; prod still on standalone repo until cutover |
 | **Consulting** | CRM, projects, meetings, proposals, invoicing, portal, public site, AI | Spring Boot 3.5.6, Java 21, Flyway | Next.js 16, React 19, TanStack Query | ✅ MVP v1.0.0 (Phases 1–10) |
-| **Hospitality** | _(future)_ | placeholder | placeholder | — |
+| **Website Audit** | Technical SEO, performance, accessibility, security | Spring Boot 3.5.6, Java 21, Flyway | Next.js 16, React 19, TanStack Query | ✅ LIVE — https://websiteaudit.fixna.in |
+| **Invoice Assistant** | Invoice/receipt extraction, review, export | Spring Boot 3.5.6, Java 21, Flyway | Next.js 16, React 19, TanStack Query | ✅ LIVE — https://invoice.fixna.in |
+| **Hospitality** | Hotel & hospitality operations | Spring Boot 3.5.6, Java 21, Flyway | Next.js 16, React 19, TanStack Query | ✅ LIVE — https://hospitality.fixna.in |
 
 ### Backend stack (all APIs)
 
@@ -82,6 +91,9 @@ Layer pattern for each product: `backend/{product}-api` + `frontend/{product}-we
 |---------|----------|----------|--------|
 | **LocalBoost** | https://localboost.fixna.in | https://api.localbost.fixna.in/api | https://api.localbost.fixna.in/api/v1/health |
 | **Consulting** | https://consulting.fixna.in _(planned)_ | https://api.consulting.fixna.in/api _(planned)_ | `/api/v1/health/ready` |
+| **Website Audit** | https://websiteaudit.fixna.in | https://api.websiteaudit.fixna.in/api | `/api/v1/health` |
+| **Invoice Assistant** | https://invoice.fixna.in | https://api.invoice.fixna.in/api | `/api/v1/health` |
+| **Hospitality** | https://hospitality.fixna.in | https://api.hospitality.fixna.in/api | `/api/v1/health` |
 
 LocalBoost production currently runs from the standalone `fixna-localboost` repo; ecosystem copy is ready for cutover.
 
@@ -95,6 +107,12 @@ Configure the following DNS records in the domain provider:
 | LocalBoost API | `api.localbost.fixna.in` | Render web service hostname | `CNAME` |
 | Consulting web | `consulting.fixna.in` | Vercel or frontend deployment hostname | `CNAME` |
 | Consulting API | `api.consulting.fixna.in` | Render web service hostname | `CNAME` |
+| Website Audit web | `websiteaudit.fixna.in` | Vercel or frontend deployment hostname | `CNAME` |
+| Website Audit API | `api.websiteaudit.fixna.in` | Render web service hostname | `CNAME` |
+| Invoice Assistant web | `invoice.fixna.in` | Vercel or frontend deployment hostname | `CNAME` |
+| Invoice Assistant API | `api.invoice.fixna.in` | Render web service hostname | `CNAME` |
+| Hospitality web | `hospitality.fixna.in` | Vercel or frontend deployment hostname | `CNAME` |
+| Hospitality API | `api.hospitality.fixna.in` | Render web service hostname | `CNAME` |
 
 The target for each `CNAME` is the hostname provided by the deployment platform, for example `fixna-localboost-api.onrender.com` or `fixna-consulting-api.onrender.com`. Do not use an IP address as the target.
 
@@ -141,6 +159,9 @@ The readiness endpoints return a JSON body such as `{"status":"READY","service":
 |---------|----------|----------|------------|
 | **LocalBoost** | http://localhost:3000 | http://localhost:8080/api | `localboost` @ localhost:**5432** |
 | **Consulting** | http://localhost:3001 | http://localhost:8081/api | `consulting` @ localhost:**5432** |
+| **Website Audit** | http://localhost:3003 | http://localhost:8082/api | `website_audit` @ localhost:**5434** |
+| **Invoice Assistant** | http://localhost:3004 | http://localhost:8083/api | `invoice_assistant` @ localhost:**5435** |
+| **Hospitality** | http://localhost:3005 | http://localhost:8084/api | `hospitality` @ localhost:**5436** |
 
 **Optional containerized infrastructure** (from `docker compose up -d`):
 
@@ -358,19 +379,22 @@ npm run package:all-apis                          # JAR packages
 
 Each product ships independently.
 
-| Layer | LocalBoost | Consulting |
-|-------|------------|------------|
-| **API** | Render — [`render-localboost.yaml`](render-localboost.yaml) | Render — [`render-consulting.yaml`](render-consulting.yaml) |
-| **Web** | Vercel — root `frontend/localboost-web` | Vercel — root `frontend/consulting-web` |
-| **Database** | Render Postgres or Neon (`fixna`) | Render Postgres (`consulting`) |
-| **Region** | Singapore | Oregon |
+| Layer | LocalBoost | Consulting | Website Audit | Invoice Assistant | Hospitality |
+|-------|------------|------------|---------------|-------------------|-------------|
+| **API** | Render — [`render-localboost.yaml`](render-localboost.yaml) | Render — [`render-consulting.yaml`](render-consulting.yaml) | Render — [`render-website-audit.yaml`](render-website-audit.yaml) | Render — [`render-invoice-assistant.yaml`](render-invoice-assistant.yaml) | Render — [`render-hospitality.yaml`](render-hospitality.yaml) |
+| **Web** | Vercel — root `frontend/localboost-web` | Vercel — root `frontend/consulting-web` | Vercel — root `frontend/website-audit-web` | Vercel — root `frontend/invoice-assistant-web` | Vercel — root `frontend/hospitality-web` |
+| **Database** | Render Postgres or Neon (`fixna`) | Render Postgres (`consulting`) | Render Postgres (`website_audit`) | Render Postgres (`invoice_assistant`) | Render Postgres (`hospitality`) |
+| **Region** | Singapore | Oregon | Singapore | Singapore | Singapore |
 
 ### API deploy (Docker)
 
 ```bash
-# Both use monorepo context (includes fixna-platform-common)
+# All use monorepo context (includes fixna-platform-common)
 docker build -f backend/localboost-api/Dockerfile -t fixna-localboost-api .
 docker build -f backend/consulting-api/Dockerfile -t fixna-consulting-api .
+docker build -f backend/website-audit-api/Dockerfile -t fixna-website-audit-api .
+docker build -f backend/invoice-assistant-api/Dockerfile -t fixna-invoice-assistant-api .
+docker build -f backend/hospitality-api/Dockerfile -t fixna-hospitality-api .
 ```
 
 Required production env vars: `SPRING_PROFILES_ACTIVE=prod`, `FIXNA_JWT_SECRET`, `FIXNA_CORS_ALLOWED_ORIGINS`, `SPRING_DATASOURCE_URL`, `POSTGRES_USER`, `POSTGRES_PASSWORD`.
@@ -381,8 +405,11 @@ Required production env vars: `SPRING_PROFILES_ACTIVE=prod`, `FIXNA_JWT_SECRET`,
 |---------|----------------|----------------------------|
 | LocalBoost | `frontend/localboost-web` | `https://api.fixna.in/api` |
 | Consulting | `frontend/consulting-web` | `https://api.consulting.fixna.in/api` |
+| Website Audit | `frontend/website-audit-web` | `https://api.websiteaudit.fixna.in/api` |
+| Invoice Assistant | `frontend/invoice-assistant-web` | `https://api.invoice.fixna.in/api` |
+| Hospitality | `frontend/hospitality-web` | `https://api.hospitality.fixna.in/api` |
 
-Full checklists: [`docs/deployment/localboost.md`](docs/deployment/localboost.md) · [`docs/deployment/consulting.md`](docs/deployment/consulting.md)
+Full checklists: [`docs/deployment/localboost.md`](docs/deployment/localboost.md) · [`docs/deployment/consulting.md`](docs/deployment/consulting.md) · [`docs/deployment/website-audit.md`](docs/deployment/website-audit.md) · [`docs/deployment/invoice-assistant.md`](docs/deployment/invoice-assistant.md) · [`docs/deployment/hospitality.md`](docs/deployment/hospitality.md)
 
 ---
 

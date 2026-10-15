@@ -6,7 +6,29 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-### Added â€” Website Audit async jobs & Invoice document intake (Consulting)
+### Added — Website Audit, Invoice Assistant, Hospitality go LIVE (production)
+
+- **Website Audit** is now live at https://websiteaudit.fixna.in
+  - Independent product: `backend/website-audit-api` + `frontend/website-audit-web`
+  - Automated technical/on-page SEO audit with evidence-based findings
+  - Bounded crawl with SSRF/DNS-rebinding defenses, async jobs, HTML reports, AI fix suggestions
+  - Flyway migrations V1–V3, PostgreSQL `website_audit` on port 5434
+
+- **Invoice Assistant** is now live at https://invoice.fixna.in
+  - Independent product: `backend/invoice-assistant-api` + `frontend/invoice-assistant-web`
+  - Private PDF invoice/receipt intake, offline OCR, field-level confidence, review workflow, CSV/JSON export
+  - Flyway migrations V1–V6, PostgreSQL `invoice_assistant` on port 5435
+
+- **Hospitality** is now live at https://hospitality.fixna.in
+  - Independent product: `backend/hospitality-api` + `frontend/hospitality-web`
+  - Configurable platform for hotel/hospitality operations
+  - Flyway migrations, PostgreSQL `hospitality` on port 5436
+
+- Updated main Fixna website (`frontend/fixna-web`) products page with all 5 products
+- Updated all documentation: README.md, AGENTS.md, product docs, architecture docs, deployment docs
+- Added Render blueprints and Vercel configurations for all three new products
+
+### Added — Website Audit async jobs & Invoice document intake (Consulting)
 
 - **Website Audit jobs (ADR-009):** `POST /api/v1/website-audits/jobs` (202) â†’ lease-claimed background worker with startup + periodic crash recovery, attempt  cap (3), and bounded crawl (â‰¤25 pages, depth â‰¤2, 60 s budget). Endpoints `GET /website-audits/jobs`, `GET /website-audits/jobs/{id}`, `POST /website-audits/jobs/{id}/cancel`, plus per-page rows in `website_audit_pages`
 - **Website Audit HTML report:** `GET /api/v1/website-audits/{id}/report` â€” self-contained, CSP-locked (`default-src 'none'`), HTML-escaped report; downloadable from the audit detail page

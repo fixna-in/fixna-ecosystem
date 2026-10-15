@@ -7,6 +7,13 @@ Two independent deploy units + a dedicated database.
 | API | `backend/website-audit-api` (Dockerfile) | Render (`render-website-audit.yaml`) |
 | Web | `frontend/website-audit-web` | Vercel (root `frontend/website-audit-web`) |
 
+## Production URLs
+
+| Surface | URL |
+|---------|-----|
+| Web | https://websiteaudit.fixna.in |
+| API | https://api.websiteaudit.fixna.in/api |
+
 ## Local run
 
 ```bash
@@ -24,19 +31,19 @@ Blueprint: `render-website-audit.yaml`. Creates web service
 (database `website_audit`). Set these env vars (mark as secret):
 
 - `FIXNA_JWT_SECRET` — ≥32 bytes, unique to this product.
-- `FIXNA_CORS_ALLOWED_ORIGINS` — the web origin, e.g. `https://audit.fixna.in`.
+- `FIXNA_CORS_ALLOWED_ORIGINS` — the web origin, e.g. `https://websiteaudit.fixna.in`.
 
 `SPRING_DATASOURCE_URL`, `POSTGRES_USER`, `POSTGRES_PASSWORD` are wired from the
-managed DB. `FIXNA_HSTS_ENABLED=true` in prod. Health check `/api/v1/health/ready`.
+managed DB. `FIXNA_HSTS_ENABLED=true` in prod. Health check `/api/v1/health`.
 
 ## Web — Vercel
 
 - Root directory: `frontend/website-audit-web`, framework preset **Next.js**.
 - Env: `NEXT_PUBLIC_API_BASE_URL=https://<api-host>/api`, `NEXT_PUBLIC_APP_ENV=production`.
-- Target domain (verify DNS before use): `audit.fixna.in`.
+- Target domain (verify DNS before use): `websiteaudit.fixna.in`.
 
 ## Verify
 
-- `GET /api/v1/health/ready` → 200 `{status: UP}`.
+- `GET /api/v1/health` → 200 `{status: UP}`.
 - Register → login → submit an audit job → poll → open report.
 - Confirm no secrets in logs and CORS rejects other origins.

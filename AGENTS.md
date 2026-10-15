@@ -8,7 +8,9 @@ This monorepo hosts **multiple independent products**. Each product deploys sepa
 |---------|-----|-----|-------------|--------------|
 | **LocalBoost** | `backend/localboost-api` | `frontend/localboost-web` | `.cursor/products/localboost/` | `docs/products/localboost/requirements/` |
 | **Consulting** | `backend/consulting-api` | `frontend/consulting-web` | `.cursor/products/consulting/` | `docs/implementation/` |
-| **Hospitality** | _(future)_ | _(future)_ | — | — |
+| **Website Audit** | `backend/website-audit-api` | `frontend/website-audit-web` | `.cursor/products/website-audit/` | `docs/specs/website-audit-*.md` |
+| **Invoice Assistant** | `backend/invoice-assistant-api` | `frontend/invoice-assistant-web` | `.cursor/products/invoice-assistant/` | `docs/specs/invoice-assistant-*.md` |
+| **Hospitality** | `backend/hospitality-api` | `frontend/hospitality-web` | `.cursor/products/hospitality/` | `docs/specs/` |
 
 ## Before every change
 
@@ -39,13 +41,16 @@ This monorepo hosts **multiple independent products**. Each product deploys sepa
 |---------|------------|------|
 | Consulting | `backend/consulting-api/src/main/resources/db/migration/` | `backend/consulting-api/src/main/resources/db/README.md` |
 | LocalBoost | `backend/localboost-api/src/main/resources/db/migration/` | `backend/localboost-api/src/main/resources/db/README.md` |
+| Website Audit | `backend/website-audit-api/src/main/resources/db/migration/` | `backend/website-audit-api/src/main/resources/db/README.md` |
+| Invoice Assistant | `backend/invoice-assistant-api/src/main/resources/db/migration/` | `backend/invoice-assistant-api/src/main/resources/db/README.md` |
+| Hospitality | `backend/hospitality-api/src/main/resources/db/migration/` | `backend/hospitality-api/src/main/resources/db/README.md` |
 
 Index: [`docs/database/README.md`](docs/database/README.md)
 
 ## Local development
 
 ```bash
-docker compose up -d                    # Postgres (both products) + Redis + Mailhog
+docker compose up -d                    # Postgres (all products) + Redis + Mailhog
 npm run test:all-apis                   # All API tests
 npm run build:all                       # All web production builds
 ```
