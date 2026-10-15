@@ -41,10 +41,11 @@ public class LocalFileStorage implements FileStorage {
     @Override
     public StoredFile store(UUID tenantId, String originalFilename, InputStream content, long sizeBytes) {
         try {
-            Path tenantDir = basePath.resolve(tenantId.toString());
+            Path tenantDir = tenantDirectory(tenantId);
             Files.createDirectories(tenantDir);
             String storageKey = UUID.randomUUID() + "-" + sanitize(originalFilename);
-            Path target = tenantDir.resolve(storageKey);
+            validateStorageKey(storageKey);
+            Path target = resolveTenantFile(tenantDir, storageKey);
             Files.copy(content, target, StandardCopyOption.REPLACE_EXISTING);
             return new StoredFile(storageKey, originalFilename, sizeBytes);
         } catch (IOException ex) {
@@ -55,10 +56,8 @@ public class LocalFileStorage implements FileStorage {
     @Override
     public InputStream open(UUID tenantId, String storageKey) {
         try {
-            Path file = basePath.resolve(tenantId.toString()).resolve(storageKey).normalize();
-            if (!file.startsWith(basePath)) {
-                throw new FixnaException("FORBIDDEN", HttpStatus.FORBIDDEN, "Invalid storage key");
-            }
+            Path tenantDir = tenantDirectory(tenantId);
+            Path file = resolveTenantFile(tenantDir, storageKey);
             if (!Files.exists(file)) {
                 throw new FixnaException("NOT_FOUND", HttpStatus.NOT_FOUND, "File not found");
             }
@@ -71,10 +70,9 @@ public class LocalFileStorage implements FileStorage {
     @Override
     public void delete(UUID tenantId, String storageKey) {
         try {
-            Path file = basePath.resolve(tenantId.toString()).resolve(storageKey).normalize();
-            if (file.startsWith(basePath)) {
-                Files.deleteIfExists(file);
-            }
+            Path tenantDir = tenantDirectory(tenantId);
+            Path file = resolveTenantFile(tenantDir, storageKey);
+            Files.deleteIfExists(file);
         } catch (IOException ex) {
             throw new FixnaException("FILE_DELETE_FAILED", HttpStatus.INTERNAL_SERVER_ERROR, "Unable to delete file", ex);
         }
@@ -102,5 +100,27 @@ public class LocalFileStorage implements FileStorage {
             return "upload";
         }
         return filename.replaceAll("[^a-zA-Z0-9._-]", "_");
+    }
+
+    private Path tenantDirectory(UUID tenantId) {
+        return basePath.resolve(tenantId.toString()).toAbsolutePath().normalize();
+    }
+
+    private Path resolveTenantFile(Path tenantDir, String storageKey) {
+        validateStorageKey(storageKey);
+        Path file = tenantDir.resolve(storageKey).toAbsolutePath().normalize();
+        if (!file.startsWith(tenantDir)) {
+            throw new FixnaException("FORBIDDEN", HttpStatus.FORBIDDEN, "Invalid storage key");
+        }
+        return file;
+    }
+
+    private void validateStorageKey(String storageKey) {
+        if (storageKey == null || storageKey.isBlank()
+                || storageKey.contains("..")
+                || storageKey.contains("/")
+                || storageKey.contains("\\")) {
+            throw new FixnaException("FORBIDDEN", HttpStatus.FORBIDDEN, "Invalid storage key");
+        }
     }
 }
