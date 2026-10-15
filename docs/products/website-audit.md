@@ -4,6 +4,8 @@ Standalone SaaS product within the Fixna ecosystem. Identifies technical and
 on‑page website issues, shows evidence, and provides a prioritized remediation
 plan. Independently deployable (own API, own database, own frontend).
 
+## Status: ✅ LIVE — https://websiteaudit.fixna.in
+
 ## Boundaries
 
 - API: `backend/website-audit-api` (Java 21 / Spring Boot 3.5.6 / Maven), port **8082**

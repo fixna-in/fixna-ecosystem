@@ -7,6 +7,13 @@ Two independent deploy units + a dedicated database.
 | API | `backend/invoice-assistant-api` (Dockerfile) | Render (`render-invoice-assistant.yaml`) |
 | Web | `frontend/invoice-assistant-web` | Vercel (root `frontend/invoice-assistant-web`) |
 
+## Production URLs
+
+| Surface | URL |
+|---------|-----|
+| Web | https://invoice.fixna.in |
+| API | https://api.invoice.fixna.in/api |
+
 ## Local run
 
 ```bash
@@ -33,21 +40,21 @@ Blueprint: `render-invoice-assistant.yaml`. Creates web service
 (database `invoice_assistant`). Set these env vars (mark as secret):
 
 - `FIXNA_JWT_SECRET` — ≥32 bytes, unique to this product.
-- `FIXNA_CORS_ALLOWED_ORIGINS` — the web origin, e.g. `https://invoices.fixna.in`.
+- `FIXNA_CORS_ALLOWED_ORIGINS` — the web origin, e.g. `https://invoice.fixna.in`.
 - `FIXNA_FILE_STORAGE_PATH=/var/data/invoice-files` (with a persistent disk).
 
 `SPRING_DATASOURCE_URL`, `POSTGRES_USER`, `POSTGRES_PASSWORD` are wired from the
-managed DB. `FIXNA_HSTS_ENABLED=true` in prod. Health check `/api/v1/health/ready`.
+managed DB. `FIXNA_HSTS_ENABLED=true` in prod. Health check `/api/v1/health`.
 
 ## Web — Vercel
 
 - Root directory: `frontend/invoice-assistant-web`, framework preset **Next.js**.
 - Env: `NEXT_PUBLIC_API_BASE_URL=https://<api-host>/api`, `NEXT_PUBLIC_APP_ENV=production`.
-- Target domain (verify DNS before use): `invoices.fixna.in`.
+- Target domain (verify DNS before use): `invoice.fixna.in`.
 
 ## Verify
 
-- `GET /api/v1/health/ready` → 200 `{status: UP}`.
+- `GET /api/v1/health` → 200 `{status: UP}`.
 - Register → login → upload a PDF → extract → confirm a low‑confidence field →
   approve → export CSV. Confirm the original is only reachable via the
   authenticated `/content` endpoint and that cross‑tenant access returns 404.

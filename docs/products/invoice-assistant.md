@@ -4,6 +4,8 @@ Standalone SaaS product within the Fixna ecosystem. Converts invoices and
 receipts into structured, reviewable records and exports. Independently
 deployable (own API, own database, own frontend).
 
+## Status: ✅ LIVE — https://invoice.fixna.in
+
 ## Boundaries
 
 - API: `backend/invoice-assistant-api` (Java 21 / Spring Boot 3.5.6 / Maven), port **8083**
