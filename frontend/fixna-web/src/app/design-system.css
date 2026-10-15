@@ -43,7 +43,7 @@ body {
   line-height: var(--leading-normal);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-}
+
 
 a { color: inherit; }
 a:not(.button):hover { text-decoration-thickness: 1px; }
@@ -181,9 +181,12 @@ p { margin: 0; color: var(--muted); }
   color: var(--foreground);
 }
 .hero .container { position: relative; }
-.hero-copy { max-width: 680px; }
+/* Hero uses the same centered container as other sections, so its text starts
+   at the same left edge — left-aligned, not a centered narrow block. The
+   headline is capped for reading comfort and anchored left. */
+.hero h1 { max-width: 40rem; margin-inline: 0; }
 .hero-copy .eyebrow { color: var(--primary); }
-.hero-copy > p { color: var(--muted-foreground); font-size: clamp(1.05rem, 1.6vw, 1.2rem); line-height: var(--leading-normal); max-width: 56ch; }
+.hero-copy > p { color: var(--muted-foreground); font-size: clamp(1.05rem, 1.6vw, 1.2rem); line-height: var(--leading-normal); max-width: 56ch; margin-inline: 0; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
 .hero-trust { margin-top: 1.75rem; color: var(--muted-foreground); font-size: 0.8rem; letter-spacing: 0.01em; }
 
@@ -325,6 +328,9 @@ p { margin: 0; color: var(--muted); }
 .field input, .field textarea { width: 100%; min-height: 46px; padding: 0.7rem 0.8rem; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--surface); color: var(--ink); }
 .field textarea { min-height: 132px; resize: vertical; }
 .field input:focus, .field textarea:focus { border-color: var(--ring); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 30%, transparent); }
+/* Theme-aware placeholder so helper text is readable against both light and dark inputs. */
+.field input::placeholder,
+.field textarea::placeholder { color: color-mix(in srgb, var(--muted-foreground) 60%, transparent); }
 .form-note { color: var(--muted); font-size: 0.8rem; }
 .field-error { color: var(--danger); font-size: 0.8rem; font-weight: 600; }
 /* Honeypot field: visually hidden, unreachable by keyboard/assistive tech. */
