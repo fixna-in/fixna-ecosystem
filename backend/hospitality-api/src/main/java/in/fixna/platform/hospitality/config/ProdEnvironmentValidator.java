@@ -52,7 +52,7 @@ public class ProdEnvironmentValidator implements ApplicationRunner {
         if (isBlank(password) || password.equals(DEFAULT_DB_PASSWORD)) {
             throw new IllegalStateException(
                     "Refusing to start: spring.datasource.password must not use the default in prod"
-                            + " (SPRING_DATASOURCE_PASSWORD / POSTGRES_PASSWORD)");
+                            + " (POSTGRES_PASSWORD)");
         }
         String jdbcScheme = jdbcScheme(url);
         if (!"postgresql".equalsIgnoreCase(jdbcScheme)) {
