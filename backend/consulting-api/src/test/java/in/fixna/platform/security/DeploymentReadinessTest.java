@@ -22,7 +22,7 @@ class DeploymentReadinessTest {
                     .toList();
             assertThat(versions).hasSizeGreaterThanOrEqualTo(15);
             assertThat(versions.getFirst()).startsWith("V1__");
-            assertThat(versions.getLast()).startsWith("V15__");
+            assertThat(versions.getLast()).startsWith("V18__");
         }
     }
 
