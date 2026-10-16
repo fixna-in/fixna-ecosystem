@@ -51,11 +51,9 @@ public class LocalTestDataSeeder {
                         INSERT INTO tenants (id, name, tenant_type)
                         VALUES (?, 'Fixna Demo Hospitality', 'HOSPITALITY')
                         RETURNING id
-                    ), new_membership AS (
-                        INSERT INTO tenant_memberships (id, tenant_id, user_id, role)
-                        VALUES (?, (SELECT id FROM new_tenant), (SELECT id FROM new_user), ?)
                     )
-                    SELECT 1
+                    INSERT INTO tenant_memberships (id, tenant_id, user_id, role)
+                    VALUES (?, (SELECT id FROM new_tenant), (SELECT id FROM new_user), ?)
                     """, userId, email, passwordHash, tenantId, UUID.randomUUID(), MembershipRole.TENANT_OWNER.name());
         };
     }
