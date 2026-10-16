@@ -16,7 +16,7 @@ npm run test         # unit tests
 Copy `.env.example` to `.env.local` and adjust:
 
 ```
-NEXT_PUBLIC_API_BASE_URL=http://localhost:8082/api
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8084/api
 NEXT_PUBLIC_APP_ENV=local
 ```
 
