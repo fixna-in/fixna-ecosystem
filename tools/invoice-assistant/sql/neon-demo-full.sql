@@ -7,7 +7,7 @@ BEGIN;
 -- Demo password: replace the hash below with a BCrypt hash for a login you control.
 -- The current placeholder is intentionally not a valid password and must be replaced.
 WITH password_seed AS (
-    SELECT '$2a$10$BAFhp4UGC7YVYh9WjPHndeYV7CnoADpM2Q2IpS6.CJ/xnjsfBE1K2'::VARCHAR(255) AS password_hash
+    SELECT '*******************'::VARCHAR(255) AS password_hash
 ),
 -- Use consistent user IDs across all 5 products (same email = same user)
 shared_users AS (
@@ -124,7 +124,7 @@ new_document AS (
             AND invoice_record_id = i.id
             AND file_name = 'invoice-INV-2024-001.pdf'
       )
-    RETURNING id, tenant_id
+    RETURNING id, tenant_id, invoice_record_id
 ),
 new_extraction AS (
     INSERT INTO invoice_document_extractions (

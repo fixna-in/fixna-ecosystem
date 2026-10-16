@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -32,7 +33,11 @@ public class SecurityConfig {
             ApiAuthenticationEntryPoint entryPoint,
             ApiAccessDeniedHandler deniedHandler)
             throws Exception {
-        http.csrf(Customizer.withDefaults())
+        // Stateless Bearer-token API (Authorization header, no cookies/sessions):
+        // CSRF does not apply. Kept disabled consistently with consulting/localboost/
+        // hospitality. The CodeQL "Disabled Spring CSRF protection" finding is a false
+        // positive for this design — enabling CSRF here 403s every POST /api/v1/auth/*.
+        http.csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(entryPoint)
