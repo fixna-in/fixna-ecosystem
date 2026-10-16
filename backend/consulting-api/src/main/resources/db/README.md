@@ -65,6 +65,9 @@ has been checked against the Consulting migrations.
 | V13 | `V13__invoice_documents.sql` | Private invoice documents, extractions, fields (ADR-011/012) |
 | V14 | `V14__invoice_document_jobs.sql` | Async invoice extraction jobs (queue/worker) |
 | V15 | `V15__tenant_quotas.sql` | Monthly upload/extraction quotas per tenant |
+| V16 | `V16__fix_currency_column_type.sql` | Fix invoice currency CHAR(3) → VARCHAR(3) |
+| V17 | `V17__subscriptions.sql` | Subscriptions (shared billing entity, 1:1 per tenant) |
+| V18 | `V18__webhook_events.sql` | Idempotent billing webhook events (shared billing entity) |
 
 ## Local seed data
 
