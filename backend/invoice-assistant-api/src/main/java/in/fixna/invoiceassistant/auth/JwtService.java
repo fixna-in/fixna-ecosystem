@@ -68,6 +68,11 @@ public class JwtService {
     private String buildToken(UUID userId, UUID tenantId, String role, String type, Duration ttl) {
         Instant now = Instant.now();
         return Jwts.builder()
+                // Unique jti (token id): iat/exp claims are second-granular, so two
+                // tokens for the same user/tenant/role issued within the same second
+                // would otherwise be byte-equal → identical SHA-256 → duplicate key on
+                // refresh_tokens.token_hash (UNIQUE) → 500 on login/refresh rotation.
+                .id(UUID.randomUUID().toString())
                 .subject(userId.toString())
                 .claim("tenantId", tenantId.toString())
                 .claim("role", role)
