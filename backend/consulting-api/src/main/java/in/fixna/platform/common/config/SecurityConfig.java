@@ -43,9 +43,6 @@ public class SecurityConfig {
                 // Brute-force guard for the public auth surface (login/register/
                 // refresh + portal login); mirrors localboost-api parity.
                 .addFilterBefore(rateLimitFilter, UsernamePasswordAuthenticationFilter.class)
-                // Brute-force guard for the public auth surface (login/register/
-                // refresh + portal login); mirrors localboost-api parity.
-                .addFilterBefore(rateLimitFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(auth -> auth.requestMatchers(
                                 "/api/v1/auth/register",
                                 "/api/v1/auth/login",
