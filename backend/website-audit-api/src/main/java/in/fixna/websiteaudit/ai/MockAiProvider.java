@@ -2,13 +2,15 @@ package in.fixna.websiteaudit.ai;
 
 import in.fixna.websiteaudit.ai.dto.AiSuggestionResponse;
 import in.fixna.websiteaudit.ai.dto.WebsiteAuditFixSuggestion;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-/** Mock AI provider for local/dev profiles. Returns deterministic placeholder suggestions. */
-@Profile("local | test")
+/**
+ * Deterministic advisory AI provider. Active in every profile (including prod)
+ * so {@code AiProvider} is always injectable — matches consulting's MockAiProvider.
+ * Returns placeholder suggestions only; no external calls.
+ */
 @Component
 public class MockAiProvider implements AiProvider {
 
