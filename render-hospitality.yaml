@@ -37,10 +37,6 @@ services:
         fromDatabase:
           name: fixna-hospitality-db
           property: password
-      - key: SPRING_DATASOURCE_PASSWORD
-        fromDatabase:
-          name: fixna-hospitality-db
-          property: password
       - key: FIXNA_HSTS_ENABLED
         value: true
       - key: JAVA_TOOL_OPTIONS
