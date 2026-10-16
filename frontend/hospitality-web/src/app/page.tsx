@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
+import { useAuth } from '@/lib/auth-context';
 import { ThemeToggle } from '@fixna/design-system';
 
 export default function Home() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { user, logout } = useAuth();
 
   return (
     <main className="min-h-screen flex flex-col">
@@ -18,13 +18,15 @@ export default function Home() {
               </Link>
             </div>
             <nav className="flex items-center gap-3">
-              {isAuthenticated ? (
+              {user ? (
                 <>
                   <Link href="/dashboard" className="text-muted-foreground hover:text-foreground">
                     Dashboard
                   </Link>
                   <button
-                    onClick={() => setIsAuthenticated(false)}
+                    onClick={() => {
+                      void logout();
+                    }}
                     className="px-4 py-2 text-sm font-medium text-primary-foreground bg-primary rounded-lg hover:bg-primary-hover"
                   >
                     Sign out
