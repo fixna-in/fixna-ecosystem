@@ -1,6 +1,7 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
+import { API_BASE } from './api-base';
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8084/api';
+export { API_BASE };
 
 export const apiClient = axios.create({
   baseURL: API_BASE,

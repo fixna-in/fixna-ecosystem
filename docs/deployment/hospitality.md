@@ -39,8 +39,24 @@ managed DB. `FIXNA_HSTS_ENABLED=true` in prod. Health check `/api/v1/health`.
 ## Web — Vercel
 
 - Root directory: `frontend/hospitality-web`, framework preset **Next.js**.
-- Env: `NEXT_PUBLIC_API_BASE_URL=https://<api-host>/api`, `NEXT_PUBLIC_APP_ENV=production`.
+- Env: `NEXT_PUBLIC_API_BASE_URL=https://api.hospitality.fixna.in/api`,
+  `NEXT_PUBLIC_APP_ENV=production`. The value **must include `https://`** —
+  `NEXT_PUBLIC_*` vars are baked into the client bundle at build time, and a
+  schemeless host is resolved by the browser as a *path* on the web origin.
 - Target domain (verify DNS before use): `hospitality.fixna.in`.
+
+### Troubleshooting — login calls hit the web host instead of the API
+
+Symptom: network tab shows
+`https://hospitality.fixna.in/fixna-hospitality.onrender.com/api/v1/auth/login`
+(HTTP 400). Cause: `NEXT_PUBLIC_API_BASE_URL` on Vercel is set to the Render
+hostname **without** `https://` (e.g. `fixna-hospitality.onrender.com/api`).
+Fix: set it to `https://api.hospitality.fixna.in/api` and **redeploy** (env
+vars are only re-read at build time). `src/lib/api-base.ts` now prepends
+`https://` to schemeless values as a safety net, but the full URL is the
+canonical configuration. If the corrected cross-origin call is then blocked,
+check `FIXNA_CORS_ALLOWED_ORIGINS` on the Render API includes
+`https://hospitality.fixna.in`.
 
 ## Verify
 
