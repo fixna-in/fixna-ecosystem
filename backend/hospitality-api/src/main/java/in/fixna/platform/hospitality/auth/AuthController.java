@@ -57,10 +57,13 @@ public class AuthController {
         if (users.existsByEmail(req.email())) {
             throw new FixnaException("CONFLICT", HttpStatus.CONFLICT, "Email already registered");
         }
+        OffsetDateTime now = OffsetDateTime.now();
         Tenant tenant = Tenant.builder()
                 .id(UUID.randomUUID())
                 .name(req.firstName() != null ? req.firstName() + "'s Workspace" : "New Workspace")
                 .tenantType("HOSPITALITY")
+                .createdAt(now)
+                .updatedAt(now)
                 .build();
         tenants.save(tenant);
 
@@ -70,6 +73,8 @@ public class AuthController {
                 .passwordHash(encoder.encode(req.password()))
                 .firstName(req.firstName())
                 .lastName(req.lastName())
+                .createdAt(now)
+                .updatedAt(now)
                 .build();
         users.save(user);
 
@@ -78,6 +83,7 @@ public class AuthController {
                 .tenantId(tenant.getId())
                 .userId(user.getId())
                 .role(MembershipRole.TENANT_OWNER.name())
+                .createdAt(now)
                 .build();
         memberships.save(membership);
 
@@ -131,6 +137,7 @@ public class AuthController {
                 .tokenHash(hash)
                 .expiresAt(OffsetDateTime.now().plus(jwt.getProps().getRefreshTtl()))
                 .revoked(false)
+                .createdAt(OffsetDateTime.now())
                 .build();
         refreshTokens.save(token);
     }
