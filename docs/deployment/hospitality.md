@@ -36,6 +36,12 @@ Blueprint: `render-hospitality.yaml`. Creates web service
 `SPRING_DATASOURCE_URL`, `POSTGRES_USER`, `POSTGRES_PASSWORD` are wired from the
 managed DB. `FIXNA_HSTS_ENABLED=true` in prod. Health check `/api/v1/health`.
 
+`REDIS_URL` is optional: no hospitality feature uses Redis yet, and the Redis
+health contributor is disabled (`management.health.redis.enabled=false`), so
+deploys pass on instances without a Redis service. Set `REDIS_URL` only when a
+Redis instance is provisioned — otherwise the health check would report 503
+(connection refused to `localhost:6379`) and fail the deploy.
+
 ## Web — Vercel
 
 - Root directory: `frontend/hospitality-web`, framework preset **Next.js**.

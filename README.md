@@ -348,6 +348,7 @@ Create product-specific files before running the apps. Never commit real secrets
 | `SPRING_DATASOURCE_URL` | `jdbc:postgresql://localhost:5436/hospitality` | Render PostgreSQL connection string |
 | `POSTGRES_USER` | `postgres` | Render PostgreSQL user |
 | `POSTGRES_PASSWORD` | `change-me` | Render PostgreSQL password |
+| `REDIS_URL` | `redis://localhost:6379` | Optional — omit when unavailable (Redis is excluded from health) |
 | `FIXNA_JWT_SECRET` | Long random secret | Render secret, never committed |
 | `FIXNA_CORS_ALLOWED_ORIGINS` | `http://localhost:3005,http://127.0.0.1:3005` | `https://hospitality.fixna.in` |
 | `FIXNA_APP_ENV` | `local` | `prod` |
