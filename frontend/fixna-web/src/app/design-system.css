@@ -43,6 +43,7 @@ body {
   line-height: var(--leading-normal);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+}
 
 
 a { color: inherit; }

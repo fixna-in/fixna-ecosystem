@@ -1,10 +1,10 @@
 /* =============================================================================
  * Fixna Unified Design System — Semantic tokens (single source of truth)
  * -----------------------------------------------------------------------------
- * Theme direction inspired by the clean, modern aiwithhassan.com aesthetic:
- * warm neutral surfaces, high-contrast ink text, terracotta accent, serif
- * headlines, sans body, mono micro-labels. Tokens are consumed by every Fixna
- * web application. Do NOT scatter raw color values in components.
+ * Brand identity: warm neutral surfaces, high-contrast ink text, terracotta accent (#e07a5f),
+ * serif headlines, sans body, mono micro-labels. Clean, modern aesthetic.
+ * Tokens consumed by every Fixna web application.
+ * Do NOT scatter raw color values in components.
  * ========================================================================== */
 
 /* ---------- 1. Brand + scale constants (theme-independent) --------------- */
@@ -49,92 +49,102 @@
 :root {
   color-scheme: light;
 
-  --background: #fafaf9;       /* warm off-white page */
-  --surface-hero: #fafaf9;
-  --foreground: #1c1917;       /* warm near-black ink */
+  --background: #fdf6f3;       /* warm neutral surface */
+  --surface-hero: #fdf6f3;
+  --foreground: #1a1a1a;       /* high-contrast ink */
   --surface: #ffffff;          /* cards, panels */
   --surface-elevated: #ffffff;
-  --surface-muted: #f4f3f1;    /* subtle warm alt surface */
+  --surface-muted: #faf5f2;    /* subtle warm alt surface */
 
-  --primary: #b64d2e;          /* terracotta accent doubles as primary action */
-  --primary-foreground: #ffffff;
-  --primary-hover: #9a3f24;
-  --accent: #b64d2e;
+  /* Primary: Terracotta accent for actions and emphasis */
+  --accent: #e07a5f;
   --accent-foreground: #ffffff;
-  --accent-hover: #9a3f24;
-  --accent-soft: #f6e9e3;
+  --accent-hover: #d46a4e;
+  --accent-deep: #b85e43;
+  --accent-soft: #f9e8e0;
 
-  --secondary: #f4f3f1;
-  --secondary-foreground: #1c1917;
+  /* Keep accessible neutrals for form elements and backgrounds */
+  --primary: #1a1a1a;          /* ink for primary text */
+  --primary-foreground: #ffffff;
+  --primary-hover: #2c2c2c;
+  --primary-deep: #0d0d0d;
 
-  --muted: #f4f3f1;
-  --muted-foreground: #8d8781; /* muted text */
-  --foreground-muted: #57534e; /* secondary body text (ink-light) */
+  --secondary: #f0f4f1;
+  --secondary-foreground: #1a1a1a;
 
-  --border: #e7e4e0;
+  --muted: #faf5f2;
+  --muted-foreground: #666666;
+  --foreground-muted: #888888;
+
+  --border: #e8e2dc;
   --input: #ffffff;
-  --ring: #b64d2e;
-  --link: #b64d2e;
+  --ring: #e07a5f;
+  --link: #e07a5f;
 
-  --success: #2f7d4a;        --success-soft: #e7f2eb;
-  --warning: #8a5a00;        --warning-soft: #fbf0d5;
-  --danger: #b42318;         --danger-soft: #fdeceb;
-  --info: #1d5fb0;           --info-soft: #e7f0fb;
+  --success: #6b8e23;        --success-soft: #f0f8e9;
+  --warning: #d4a017;        --warning-soft: #fdf4e5;
+  --danger: #b33a3a;         --danger-soft: #fdedec;
+  --info: #5a8d8b;           --info-soft: #e8f4f3;
 
-  --sidebar-background: #fafaf9;
-  --sidebar-foreground: #1c1917;
-  --header-background: #fafaf9;
-  --overlay-background: rgb(28 25 23 / 45%);
+  --sidebar-background: #faf5f2;
+  --sidebar-foreground: #1a1a1a;
+  --header-background: #fdf6f3;
+  --overlay-background: rgb(26 26 26 / 35%);
 
-  --shadow-sm: 0 1px 2px rgb(28 25 23 / 4%);
-  --shadow-md: 0 4px 14px rgb(28 25 23 / 6%);
-  --shadow-lg: 0 12px 34px rgb(28 25 23 / 10%);
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 5%);
+  --shadow-md: 0 4px 14px rgb(0 0 0 / 7%);
+  --shadow-lg: 0 12px 34px rgb(0 0 0 / 10%);
 }
 
 /* ---------- 3. Dark theme (explicit user choice) ------------------------- */
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  --background: #0c0a09;
-  --surface-hero: #0c0a09;
-  --foreground: #f5f4f2;
-  --surface: #161412;
-  --surface-elevated: #1c1917;
-  --surface-muted: #161412;
+  --background: #1a1a1a;
+  --surface-hero: #1a1a1a;
+  --foreground: #fdf6f3;
+  --surface: #2a2a2a;
+  --surface-elevated: #3a3a3a;
+  --surface-muted: #252525;
 
-  --primary: #e07050;
+  /* Primary: Ink for text */
+  --primary: #1a1a1a;
   --primary-foreground: #ffffff;
-  --primary-hover: #eb8663;
-  --accent: #e07050;
-  --accent-foreground: #ffffff;
-  --accent-hover: #eb8663;
-  --accent-soft: #241612;
+  --primary-hover: #2c2c2c;
+  --primary-deep: #0d0d0d;
 
-  --secondary: #161412;
-  --secondary-foreground: #f5f4f2;
+  /* Accent: Terracotta for actions and emphasis */
+  --accent: #d4a07a;
+  --accent-foreground: #1a1a1a;
+  --accent-hover: #e8b38e;
+  --accent-deep: #b88a66;
+  --accent-soft: #f5e6dc;
 
-  --muted: #161412;
-  --muted-foreground: #8a8580;
-  --foreground-muted: #cfccc8;
+  --secondary: #2a2a2a;
+  --secondary-foreground: #fdf6f3;
 
-  --border: #262320;
-  --input: #161412;
-  --ring: #e07050;
-  --link: #e07050;
+  --muted: #252525;
+  --muted-foreground: #e0e0e0;
+  --foreground-muted: #b8b8b8;
 
-  --success: #5fd39a;        --success-soft: #10281d;
-  --warning: #e6b53f;        --warning-soft: #2a2210;
-  --danger: #f2897a;         --danger-soft: #2c1614;
-  --info: #6aa9f0;           --info-soft: #101f30;
+  --border: #4a4a4a;
+  --input: #2a2a2a;
+  --ring: #d4a07a;
+  --link: #d4a07a;
 
-  --sidebar-background: #0c0a09;
-  --sidebar-foreground: #f5f4f2;
-  --header-background: #0c0a09;
-  --overlay-background: rgb(12 10 9 / 58%);
+  --success: #6b8e23;        --success-soft: #f0f8e9;
+  --warning: #d4a017;        --warning-soft: #fdf4e5;
+  --danger: #b33a3a;         --danger-soft: #fdedec;
+  --info: #5a8d8b;           --info-soft: #e8f4f3;
 
-  --shadow-sm: 0 1px 2px rgb(0 0 0 / 40%);
-  --shadow-md: 0 4px 14px rgb(0 0 0 / 45%);
-  --shadow-lg: 0 12px 34px rgb(0 0 0 / 55%);
+  --sidebar-background: #252525;
+  --sidebar-foreground: #fdf6f3;
+  --header-background: #1a1a1a;
+  --overlay-background: rgb(26 26 26 / 35%);
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 5%);
+  --shadow-md: 0 4px 14px rgb(0 0 0 / 7%);
+  --shadow-lg: 0 12px 34px rgb(0 0 0 / 10%);
 }
 
 /* ---------- 4. System preference (only until an explicit choice exists) -- */
@@ -142,42 +152,45 @@
   :root:not([data-theme]) {
     color-scheme: dark;
 
-    --background: #0c0a09;
-    --surface-hero: #0c0a09;
-    --foreground: #f5f4f2;
-    --surface: #161412;
-    --surface-elevated: #1c1917;
-    --surface-muted: #161412;
+    --background: #0a110d;
+    --surface-hero: #0a110d;
+    --foreground: #e8f0eb;
+    --surface: #111c15;
+    --surface-elevated: #172219;
+    --surface-muted: #111c15;
 
-    --primary: #e07050;
+    /* Lightened green for dark mode — maintains readability on dark surfaces */
+    --primary: #4caf7d;
     --primary-foreground: #ffffff;
-    --primary-hover: #eb8663;
-    --accent: #e07050;
-    --accent-foreground: #ffffff;
-    --accent-hover: #eb8663;
-    --accent-soft: #241612;
+    --primary-hover: #5ec98f;
+    --primary-deep: #3a9969;
 
-    --secondary: #161412;
-    --secondary-foreground: #f5f4f2;
+    --accent: #c7ed94;
+    --accent-foreground: #0a110d;
+    --accent-hover: #b8e47e;
+    --accent-soft: #1a2e14;
 
-    --muted: #161412;
-    --muted-foreground: #8a8580;
-    --foreground-muted: #cfccc8;
+    --secondary: #111c15;
+    --secondary-foreground: #e8f0eb;
 
-    --border: #262320;
-    --input: #161412;
-    --ring: #e07050;
-    --link: #e07050;
+    --muted: #111c15;
+    --muted-foreground: #7aaa8a;
+    --foreground-muted: #a8c8b2;
+
+    --border: #1f3328;
+    --input: #111c15;
+    --ring: #4caf7d;
+    --link: #4caf7d;
 
     --success: #5fd39a;        --success-soft: #10281d;
     --warning: #e6b53f;        --warning-soft: #2a2210;
     --danger: #f2897a;         --danger-soft: #2c1614;
     --info: #6aa9f0;           --info-soft: #101f30;
 
-    --sidebar-background: #0c0a09;
-    --sidebar-foreground: #f5f4f2;
-    --header-background: #0c0a09;
-    --overlay-background: rgb(12 10 9 / 58%);
+    --sidebar-background: #0a110d;
+    --sidebar-foreground: #e8f0eb;
+    --header-background: #0a110d;
+    --overlay-background: rgb(10 17 13 / 60%);
 
     --shadow-sm: 0 1px 2px rgb(0 0 0 / 40%);
     --shadow-md: 0 4px 14px rgb(0 0 0 / 45%);
@@ -185,20 +198,15 @@
   }
 }
 
-/* ---------- 5. Compatibility aliases (existing Fixna + aiwithhassan style) -- */
+/* ---------- 5. Compatibility aliases ------------------------------------ */
 :root {
-  /* Existing aliases */
   --text: var(--foreground);
   --surface-soft: var(--surface-muted);
   --primary-bright: var(--accent);
-  --primary-deep: var(--primary-hover);
   --shadow: var(--shadow-lg);
 
-  /* aiwithhassan-inspired aliases */
   --bg: var(--background);
   --bg-alt: var(--surface-muted);
   --ink: var(--foreground);
   --ink-light: var(--foreground-muted);
-  --accent-hover: var(--primary-hover);
-  --accent-soft: var(--accent-soft);
 }

@@ -42,3 +42,8 @@ git
 google-credentials*.json
 secrets/
 credentials/
+.claude
+.cline
+.cursor
+.kilo
+.vscode

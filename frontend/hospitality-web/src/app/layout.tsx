@@ -25,6 +25,16 @@ export default function RootLayout({
         {/* Apply the persisted/system theme before paint to avoid a flash. */}
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
+       </head>
+       <body className="antialiased">
+         {/* Skip link for accessibility */}
+         <a href="#main-content" className="skip-link">
+           Skip to main content
+         </a>
+         <ThemeProvider>
+           <Providers>{children}</Providers>
+         </ThemeProvider>
+       </body>
       <body className="antialiased">
         <ThemeProvider>
           <Providers>{children}</Providers>

@@ -70,11 +70,11 @@ export function NewCampaignForm() {
         <label>
           Objective
           <select {...register("objective")}>
-            <option value="LEAD_GENERATION">LEAD_GENERATION</option>
-            <option value="STORE_VISITS">STORE_VISITS</option>
-            <option value="WEBSITE_TRAFFIC">WEBSITE_TRAFFIC</option>
-            <option value="WHATSAPP_ENQUIRIES">WHATSAPP_ENQUIRIES</option>
-            <option value="PROMOTION">PROMOTION</option>
+             <option value="LEAD_GENERATION">Lead Generation</option>
+             <option value="STORE_VISITS">Store Visits</option>
+             <option value="WEBSITE_TRAFFIC">Website Traffic</option>
+             <option value="WHATSAPP_ENQUIRIES">WhatsApp Enquiries</option>
+             <option value="PROMOTION">Promotion</option>
           </select>
         </label>
         <label>
