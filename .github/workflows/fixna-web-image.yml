@@ -13,7 +13,7 @@ env:
   REGISTRY: ghcr.io
 
 jobs:
-  build-and-push:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -72,3 +72,12 @@ jobs:
           tags: |
             ${{ env.REGISTRY }}/${{ steps.image.outputs.name }}:${{ steps.tags.outputs.branch }}
             ${{ env.REGISTRY }}/${{ steps.image.outputs.name }}:${{ steps.tags.outputs.sha }}
+
+  deploy:
+    needs: build
+    if: github.event_name == 'push' && github.ref_name == 'dev' && github.ref_name != 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Dokploy deploy
+        run: curl -fsS -X POST "${{ secrets.DOKPLOY_DEPLOY_HOOK }}"
+
