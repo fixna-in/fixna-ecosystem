@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, IBM_Plex_Mono, Instrument_Serif } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { PageShell } from "@/components/page-shell";
 import { siteUrl } from "@/lib/site-url";
 import { ThemeProvider } from "@fixna/design-system";
@@ -87,6 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider>
           <PageShell>{children}</PageShell>
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
