@@ -18,6 +18,8 @@ backend/*/.env.*
 .idea/
 .vscode/
 *.iml
+.cline/
+.claude/
 
 # OS
 .DS_Store
