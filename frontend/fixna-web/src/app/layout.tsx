@@ -5,6 +5,7 @@ import { PageShell } from "@/components/page-shell";
 import { siteUrl } from "@/lib/site-url";
 import { ThemeProvider } from "@fixna/design-system";
 import { themeInitScript } from "@fixna/design-system/theme";
+import { Analytics } from '@vercel/analytics/next';
 import "@fixna/design-system/tokens.css";
 import "./design-system.css";
 import "./globals.css";
@@ -89,6 +90,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <PageShell>{children}</PageShell>
         </ThemeProvider>
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
