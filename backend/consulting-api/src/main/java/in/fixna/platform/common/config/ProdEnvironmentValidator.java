@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProdEnvironmentValidator implements ApplicationRunner {
 
-    static final String DEFAULT_DB_URL = "jdbc:postgresql://localhost:5433/consulting";
+    static final String DEFAULT_DB_URL = "jdbc:postgresql://localhost:5433/consulting_db";
     static final String DEFAULT_DB_PASSWORD = "change-me";
 
     private final Environment environment;

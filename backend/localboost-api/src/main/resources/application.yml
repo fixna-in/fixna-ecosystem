@@ -1,13 +1,13 @@
 server:
-  # SERVER_PORT for local dev; Render and other PaaS inject PORT.
-  port: ${SERVER_PORT:${PORT:8080}}
+  # Production uses PORT=80; local dev can override
+  port: ${SERVER_PORT:${PORT:80}}
 
 spring:
   application:
-    name: fixna-localboost-backend
+    name: localboost-api
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/fixna}
-    username: ${POSTGRES_USER:fixna}
+    url: ${SPRING_DATASOURCE_URL:postgresql://localboost_user:${POSTGRES_PASSWORD}@fixnainfra-postgresadmin-qfasaa:5432/localboost_db}
+    username: ${POSTGRES_USER:localboost_user}
     password: ${SPRING_DATASOURCE_PASSWORD:${POSTGRES_PASSWORD:change-me}}
     hikari:
       maximum-pool-size: ${DB_POOL_MAX:10}

@@ -1,14 +1,14 @@
 server:
-  port: ${SERVER_PORT:${PORT:8082}}
+  port: ${SERVER_PORT:${PORT:80}}
 
 spring:
   profiles:
     default: local
   application:
-    name: fixna-website-audit-api
+    name: website-audit-api
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/website_audit}
-    username: ${POSTGRES_USER:postgres}
+    url: ${SPRING_DATASOURCE_URL:postgresql://website_audit_user:${POSTGRES_PASSWORD}@fixnainfra-postgresadmin-qfasaa:5432/website_audit_db}
+    username: ${POSTGRES_USER:website_audit_user}
     password: ${POSTGRES_PASSWORD:change-me}
     hikari:
       maximum-pool-size: ${DB_POOL_MAX:10}

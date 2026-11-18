@@ -22,7 +22,7 @@ public class ProdEnvironmentValidator implements ApplicationRunner {
 
     private static final Logger LOG = LoggerFactory.getLogger(ProdEnvironmentValidator.class);
 
-    static final String DEFAULT_DB_URL = "jdbc:postgresql://localhost:5432/fixna";
+    static final String DEFAULT_DB_URL = "jdbc:postgresql://localhost:5432/localboost_db";
     static final String DEFAULT_DB_PASSWORD = "change-me";
 
     private final Environment environment;

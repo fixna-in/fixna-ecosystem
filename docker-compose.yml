@@ -1,11 +1,11 @@
-# Local development — Consulting + LocalBoost databases
+# Local development — All product databases
 
 services:
   postgres-consulting:
     image: postgres:17
     environment:
-      POSTGRES_DB: consulting
-      POSTGRES_USER: postgres
+      POSTGRES_DB: consulting_db
+      POSTGRES_USER: consulting_user
       POSTGRES_PASSWORD: change-me
     ports:
       - "5433:5432"
@@ -15,8 +15,8 @@ services:
   postgres-localboost:
     image: postgres:17
     environment:
-      POSTGRES_DB: fixna
-      POSTGRES_USER: fixna
+      POSTGRES_DB: localboost_db
+      POSTGRES_USER: localboost_user
       POSTGRES_PASSWORD: change-me
     ports:
       - "5432:5432"
@@ -26,8 +26,8 @@ services:
   postgres-website-audit:
     image: postgres:17
     environment:
-      POSTGRES_DB: website_audit
-      POSTGRES_USER: postgres
+      POSTGRES_DB: website_audit_db
+      POSTGRES_USER: website_audit_user
       POSTGRES_PASSWORD: change-me
     ports:
       - "5434:5432"
@@ -37,8 +37,8 @@ services:
   postgres-invoice-assistant:
     image: postgres:17
     environment:
-      POSTGRES_DB: invoice_assistant
-      POSTGRES_USER: postgres
+      POSTGRES_DB: invoice_assistant_db
+      POSTGRES_USER: invoice_assistant_user
       POSTGRES_PASSWORD: change-me
     ports:
       - "5435:5432"
@@ -48,8 +48,8 @@ services:
   postgres-hospitality:
     image: postgres:17
     environment:
-      POSTGRES_DB: hospitality
-      POSTGRES_USER: postgres
+      POSTGRES_DB: hospitality_db
+      POSTGRES_USER: hospitality_user
       POSTGRES_PASSWORD: change-me
     ports:
       - "5436:5432"
@@ -76,3 +76,4 @@ volumes:
   fixna-invoice-assistant-postgres:
   fixna-hospitality-postgres:
   fixna-redis:
+

@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5435/invoice_assistant
-    username: postgres
+    url: jdbc:postgresql://localhost:5435/invoice_assistant_db
+    username: invoice_assistant_user
     # Must match docker-compose.yml postgres-invoice-assistant (POSTGRES_PASSWORD: change-me).
     password: change-me
   flyway:

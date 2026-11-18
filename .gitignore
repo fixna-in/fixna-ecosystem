@@ -30,6 +30,18 @@ Thumbs.db
 
 # File storage (local dev)
 backend/consulting-api/storage/
+**/storage/
+**/data/
+data/
+*.db
+*.sqlite
+
+# Local build / test fixtures / runtime logs
+**/target/
+**/build/
+.tsbuildinfo
+*.log
+
 
 # Secrets — never commit private keys, tokens, or service-account JSON.
 # (A stray private key file named `git` existed at repo root; it was deleted

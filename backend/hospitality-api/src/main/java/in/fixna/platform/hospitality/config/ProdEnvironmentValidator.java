@@ -20,8 +20,8 @@ public class ProdEnvironmentValidator implements ApplicationRunner {
 
     private static final Logger LOG = LoggerFactory.getLogger(ProdEnvironmentValidator.class);
 
-    static final String DEFAULT_DB_URL = "jdbc:postgresql://localhost:5432/hospitality";
-    static final String LOCAL_DB_URL = "jdbc:postgresql://localhost:5434/hospitality";
+    static final String DEFAULT_DB_URL = "jdbc:postgresql://localhost:5432/hospitality_db";
+    static final String LOCAL_DB_URL = "jdbc:postgresql://localhost:5436/hospitality_db";
     static final String DEFAULT_DB_PASSWORD = "change-me";
 
     private final Environment environment;

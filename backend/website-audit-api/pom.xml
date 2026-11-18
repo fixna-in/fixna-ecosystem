@@ -9,6 +9,7 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <artifactId>fixna-website-audit-api</artifactId>
+    <version>1.1.0</version>
     <name>fixna-website-audit-api</name>
     <description>Fixna Website Audit API</description>
     <properties>

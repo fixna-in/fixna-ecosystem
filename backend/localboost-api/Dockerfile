@@ -17,5 +17,5 @@ USER appuser
 COPY --from=build /workspace/backend/localboost-api/target/fixna-localboost-api.jar app.jar
 ENV SPRING_PROFILES_ACTIVE=prod
 ENV FIXNA_APP_ENV=prod
-EXPOSE 8080
+EXPOSE 80
 ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-jar", "app.jar"]

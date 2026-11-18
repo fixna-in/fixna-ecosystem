@@ -27,15 +27,15 @@ services:
         sync: false
       - key: SPRING_DATASOURCE_URL
         fromDatabase:
-          name: fixna-consulting-db
+          name: consulting_db
           property: connectionString
       - key: POSTGRES_USER
         fromDatabase:
-          name: fixna-consulting-db
+          name: consulting_db
           property: user
       - key: POSTGRES_PASSWORD
         fromDatabase:
-          name: fixna-consulting-db
+          name: consulting_db
           property: password
       - key: SPRING_FLYWAY_BASELINE_ON_MIGRATE
         value: true
@@ -47,7 +47,7 @@ services:
         value: -XX:+UseContainerSupport -Xms256m -Xmx384m
 
 databases:
-  - name: fixna-consulting-db
-    databaseName: consulting
+  - name: consulting_db
+    databaseName: consulting_db
     plan: basic-256mb
     region: oregon

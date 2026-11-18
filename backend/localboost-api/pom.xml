@@ -9,6 +9,7 @@
   <relativePath>../../pom.xml</relativePath>
  </parent>
  <artifactId>fixna-localboost-api</artifactId>
+ <version>1.1.0</version>
  <name>fixna-localboost-api</name>
  <description>Fixna LocalBoost API</description>
  <properties>

@@ -35,19 +35,19 @@ services:
         value: -XX:+UseContainerSupport -Xms256m -Xmx384m
       - key: SPRING_DATASOURCE_URL
         fromDatabase:
-          name: fixna-localboost-db
+          name: localboost_db
           property: connectionString
       - key: POSTGRES_USER
         fromDatabase:
-          name: fixna-localboost-db
+          name: localboost_db
           property: user
       - key: SPRING_DATASOURCE_PASSWORD
         fromDatabase:
-          name: fixna-localboost-db
+          name: localboost_db
           property: password
       - key: POSTGRES_PASSWORD
         fromDatabase:
-          name: fixna-localboost-db
+          name: localboost_db
           property: password
       - key: FIXNA_JWT_SECRET
         sync: false
@@ -55,6 +55,7 @@ services:
         sync: false
 
 databases:
-  - name: fixna-localboost-db
+  - name: localboost_db
+    databaseName: localboost_db
     plan: basic-256mb
     region: singapore
