@@ -49,3 +49,10 @@ logging:
   level:
     root: ERROR
     in.fixna.platform: WARN
+
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+

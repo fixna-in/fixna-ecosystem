@@ -12,8 +12,8 @@ class LocalProfileConfigurationTest {
         var properties = new YamlPropertySourceLoader()
                 .load("local", new ClassPathResource("application-local.yml")).getFirst();
         assertThat(properties.getProperty("spring.datasource.url"))
-                .isEqualTo("jdbc:postgresql://localhost:5432/localboost");
-        assertThat(properties.getProperty("spring.datasource.username")).isEqualTo("postgres");
+                .isEqualTo("jdbc:postgresql://localhost:5432/localboost_db");
+        assertThat(properties.getProperty("spring.datasource.username")).isEqualTo("localboost_user");
         assertThat(properties.getProperty("spring.datasource.password")).isEqualTo("${POSTGRES_PASSWORD}");
         assertThat(properties.getProperty("fixna.test-data.enabled")).isEqualTo(false);
         assertThat(properties.getProperty("spring.autoconfigure.exclude[0]"))
