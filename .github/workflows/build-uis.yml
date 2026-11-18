@@ -1,9 +1,19 @@
-name: fixna-web image
+name: Build & Push UI Images
 
 on:
   push:
-    branches: ["**"]
+    branches:
+      - main
+      - dev
+    paths:
+      - 'frontend/**'
   pull_request:
+    branches:
+      - main
+      - dev
+    paths:
+      - 'frontend/**'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -24,6 +34,17 @@ jobs:
         with:
           node-version: "22"
           cache: npm
+
+      - name: Determine profile and environment based on branch
+        id: env
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "profile=prod" >> $GITHUB_OUTPUT
+            echo "app_env=prod" >> $GITHUB_OUTPUT
+          else
+            echo "profile=dev" >> $GITHUB_OUTPUT
+            echo "app_env=dev" >> $GITHUB_OUTPUT
+          fi
 
       - name: Install dependencies
         run: npm ci
@@ -53,25 +74,29 @@ jobs:
         env:
           IMAGE_NAME: ${{ github.repository }}
 
-      - name: Compute image tags
-        id: tags
-        run: |
-          BRANCH="${GITHUB_REF#refs/heads/}"
-          BRANCH_TAG="$(printf '%s' "$BRANCH" | tr '/' '-')"
-          echo "branch=${BRANCH_TAG}" >> "$GITHUB_OUTPUT"
-          echo "sha=${GITHUB_SHA::12}" >> "$GITHUB_OUTPUT"
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ steps.image.outputs.name }}
+          tags: |
+            type=raw,value=${{ steps.env.outputs.profile }}
+            type=raw,value=build-${{ github.run_number }}
+            type=sha,format=short
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
       - name: Build and push image
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: frontend/fixna-web/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             NEXT_PUBLIC_SITE_URL=${{ vars.NEXT_PUBLIC_SITE_URL }}
-          tags: |
-            ${{ env.REGISTRY }}/${{ steps.image.outputs.name }}:${{ steps.tags.outputs.branch }}
-            ${{ env.REGISTRY }}/${{ steps.image.outputs.name }}:${{ steps.tags.outputs.sha }}
 
   deploy:
     needs: build
@@ -80,4 +105,6 @@ jobs:
     steps:
       - name: Trigger Dokploy deploy
         run: curl -fsS -X POST "${{ secrets.DOKPLOY_DEPLOY_HOOK }}"
+
+
 

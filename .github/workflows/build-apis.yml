@@ -5,10 +5,18 @@ on:
     branches:
       - main
       - dev
+    paths:
+      - 'backend/**'
+      - 'pom.xml'
+      - '.github/workflows/build-apis.yml'
   pull_request:
     branches:
       - main
       - dev
+    paths:
+      - 'backend/**'
+      - 'pom.xml'
+      - '.github/workflows/build-apis.yml'
   workflow_dispatch:
 
 permissions:
@@ -110,7 +118,7 @@ jobs:
           tags: |
             type=raw,value=${{ steps.env.outputs.profile }}
             type=raw,value=build-${{ github.run_number }}
-            type: sha,format=short
+            type=sha,format=short
 
       - name: Set up Docker Buildx
         if: steps.changes.outputs.changed == 'true'
