@@ -137,4 +137,11 @@ jobs:
             SPRING_PROFILES_ACTIVE=${{ steps.env.outputs.profile }}
             FIXNA_APP_ENV=${{ steps.env.outputs.app_env }}
 
+      - name: Trigger Dokploy deploy (LocalBoost API dev)
+        if: steps.changes.outputs.changed == 'true' && github.event_name == 'push' && github.ref_name == 'dev' && matrix.product.name == 'localboost'
+        env:
+          DOKPLOY_HOOK: ${{ secrets.DOKPLOY_HOOK_LOCALBOOST_API_DEV }}
+        run: curl -fsS -X POST "$DOKPLOY_HOOK"
+
+
 

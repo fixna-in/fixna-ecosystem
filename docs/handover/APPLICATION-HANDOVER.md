@@ -8,7 +8,7 @@ Welcome! This document provides a complete architectural and operational handove
 The Fixna Ecosystem is a **multi-product monorepo** hosting independent business applications. Each product deploys as its own isolated stack:
 - **API**: Spring Boot 3.5.6 (Java 21) listening on **Port 80** in production containers.
 - **Web**: Next.js 16+ (React 19, TypeScript) deployed on Vercel (or standby Docker images).
-- **Database**: Independent PostgreSQL 17/18 instance with dedicated user roles (`<app>_user` owning `<app>_db`) and Flyway migration history.
+- **Database**: Managed PostgreSQL 18 instance (`fixnainfra-postgresadmin-qfasaa:5432` in Dokploy) with dedicated user roles (`<app>_user` owning `<app>_db`) and Flyway migration history.
 - **Shared Infrastructure**: Only `backend/libs/fixna-platform-common` (logging, security headers, CORS, error handling).
 
 ---
@@ -41,30 +41,35 @@ The Fixna Ecosystem is a **multi-product monorepo** hosting independent business
    - Centralized environment reference placeholders are located in the **`env/`** folder (e.g., `env/consulting-api.env`).
 5. **Port & Routing**:
    - All containers listen on internal **Port 80** (`PORT=80`). Public TLS termination and routing are handled by Dokploy's Traefik reverse proxy.
+   - **Subdomain Pattern**:
+     - Production API: `https://api.<product>.fixna.in` (e.g., `https://api.consulting.fixna.in`)
+     - Development API: `https://dev.api.<product>.fixna.in` (e.g., `https://dev.api.consulting.fixna.in`)
+     - Web Frontend: `https://<product>.fixna.in` (e.g., `https://consulting.fixna.in`)
 6. **Database Seeding**:
    - Default administrative user (`fixnainfo@gmail.com`) is provisioned via versioned Flyway migration scripts (`ON CONFLICT DO NOTHING`) running on startup in `dev` and `prod`.
 
 ---
 
-## 4. Build & Test Commands
+## 4. Build, CI/CD & Local Development
 
-### **Java Backend (Maven)**
-```bash
-# Build the entire ecosystem reactor
-mvn -f pom.xml clean compile
+### **GitHub Actions Workflows**
+- **`build-apis.yml`**: Path-filtered (`backend/**`, `pom.xml`) with matrix change detection. Only builds and pushes images for products with actual changes.
+- **`build-uis.yml`**: Path-filtered (`frontend/**`). Builds and pushes frontend container images.
+- **Image Tagging**: Consistent tags generated via `docker/metadata-action`:
+  - Profile/Branch tag (`dev` or `prod`).
+  - Incremental build number (`build-<RUN_NUMBER>`).
+  - Short commit SHA (`sha-<short-sha>`).
 
-# Run unit tests across all APIs
-npm run test:all-apis  # or mvn test from root
+### **Local Development Setup**
+- **Docker Compose (`docker-compose.yml`)**: Runs supporting local infrastructure (`Redis` and `Mailhog`). Local backend applications connect directly to the shared remote PostgreSQL server.
+- **Java Backend (Maven)**:
+  ```bash
+  # Build ecosystem reactor
+  mvn -f pom.xml clean compile
 
-# Build specific API jar with build-info versioning
-mvn -f backend/consulting-api/pom.xml clean package
-```
-
-### **Docker Container Build**
-```bash
-# Build monorepo Docker image (context is repo root to include fixna-platform-common)
-docker build -f backend/consulting-api/Dockerfile -t fixna-consulting-api .
-```
+  # Run unit tests
+  mvn test
+  ```
 
 ---
 
@@ -85,3 +90,4 @@ The public health endpoint (`GET /api/v1/health`) returns an aggregated JSON pay
   }
 }
 ```
+

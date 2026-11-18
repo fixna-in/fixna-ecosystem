@@ -1,5 +1,20 @@
 # Progress Log
 
+## 2026-11-19 — Dokploy Production Readiness & CI/CD Optimization
+
+**Delivered:**
+- **Port 80 Container Standardization:** All backend Spring Boot APIs configured to listen on internal Port 80 (`PORT=80`), integrating seamlessly with Dokploy's Traefik reverse proxy.
+- **Managed PostgreSQL 18 Integration:** Configured all backend services to connect to the shared PostgreSQL 18 instance in Dokploy (`fixnainfra-postgresadmin-qfasaa:5432`) preserving multi-tenant isolation (`<app>_db` and `<app>_user`).
+- **Application-Specific Versioning:** Explicit versions per application (`consulting-api` v1.2.0, others v1.1.0) bound via Spring Boot `build-info` and surfaced in public health endpoints (`GET /api/v1/health`).
+- **Centralized Environment Configuration:** Consolidated per-application environment reference files under `env/` containing local, dev, and production placeholders.
+- **Path-Filtered GitHub Actions Workflows:** 
+  - `build-apis.yml`: Path-filtered (`backend/**`, `pom.xml`) with matrix-level git diff change detection to build and push only modified services.
+  - `build-uis.yml`: Path-filtered (`frontend/**`) for Next.js web applications.
+  - Standardized image tagging using `docker/metadata-action` (`dev`/`prod`, incremental `build-<RUN_NUMBER>`, and `sha-<short>` tags).
+- **Simplified Local Development:** Updated `docker-compose.yml` to run supporting local infrastructure (`Redis` & `Mailhog`) while connecting applications directly to the shared PostgreSQL server.
+
+**Verified:** BUILD SUCCESS — all 186 consulting-api tests and 229 localboost-api tests passed cleanly.
+
 ## 2026-10-09 — fixna.web links, dark-hero fix, LocalBoost sticky topbar
 
 **Delivered:**
@@ -145,7 +160,7 @@
 ## Post-MVP
 
 Consulting MVP v1.0.0 complete. See `activeContext.md` for integration opportunities.
-## 2026-10-13 � Unified Fixna design system across all five web apps
+## 2026-10-13 � Unified Fixna design system across all five web apps
 
 **Delivered:**
 - Established @fixna/design-system as single source of truth (tokens, themes, runtime, primitives); added brand lime/dark-green palette with light/dark/system + no-flash init.
