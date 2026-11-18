@@ -1,0 +1,132 @@
+name: Build & Push API Images
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: images-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-push:
+    name: ${{ matrix.product.name }} API
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        product:
+          - name: consulting
+            dir: consulting-api
+            health: /api/v1/health/ready
+          - name: localboost
+            dir: localboost-api
+            health: /api/v1/health/readiness
+          - name: hospitality
+            dir: hospitality-api
+            health: /api/v1/health/readiness
+          - name: website-audit
+            dir: website-audit-api
+            health: /api/v1/health/ready
+          - name: invoice-assistant
+            dir: invoice-assistant-api
+            health: /api/v1/health/ready
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for product changes
+        id: changes
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          git fetch origin ${{ github.base_ref || 'main' }} --depth=1 || true
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.before || 'HEAD^' }} ${{ github.sha }} || true)
+          echo "Changed files: $CHANGED_FILES"
+          if [ -z "$CHANGED_FILES" ] || echo "$CHANGED_FILES" | grep -E "backend/${{ matrix.product.dir }}|backend/libs/fixna-platform-common|pom.xml"; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - uses: actions/setup-java@v4
+        if: steps.changes.outputs.changed == 'true'
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Determine profile and environment based on branch
+        id: env
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "profile=prod" >> $GITHUB_OUTPUT
+            echo "app_env=prod" >> $GITHUB_OUTPUT
+          else
+            echo "profile=dev" >> $GITHUB_OUTPUT
+            echo "app_env=dev" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Install parent POM and shared library
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          mvn -f pom.xml install -N -B
+          mvn -f backend/libs/fixna-platform-common/pom.xml -B install -DskipTests
+
+      - name: Run unit tests and package
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          mvn -f backend/${{ matrix.product.dir }}/pom.xml -B test
+          mvn -f backend/${{ matrix.product.dir }}/pom.xml -B -DskipTests package
+
+      - name: Log in to GitHub Container Registry
+        if: steps.changes.outputs.changed == 'true' && github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract Docker metadata
+        id: meta
+        if: steps.changes.outputs.changed == 'true'
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/fixna-in/${{ matrix.product.name }}-api
+          tags: |
+            type=raw,value=${{ steps.env.outputs.profile }}
+            type=raw,value=build-${{ github.run_number }}
+            type: sha,format=short
+
+      - name: Set up Docker Buildx
+        if: steps.changes.outputs.changed == 'true'
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push Docker image
+        if: steps.changes.outputs.changed == 'true'
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: backend/${{ matrix.product.dir }}/Dockerfile
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            SPRING_PROFILES_ACTIVE=${{ steps.env.outputs.profile }}
+            FIXNA_APP_ENV=${{ steps.env.outputs.app_env }}
+
+
