@@ -43,7 +43,7 @@ The Fixna Ecosystem is a **multi-product monorepo** hosting independent business
    - All containers listen on internal **Port 80** (`PORT=80`). Public TLS termination and routing are handled by Dokploy's Traefik reverse proxy.
    - **Subdomain Pattern**:
      - Production API: `https://api.<product>.fixna.in` (e.g., `https://api.consulting.fixna.in`)
-     - Development API: `https://dev.api.<product>.fixna.in` (e.g., `https://dev.api.consulting.fixna.in`)
+     - Development API: `https://<product>-api.dev.fixna.in` (e.g., `https://localboost-api.dev.fixna.in`)
      - Web Frontend: `https://<product>.fixna.in` (e.g., `https://consulting.fixna.in`)
 6. **Database Seeding**:
    - Default administrative user (`fixnainfo@gmail.com`) is provisioned via versioned Flyway migration scripts (`ON CONFLICT DO NOTHING`) running on startup in `dev` and `prod`.

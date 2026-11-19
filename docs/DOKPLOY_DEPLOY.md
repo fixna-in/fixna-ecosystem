@@ -20,7 +20,7 @@ This guide details the deployment specifications for all backend services in the
 - **Container Port**: `80`
 - **Domain**: 
   - Production: `api.consulting.fixna.in`
-  - Development: `dev.api.consulting.fixna.in`
+  - Development: `consulting-api.dev.fixna.in`
 - **Health Path**: `/api/v1/health/ready`
 - **Database URL Format**: 
   `postgresql://consulting_user:<PASSWORD>@fixnainfra-postgresadmin-qfasaa:5432/consulting_db`
@@ -39,7 +39,7 @@ This guide details the deployment specifications for all backend services in the
 - **Container Port**: `80`
 - **Domain**: 
   - Production: `api.localboost.fixna.in`
-  - Development: `dev.api.localboost.fixna.in`
+  - Development: `localboost-api.dev.fixna.in`
 - **Health Path**: `/api/v1/health/readiness`
 - **Database URL Format**: 
   `postgresql://localboost_user:<PASSWORD>@fixnainfra-postgresadmin-qfasaa:5432/localboost_db`
@@ -57,10 +57,9 @@ This guide details the deployment specifications for all backend services in the
 - **Image Name**: `ghcr.io/fixna-in/hospitality-api`
 - **Tags**: `prod`, `dev`, `build-<RUN_NUMBER>`, or `<SHA>`
 - **Container Port**: `80`
-- **Container Port**: `80`
 - **Domain**: 
   - Production: `api.hospitality.fixna.in`
-  - Development: `dev.api.hospitality.fixna.in`
+  - Development: `hospitality-api.dev.fixna.in`
 - **Health Path**: `/api/v1/health/readiness`
 - **Database URL Format**: 
   `postgresql://hospitality_user:<PASSWORD>@fixnainfra-postgresadmin-qfasaa:5432/hospitality_db`
@@ -79,7 +78,7 @@ This guide details the deployment specifications for all backend services in the
 - **Container Port**: `80`
 - **Domain**: 
   - Production: `api.website-audit.fixna.in`
-  - Development: `dev.api.website-audit.fixna.in`
+  - Development: `website-audit-api.dev.fixna.in`
 - **Health Path**: `/api/v1/health/ready`
 - **Database URL Format**: 
   `postgresql://website_audit_user:<PASSWORD>@fixnainfra-postgresadmin-qfasaa:5432/website_audit_db`
@@ -98,7 +97,7 @@ This guide details the deployment specifications for all backend services in the
 - **Container Port**: `80`
 - **Domain**: 
   - Production: `api.invoice-assistant.fixna.in`
-  - Development: `dev.api.invoice-assistant.fixna.in`
+  - Development: `invoice-assistant-api.dev.fixna.in`
 - **Health Path**: `/api/v1/health/ready`
 - **Database URL Format**: 
   `postgresql://invoice_assistant_user:<PASSWORD>@fixnainfra-postgresadmin-qfasaa:5432/invoice_assistant_db`
