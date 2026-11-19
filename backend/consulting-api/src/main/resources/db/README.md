@@ -1,4 +1,4 @@
-# Consulting database (Flyway)
+om env# Consulting database (Flyway)
 
 Migrations in `migration/` apply automatically on API startup.
 
