@@ -20,8 +20,7 @@ public enum MembershipRole {
         return this != TENANT_VIEWER;
     }
 
-    /** Whether the role may manage memberships and tenant settings. */
     public boolean canAdminister() {
-        return this == TENANT_OWNER || this == TENANT_ADMIN || this == AGENCY_ADMIN;
+        return this == TENANT_OWNER || this == TENANT_ADMIN || this == AGENCY_ADMIN || this == ADMIN;
     }
 }
