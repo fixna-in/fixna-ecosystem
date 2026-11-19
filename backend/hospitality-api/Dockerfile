@@ -12,7 +12,10 @@ RUN mvn -N -f pom.xml install \
 
 FROM eclipse-temurin:21-jre-jammy
 WORKDIR /app
-RUN useradd --system --uid 10001 --create-home appuser
+RUN useradd --system --uid 10001 --create-home appuser \
+    && apt-get update && apt-get install -y --no-install-recommends curl libcap2-bin \
+    && setcap 'cap_net_bind_service=+ep' /opt/java/openjdk/bin/java \
+    && rm -rf /var/lib/apt/lists/*
 USER appuser
 COPY --from=build /workspace/backend/hospitality-api/target/fixna-hospitality-api.jar app.jar
 ENV SPRING_PROFILES_ACTIVE=prod
