@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL:postgresql://consulting_user:${POSTGRES_PASSWORD}@fixnainfra-postgresadmin-qfasaa:5432/consulting_db}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://consulting_user:${POSTGRES_PASSWORD}@fixnainfra-postgresadmin-qfasaa:5432/consulting_db}
     username: ${POSTGRES_USER:consulting_user}
     password: ${POSTGRES_PASSWORD}
     hikari:

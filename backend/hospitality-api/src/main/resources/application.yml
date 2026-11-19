@@ -7,7 +7,7 @@ spring:
   application:
     name: hospitality-api
   datasource:
-    url: ${SPRING_DATASOURCE_URL:postgresql://hospitality_user:${POSTGRES_PASSWORD}@fixnainfra-postgresadmin-qfasaa:5432/hospitality_db}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://hospitality_user:${POSTGRES_PASSWORD}@fixnainfra-postgresadmin-qfasaa:5432/hospitality_db}
     username: ${POSTGRES_USER:hospitality_user}
     password: ${POSTGRES_PASSWORD:change-me}
     hikari:

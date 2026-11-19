@@ -7,7 +7,7 @@ spring:
   application:
     name: invoice-assistant-api
   datasource:
-    url: ${SPRING_DATASOURCE_URL:postgresql://invoice_assistant_user:${POSTGRES_PASSWORD}@fixnainfra-postgresadmin-qfasaa:5432/invoice_assistant_db}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://invoice_assistant_user:${POSTGRES_PASSWORD}@fixnainfra-postgresadmin-qfasaa:5432/invoice_assistant_db}
     username: ${POSTGRES_USER:invoice_assistant_user}
     password: ${POSTGRES_PASSWORD:change-me}
     hikari:

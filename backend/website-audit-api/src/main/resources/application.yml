@@ -7,7 +7,7 @@ spring:
   application:
     name: website-audit-api
   datasource:
-    url: ${SPRING_DATASOURCE_URL:postgresql://website_audit_user:${POSTGRES_PASSWORD}@fixnainfra-postgresadmin-qfasaa:5432/website_audit_db}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://website_audit_user:${POSTGRES_PASSWORD}@fixnainfra-postgresadmin-qfasaa:5432/website_audit_db}
     username: ${POSTGRES_USER:website_audit_user}
     password: ${POSTGRES_PASSWORD:change-me}
     hikari:
