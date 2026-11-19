@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.springframework.http.HttpStatus;
 
 import in.fixna.platform.common.web.FixnaException;
+import in.fixna.platform.tenant.MembershipRole;
 
 /**
  * Request-scoped tenant/user identity resolved from the authenticated JWT

@@ -137,11 +137,30 @@ jobs:
             SPRING_PROFILES_ACTIVE=${{ steps.env.outputs.profile }}
             FIXNA_APP_ENV=${{ steps.env.outputs.app_env }}
 
-      - name: Trigger Dokploy deploy (LocalBoost API dev)
-        if: github.event_name == 'push' && (github.ref_name == 'dev' || github.ref == 'refs/heads/dev') && matrix.product.name == 'localboost'
+      - name: Trigger Dokploy deploy (Dev)
+        if: github.event_name == 'push' && (github.ref_name == 'dev' || github.ref == 'refs/heads/dev')
         env:
-          DOKPLOY_HOOK: ${{ secrets.DOKPLOY_HOOK_LOCALBOOST_API_DEV }}
-        run: curl -fsS -X POST "$DOKPLOY_HOOK"
+          DOKPLOY_HOOK_LOCALBOOST: ${{ secrets.DOKPLOY_HOOK_LOCALBOOST_API_DEV }}
+          DOKPLOY_HOOK_CONSULTING: ${{ secrets.DOKPLOY_HOOK_CONSULTING_API_DEV }}
+          DOKPLOY_HOOK_HOSPITALITY: ${{ secrets.DOKPLOY_HOOK_HOSPITALITY_API_DEV }}
+          DOKPLOY_HOOK_WEBSITE_AUDIT: ${{ secrets.DOKPLOY_HOOK_WEBSITE_AUDIT_API_DEV }}
+          DOKPLOY_HOOK_INVOICE_ASSISTANT: ${{ secrets.DOKPLOY_HOOK_INVOICE_ASSISTANT_API_DEV }}
+          PRODUCT_NAME: ${{ matrix.product.name }}
+        run: |
+          HOOK=""
+          case "$PRODUCT_NAME" in
+            localboost) HOOK="$DOKPLOY_HOOK_LOCALBOOST" ;;
+            consulting) HOOK="$DOKPLOY_HOOK_CONSULTING" ;;
+            hospitality) HOOK="$DOKPLOY_HOOK_HOSPITALITY" ;;
+            website-audit) HOOK="$DOKPLOY_HOOK_WEBSITE_AUDIT" ;;
+            invoice-assistant) HOOK="$DOKPLOY_HOOK_INVOICE_ASSISTANT" ;;
+          esac
+          if [ -n "$HOOK" ]; then
+            echo "Triggering Dokploy deploy for $PRODUCT_NAME..."
+            curl -fsS -X POST "$HOOK" || echo "Warning: Dokploy webhook call failed"
+          else
+            echo "No Dokploy deploy hook configured for $PRODUCT_NAME (skipping trigger)."
+          fi
 
 
 

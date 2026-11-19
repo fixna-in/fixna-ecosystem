@@ -23,7 +23,7 @@ import in.fixna.platform.hospitality.tenant.MembershipLookup;
 import in.fixna.platform.hospitality.tenant.TenantContext;
 import in.fixna.platform.common.web.ApiError;
 import in.fixna.platform.common.web.FixnaException;
-import in.fixna.platform.hospitality.tenant.MembershipRole;
+import in.fixna.platform.tenant.MembershipRole;
 import in.fixna.platform.common.web.RequestIdFilter;
 import in.fixna.platform.hospitality.auth.JwtService.InvalidTokenException;
 
