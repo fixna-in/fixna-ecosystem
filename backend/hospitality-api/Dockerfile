@@ -17,5 +17,7 @@ USER appuser
 COPY --from=build /workspace/backend/hospitality-api/target/fixna-hospitality-api.jar app.jar
 ENV SPRING_PROFILES_ACTIVE=prod
 ENV FIXNA_APP_ENV=prod
-EXPOSE 8082
+EXPOSE 80
+HEALTHCHECK --interval=30s --timeout=5s --start-period=60s --retries=3 \
+  CMD curl -f http://localhost:80/api/v1/health/readiness || exit 1
 ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-jar", "app.jar"]

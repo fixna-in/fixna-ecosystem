@@ -2,6 +2,7 @@
 <modelVersion>4.0.0</modelVersion>
 <parent><groupId>in.fixna</groupId><artifactId>fixna-ecosystem</artifactId><version>1.0.0</version><relativePath>../../pom.xml</relativePath></parent>
 <artifactId>fixna-invoice-assistant-api</artifactId>
+<version>1.1.0</version>
 <name>fixna-invoice-assistant-api</name>
 <description>Fixna Invoice Assistant API (standalone product, own database)</description>
 <properties><java.version>21</java.version></properties>

@@ -15,6 +15,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EntityScan(basePackages = "in.fixna.platform")
 @EnableTransactionManagement
 public class FixnaApplication {
+    static {
+        String redisUrl = System.getenv("REDIS_URL");
+        if (redisUrl != null && redisUrl.isBlank()) {
+            System.setProperty("REDIS_URL", "redis://localhost:6379");
+        }
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(FixnaApplication.class, args);
     }

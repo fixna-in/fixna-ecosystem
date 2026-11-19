@@ -1,14 +1,14 @@
 server:
-  port: ${SERVER_PORT:${PORT:8083}}
+  port: ${SERVER_PORT:${PORT:80}}
 
 spring:
   profiles:
     default: local
   application:
-    name: fixna-invoice-assistant-api
+    name: invoice-assistant-api
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/invoice_assistant}
-    username: ${POSTGRES_USER:postgres}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://invoice_assistant_user:${POSTGRES_PASSWORD}@fixnainfra-postgresadmin-qfasaa:5432/invoice_assistant_db}
+    username: ${POSTGRES_USER:invoice_assistant_user}
     password: ${POSTGRES_PASSWORD:change-me}
     hikari:
       maximum-pool-size: ${DB_POOL_MAX:10}

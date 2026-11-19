@@ -3,7 +3,7 @@
 Migrations in `migration/` apply automatically on API startup.
 
 **Database name (local):** `fixna`  
-**Port:** 8080
+**Port:** 5432 (native PostgreSQL), API **80** (port 80 in production containers)
 
 ## Migration index
 

@@ -27,15 +27,15 @@ services:
         sync: false
       - key: SPRING_DATASOURCE_URL
         fromDatabase:
-          name: fixna-hospitality-db
+          name: hospitality_db
           property: connectionString
       - key: POSTGRES_USER
         fromDatabase:
-          name: fixna-hospitality-db
+          name: hospitality_db
           property: user
       - key: POSTGRES_PASSWORD
         fromDatabase:
-          name: fixna-hospitality-db
+          name: hospitality_db
           property: password
       - key: FIXNA_HSTS_ENABLED
         value: true
@@ -43,7 +43,7 @@ services:
         value: -XX:+UseContainerSupport -Xms256m -Xmx384m
 
 databases:
-  - name: fixna-hospitality-db
-    databaseName: hospitality
+  - name: hospitality_db
+    databaseName: hospitality_db
     plan: basic-256mb
     region: singapore

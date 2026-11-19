@@ -71,7 +71,7 @@ Layer pattern for each product: `backend/{product}-api` + `frontend/{product}-we
 
 ### Backend stack (all APIs)
 
-- **Java 21** · **Spring Boot 3.5.6** · **PostgreSQL 17** · **Flyway 11.20**
+- **Java 21** · **Spring Boot 3.5.6** · **PostgreSQL 18** · **Flyway 11.20** · **Port 80 (Traefik routing)**
 - REST under `/api/v1/*` · JWT auth · RBAC · tenant-scoped data access
 - Shared lib: [`backend/libs/fixna-platform-common`](backend/libs/fixna-platform-common) — request IDs, CORS, security headers, global errors, password config
 

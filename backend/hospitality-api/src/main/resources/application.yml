@@ -1,14 +1,14 @@
 server:
-  port: ${SERVER_PORT:${PORT:8084}}
+  port: ${SERVER_PORT:${PORT:80}}
 
 spring:
   profiles:
     default: local
   application:
-    name: fixna-hospitality-api
+    name: hospitality-api
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/hospitality}
-    username: ${POSTGRES_USER:postgres}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://hospitality_user:${POSTGRES_PASSWORD}@fixnainfra-postgresadmin-qfasaa:5432/hospitality_db}
+    username: ${POSTGRES_USER:hospitality_user}
     password: ${POSTGRES_PASSWORD:change-me}
     hikari:
       maximum-pool-size: ${DB_POOL_MAX:10}

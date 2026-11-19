@@ -3,7 +3,7 @@
 Migrations in `migration/` apply automatically on API startup.
 
 **Database name:** `consulting`  
-**Port:** 5432 (native PostgreSQL), API **8081**
+**Port:** 5432 (native PostgreSQL), API **80** (port 80 in production containers)
 
 Create the `consulting` database in the PostgreSQL instance for this environment
 if it does not already exist:

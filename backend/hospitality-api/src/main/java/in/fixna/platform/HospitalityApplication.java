@@ -9,6 +9,13 @@ import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServic
  */
 @SpringBootApplication(exclude = UserDetailsServiceAutoConfiguration.class)
 public class HospitalityApplication {
+    static {
+        String redisUrl = System.getenv("REDIS_URL");
+        if (redisUrl != null && redisUrl.isBlank()) {
+            System.setProperty("REDIS_URL", "redis://localhost:6379");
+        }
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(HospitalityApplication.class, args);
     }

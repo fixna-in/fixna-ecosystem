@@ -6,18 +6,32 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-### Added — Website Audit, Invoice Assistant, Hospitality go LIVE (production)
+### Added â€” Dokploy Production Readiness & CI/CD Optimization
+
+- **Port 80 Container Standardization:** All backend Spring Boot APIs configured to run on internal Port 80 (`PORT=80`), routing via Dokploy's Traefik reverse proxy.
+- **Managed PostgreSQL 18 Integration:** Configured all services to connect to the shared PostgreSQL 18 instance in Dokploy (`fixnainfra-postgresadmin-qfasaa:5432`) with multi-tenant isolation (`<app>_db` and `<app>_user`).
+- **Application-Specific Versioning:** Explicit versions per application (`consulting-api` v1.2.0, others v1.1.0) automatically bound via Spring Boot `build-info` and surfaced in the public health endpoint (`GET /api/v1/health`).
+- **Centralized Environment Templates:** Consolidated per-application environment reference files under `env/` containing local, dev, and production placeholders.
+- **Path-Filtered GitHub Actions Workflows:** 
+  - `build-apis.yml`: Path-filtered (`backend/**`, `pom.xml`) with matrix-level git diff change detection to build and push only modified services.
+  - `build-uis.yml`: Path-filtered (`frontend/**`) for Next.js web applications.
+  - Standardized image tagging using `docker/metadata-action` (`dev`/`prod`, incremental `build-<RUN_NUMBER>`, and `sha-<short>` tags).
+- **Simplified Local Development:** Updated `docker-compose.yml` to run supporting local infrastructure (`Redis` & `Mailhog`) while connecting applications directly to the shared PostgreSQL server.
+
+### Added â€” Website Audit, Invoice Assistant, Hospitality go LIVE (production)
+
+### Added ï¿½ Website Audit, Invoice Assistant, Hospitality go LIVE (production)
 
 - **Website Audit** is now live at https://websiteaudit.fixna.in
   - Independent product: `backend/website-audit-api` + `frontend/website-audit-web`
   - Automated technical/on-page SEO audit with evidence-based findings
   - Bounded crawl with SSRF/DNS-rebinding defenses, async jobs, HTML reports, AI fix suggestions
-  - Flyway migrations V1–V3, PostgreSQL `website_audit` on port 5434
+  - Flyway migrations V1ï¿½V3, PostgreSQL `website_audit` on port 5434
 
 - **Invoice Assistant** is now live at https://invoice.fixna.in
   - Independent product: `backend/invoice-assistant-api` + `frontend/invoice-assistant-web`
   - Private PDF invoice/receipt intake, offline OCR, field-level confidence, review workflow, CSV/JSON export
-  - Flyway migrations V1–V6, PostgreSQL `invoice_assistant` on port 5435
+  - Flyway migrations V1ï¿½V6, PostgreSQL `invoice_assistant` on port 5435
 
 - **Hospitality** is now live at https://hospitality.fixna.in
   - Independent product: `backend/hospitality-api` + `frontend/hospitality-web`
@@ -28,7 +42,7 @@ Format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - Updated all documentation: README.md, AGENTS.md, product docs, architecture docs, deployment docs
 - Added Render blueprints and Vercel configurations for all three new products
 
-### Added — Website Audit async jobs & Invoice document intake (Consulting)
+### Added ï¿½ Website Audit async jobs & Invoice document intake (Consulting)
 
 - **Website Audit jobs (ADR-009):** `POST /api/v1/website-audits/jobs` (202) â†’ lease-claimed background worker with startup + periodic crash recovery, attempt  cap (3), and bounded crawl (â‰¤25 pages, depth â‰¤2, 60 s budget). Endpoints `GET /website-audits/jobs`, `GET /website-audits/jobs/{id}`, `POST /website-audits/jobs/{id}/cancel`, plus per-page rows in `website_audit_pages`
 - **Website Audit HTML report:** `GET /api/v1/website-audits/{id}/report` â€” self-contained, CSP-locked (`default-src 'none'`), HTML-escaped report; downloadable from the audit detail page
@@ -299,7 +313,7 @@ Consulting MVP unchanged; LocalBoost keeps its own database and migration histor
 - Audit, notification/file abstractions, domain events, observability
 - Flyway migration `V1__platform_core.sql`
 - Health endpoints, error envelope, tenant isolation patterns
-## 2026-10-13 — Unified Fixna design system across all five web apps
+## 2026-10-13 ï¿½ Unified Fixna design system across all five web apps
 
 **Delivered:**
 - Established @fixna/design-system as single source of truth (tokens, themes, runtime, primitives); added brand lime/dark-green palette with light/dark/system + no-flash init.
