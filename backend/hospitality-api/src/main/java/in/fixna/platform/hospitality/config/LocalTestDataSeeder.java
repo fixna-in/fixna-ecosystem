@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import in.fixna.platform.hospitality.auth.JwtService;
-import in.fixna.platform.hospitality.tenant.MembershipRole;
+import in.fixna.platform.tenant.MembershipRole;
 import in.fixna.platform.hospitality.tenant.Tenant;
 import in.fixna.platform.hospitality.tenant.TenantMembership;
 import in.fixna.platform.hospitality.tenant.TenantMembershipRepository;

@@ -15,7 +15,7 @@ import in.fixna.platform.hospitality.auth.dto.AuthResponse;
 import in.fixna.platform.hospitality.auth.dto.LoginRequest;
 import in.fixna.platform.hospitality.auth.dto.RefreshRequest;
 import in.fixna.platform.hospitality.auth.dto.RegisterRequest;
-import in.fixna.platform.hospitality.tenant.MembershipRole;
+import in.fixna.platform.tenant.MembershipRole;
 import in.fixna.platform.hospitality.tenant.Tenant;
 import in.fixna.platform.hospitality.tenant.TenantMembership;
 import in.fixna.platform.hospitality.tenant.TenantMembershipRepository;

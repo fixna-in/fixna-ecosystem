@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Component;
 
+import in.fixna.platform.tenant.MembershipRole;
+
 @Component
 public class MembershipLookupImpl implements MembershipLookup {
 

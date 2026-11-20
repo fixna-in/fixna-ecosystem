@@ -12,15 +12,15 @@ public enum MembershipRole {
     TENANT_MARKETING_USER,
     TENANT_VIEWER,
     AGENCY_ADMIN,
-    AGENCY_USER;
+    AGENCY_USER,
+    ADMIN;
 
     /** Whether the role may mutate tenant-owned resources. */
     public boolean canWrite() {
         return this != TENANT_VIEWER;
     }
 
-    /** Whether the role may manage memberships and tenant settings. */
     public boolean canAdminister() {
-        return this == TENANT_OWNER || this == TENANT_ADMIN || this == AGENCY_ADMIN;
+        return this == TENANT_OWNER || this == TENANT_ADMIN || this == AGENCY_ADMIN || this == ADMIN;
     }
 }
